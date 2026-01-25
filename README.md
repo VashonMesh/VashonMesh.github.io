@@ -1,6 +1,6 @@
-# VashonMesh.github.io
+# <VashonMesh.github.io>, aka <VashonMesh.org>
 
-[VashonMesh.org](https://VashonMesh.org) Home page
+[VashonMesh.org](https://VashonMesh.org) Website Technical Notes
 
 ## Welcome
 
@@ -9,8 +9,9 @@ related local area mesh networks.
 
 Astro website project for VashonMesh. Here's what was set up:
 
-## Project Structure:
+## Project Structure
 
+- See <https://docs.astro.build/en/basics/project-structure/> for details
 - package.json - Astro dependencies and build scripts
 - astro.config.mjs - Astro configuration for GitHub Pages
 - index.astro - Homepage with VashonMesh branding and content
@@ -18,7 +19,7 @@ Astro website project for VashonMesh. Here's what was set up:
 - favicon.svg - Custom mesh network icon
 - .gitignore - Updated to ignore build artifacts and dependencies
 
-## Features:
+## Features
 
 - Modern, responsive design with gradient hero section
 - Three content cards explaining VashonMesh and mesh networking
@@ -26,7 +27,7 @@ Astro website project for VashonMesh. Here's what was set up:
 - Mobile-friendly layout
 - GitHub Actions workflow automatically builds & deploys the site to https://vashonmesh.github.io/ when changes are published
 
-## You can run locally (e.g., in Visual Studio Code) with:
+## You can run locally (e.g., in Visual Studio Code) with
 
 '''npm run dev''' - Start dev server
 '''npm run build''' - Build for production
