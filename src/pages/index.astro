@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="VashonMesh - Community Mesh Networks">
+  <main>
+    <section class="hero">
+      <h1>VashonMesh</h1>
+      <p class="tagline">Connecting communities through local mesh networks</p>
+    </section>
+
+    <section class="content">
+      <div class="card">
+        <h2>Welcome</h2>
+        <p>
+          VashonMesh is a small group of rebels helping others connect to MeshCore and
+          related local area mesh networks.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>What is Mesh Networking?</h2>
+        <p>
+          Mesh networks enable direct, peer-to-peer connections between devices, creating
+          resilient communication systems that don't rely on traditional internet infrastructure.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Get Involved</h2>
+        <p>
+          Interested in joining or learning more about local mesh networks? 
+          We're here to help you get connected.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    max-width: 1200px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .tagline {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    opacity: 0.95;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .card h2 {
+    color: #667eea;
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+
+  .card p {
+    color: #4b5563;
+    line-height: 1.6;
+  }
+</style>
