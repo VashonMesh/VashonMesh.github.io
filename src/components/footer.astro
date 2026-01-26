@@ -1,0 +1,48 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="content">
+    <p>&copy; {year} VashonMesh. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://github.com/VashonMesh/VashonMesh.github.io" target="_blank" rel="noopener">
+        Edit on GitHub
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: #f3f4f6;
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  p {
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .social-links a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .social-links a:hover {
+    color: #667eea;
+  }
+</style>

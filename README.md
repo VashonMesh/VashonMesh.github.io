@@ -25,13 +25,29 @@ Astro website project for VashonMesh. Here's what was set up:
 - Three content cards explaining VashonMesh and mesh networking
 - Purple/blue color scheme
 - Mobile-friendly layout
-- GitHub Actions workflow automatically builds & deploys the site to https://vashonmesh.github.io/ when changes are published
+- GitHub Actions workflow automatically builds & deploys the site to
+  https://vashonmesh.github.io/ when changes are published Uses
+  https://www.goatcounter.com/ for open source analytics
 
 ## You can run locally (e.g., in Visual Studio Code) with
 
 '''npm run dev''' - Start dev server
+
 '''npm run build''' - Build for production
+
+If committing changes to the GitHub repository, there is a github action to
+automatically build and redeploy the site.
+
+This site is developed with the Astro framework, which basically allows pages to
+be either MarkDown or straight HTML (but with an 'astro' file extension). If
+modifying the site with Visual Studio Code, it is recommended to install the
+official Astro extension
+(https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode)
+and https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode
+for TailwindCSS support.
 
 ## Contributing
 
-- John Cornelison started this site in Jan 2026, but is counting on others to help flush it out and test, comment and promote it as anyone wants. Let me know if you want editing rights, this is NOT an individual effort!
+- John Cornelison started this site in Jan 2026, but is counting on others to
+  help flush it out and test, comment and promote it as anyone wants. Let me
+  know if you want editing rights, this is NOT an individual effort!

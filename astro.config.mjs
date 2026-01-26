@@ -5,3 +5,5 @@ export default defineConfig({
     site: 'https://vashonmesh.github.io',
 
 });
+
+// markdown options: https://docs.astro.build/en/guides/markdown-content/#markdown-plugins

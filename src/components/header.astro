@@ -1,0 +1,56 @@
+---
+---
+
+<header>
+  <nav>
+    <div class="logo">
+      <a href="/">VashonMesh</a>
+    </div>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/posts">Posts</a>
+      <a href="/about">About</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo a {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #333;
+    text-decoration: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .links a {
+    color: #4b5563;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .links a:hover {
+    color: #667eea;
+  }
+</style>
