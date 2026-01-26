@@ -1,3 +1,5 @@
+// https://docs.astro.build/en/guides/content-collections/#the-collection-config-file
+
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';

@@ -7,7 +7,19 @@
 VashonMesh is a small group of rebels helping others connect to MeshCore and
 related local area mesh networks.
 
-Astro website project for VashonMesh. Here's what was set up:
+This readme introduces technology used to create VashonMesh.org, and some of the
+features available to editors and browsers.
+
+## Astro
+
+[Astro](https://astro.build) is the web framework used which
+
+- builds to a static website with minimal Javascript
+- makes it incredibly fast,
+- free (aside from the domain registration & SSL certs),
+- easily edited,
+- pretty self-explanatory, and
+- leveraging modern technologies.
 
 ## Project Structure
 
@@ -22,12 +34,24 @@ Astro website project for VashonMesh. Here's what was set up:
 ## Features
 
 - Modern, responsive design with gradient hero section
-- Three content cards explaining VashonMesh and mesh networking
-- Purple/blue color scheme
+- Content cards explaining VashonMesh and mesh networking
 - Mobile-friendly layout
 - GitHub Actions workflow automatically builds & deploys the site to
-  https://vashonmesh.github.io/ when changes are published Uses
-  https://www.goatcounter.com/ for open source analytics
+  <https://vashonmesh.github.io/> when changes are published
+- Uses <https://www.goatcounter.com> for open source analytics
+
+- Astro supports:
+  - Custom components of many flavors. Specifically we've enabled
+    - Astro components: <https://docs.astro.build/en/basics/astro-components/>
+    - Svelte <https://docs.astro.build/en/guides/integrations-guide/svelte/>
+  - GitHub flavored Markdown <https://github.github.com/gfm/>
+  - TailwindCss (provides natural inline styling reducing the need for endless
+    css classes): <https://docs.astro.build/en/guides/styling/#tailwind>
+  - Fun fonts: <https://docs.astro.build/en/guides/fonts/>
+  - Fancy image handling: <https://docs.astro.build/en/guides/images/>
+  - Nice icon libraries
+  - Typography libraries
+    <https://docs.astro.build/en/recipes/tailwind-rendered-markdown/>
 
 ## You can run locally (e.g., in Visual Studio Code) with
 
@@ -42,12 +66,14 @@ This site is developed with the Astro framework, which basically allows pages to
 be either MarkDown or straight HTML (but with an 'astro' file extension). If
 modifying the site with Visual Studio Code, it is recommended to install the
 official Astro extension
-(https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode)
-and https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode
+<https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode>
+and
+<https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode>
 for TailwindCSS support.
 
 ## Contributing
 
 - John Cornelison started this site in Jan 2026, but is counting on others to
   help flush it out and test, comment and promote it as anyone wants. Let me
-  know if you want editing rights, this is NOT an individual effort!
+  know if you want editing rights, a quick intro to the file structure, etc.
+  This is NOT an individual effort!
