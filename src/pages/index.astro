@@ -1,36 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import "tailwindcss";
 ---
 
 <Layout title="VashonMesh - Community Mesh Networks">
   <main>
     <section class="hero">
       <h1>VashonMesh</h1>
-      <p class="tagline">Connecting communities through local mesh networks</p>
-      <a href="https://github.com/VashonMesh/VashonMesh.github.io" target="_blank" rel="noopener" style="text-align: right;"><img src="/GitHub-Mark-32px.png" alt="GitHub Mark"> Edit site on GitHub</a>
+      <p class="tagline">Connecting Vashon & Maury Islanders <br/>...with Local Mesh Networks</p>
+      
     </section>
 
     <section class="content">
       <div class="card">
         <h2>Welcome</h2>
         <p>
-          VashonMesh is a small group of rebels helping others connect to MeshCore and
+          VashonMesh is a small group of rebels informally helping islanders connect with MeshCore and
           related local area mesh networks.
         </p>
         <p>
-          Our mission is to empower communities to build resilient, decentralized networks that
+          Our mission is to empower neighbors to build resilient, decentralized networks that
           foster communication and collaboration.
         </p>
+        <a href="about"><span class="rounded-full bg-purple-100 px-2.5 py-0.5 text-sm whitespace-nowrap text-purple-700">
+  About Us
+</span></a>
+
       </div>
 
       <div class="card">
         <h2>What is Mesh Networking?</h2>
         <p>
           Mesh networks enable direct, peer-to-peer connections between devices, creating
-          resilient communication systems that don't rely on traditional internet infrastructure.
-          <br>
-          Read more about <a href="https://meshcore.net/" target="_blank" rel="noopener">MeshCore</a>.
-            Read more about <a href="./test.md" target="_blank" rel="noopener">test</a>.
+          resilient communication systems that don't rely on traditional internet infrastructure: no cell towers, no subscriptions, inexpensive radios without license requirements, and better range than FRMS walkie-talkies.
+          </p>
+        <p>
+          Read more about <a href="https://meshcore.net/" target="_blank" rel="noopener">LoRa (Long Range) Technology</a>.
         </p>
       </div>
 
@@ -38,9 +43,34 @@ import Layout from '../layouts/Layout.astro';
         <h2>Get Involved</h2>
         <p>
           Interested in joining or learning more about local mesh networks? 
+          We are all learning and experimenting. Join with us to learn more!
+        </p>
+        <a href="join"><span class="rounded-full bg-purple-100 px-2.5 py-0.5 text-sm whitespace-nowrap text-purple-700">How to Participate!</span></a>
+
+      </div>
+
+            <div class="card">
+        <h2>Get a Radio</h2>
+        <p>
+          Interested in how to get started? 
           We're here to help you get connected.
         </p>
       </div>
+
+                  <div class="card">
+        <h2>Set up a Neighborhood Repeater</h2>
+        <p>
+          Ensure your neighborhood has great connectivity. 
+          We're here to help you get connected.
+        </p>
+      </div>
+
+            </div>
+            <div class="card">
+        <h2>Current Activities</h2>
+        <p>
+          See what we've been up to and how you can participate!
+        </p>
     </section>
   </main>
 </Layout>

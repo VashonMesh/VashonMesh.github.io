@@ -1,4 +1,15 @@
 {
     "python-envs.defaultEnvManager": "ms-python.python:system",
-    "python-envs.pythonProjects": []
+    "python-envs.pythonProjects": [],
+    "cSpell.words": [
+        "AREDN",
+        "EMCOMM",
+        "goatcounter",
+        "imgs",
+        "KEEPTEEN",
+        "Lucida",
+        "Meshtastic",
+        "Mestastic",
+        "Segoe"
+    ]
 }

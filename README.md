@@ -73,6 +73,7 @@ for TailwindCSS support.
 
 ## Contributing
 
+- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
 - John Cornelison started this site in Jan 2026, but is counting on others to
   help flush it out and test, comment and promote it as anyone wants. Let me
   know if you want editing rights, a quick intro to the file structure, etc.
