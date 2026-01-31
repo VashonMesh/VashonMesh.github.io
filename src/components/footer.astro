@@ -8,10 +8,10 @@ const year = new Date().getFullYear();
     <p><a href="https://vashonsoftware.com" class="com">Site by Vashon Software</a></p>
     <div class="social-links">
       <a href="https://github.com/VashonMesh/VashonMesh.github.io" target="_blank" rel="noopener">
-       <img src="/GitHub-Mark-32px.png" alt="Edit on GitHub" style="width:32px; height:32px; vertical-align:middle; margin-right:8px;"/>Edit on GitHub
+       <img src="/GitHub-Mark-32px.png" alt="Edit on GitHub" style="width:32px; height:32px; vertical-align:middle; margin-right:10px;"/>Edit on GitHub
       </a>
       <a href="https://W7VMI.org" target="_blank" rel="noopener">
-       <img src="/w7vmi_new_logo.svg" alt="W7VMI" style="width:32px; height:32px; vertical-align:middle; margin-right:8px; margin-left: 40px;" />Affiliated with W7VMI</a>
+       <img src="/w7vmi_new_logo.svg" alt="W7VMI" style="width:32px; height:32px; vertical-align:middle; margin-right:10px; margin-left: 40px;" />Affiliated with W7VMI</a>
     </div>
   </div>
 </footer>
@@ -72,12 +72,24 @@ const year = new Date().getFullYear();
   .social-links a {
     color: var(--text-secondary);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.3s ease;
     display: inline-flex;
     align-items: center;
   }
 
   .social-links a:hover {
     color: #667eea;
+    transform: scale(1.1);
+  }
+
+  /* Add glow effect to icons in dark mode */
+  :global(.dark) .social-links img {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  :global(.dark) .social-links a:hover img {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+    transform: scale(1.5);
   }
 </style>
