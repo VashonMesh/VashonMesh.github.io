@@ -7,10 +7,10 @@ const year = new Date().getFullYear();
     <p>&copy; {year} VashonMesh.org, All rights reserved.</p>
     <div class="social-links">
       <a href="https://github.com/VashonMesh/VashonMesh.github.io" target="_blank" rel="noopener">
-       <img src="public/GitHub-Mark-32px.png" alt="Edit on GitHub" style="width:32px; height:32px; vertical-align:middle; margin-right:4px;"/>Edit on GitHub
+       <img src="/GitHub-Mark-32px.png" alt="Edit on GitHub" style="width:32px; height:32px; vertical-align:middle; margin-right:4px;"/>Edit on GitHub
       </a>
       <a href="https://W7VMI.org" target="_blank" rel="noopener">
-       <img src="public/W7VMI.jpg" alt="W7VMI" style="width:32px; height:32px; vertical-align:middle; margin-right:4px; margin-left: 40px;" />Affiliated with W7VMI</a>
+       <img src="/W7VMI.jpg" alt="W7VMI" style="width:32px; height:32px; vertical-align:middle; margin-right:4px; margin-left: 40px;" />Affiliated with W7VMI</a>
     </div>
   </div>
 </footer>
@@ -38,10 +38,17 @@ const year = new Date().getFullYear();
     margin: 0;
   }
 
+  .social-links {
+    display: flex;
+    align-items: center;
+  }
+
   .social-links a {
     color: #6b7280;
     text-decoration: none;
     transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
   }
 
   .social-links a:hover {

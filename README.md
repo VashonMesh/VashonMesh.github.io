@@ -31,7 +31,21 @@ features available to editors and browsers.
 - favicon.svg - Custom mesh network icon
 - .gitignore - Updated to ignore build artifacts and dependencies
 
-## Features
+## ✨ Features
+
+- ⚡ Astro-Powered - Blazing fast static site generation with zero-JS output by
+  default
+- 🎨 Beautiful Design - Minimalist and image-centric layout perfect for
+  portfolios
+- 🔄 Client Router - Seamless client-side navigation for an SPA-like feel
+- 📱 Responsive Design - Mobile-friendly layout with a collapsible menu
+- 🌗 Dark Mode - Native dark mode support with toggle switch and persistence
+- 📝 CMS Ready - Optional Decap CMS support (disabled by default, see
+  customization section)
+- 🎯 Scoped CSS - Modular, component-scoped styles replacing legacy monolithic
+  CSS
+- ✍️ Typography - Futura for titles/menu (Small Caps) and EB Garamond for body
+- 📚 Content Collections - Type-safe Markdown content management
 
 - Modern, responsive design with gradient hero section
 - Content cards explaining VashonMesh and mesh networking
@@ -52,6 +66,13 @@ features available to editors and browsers.
   - Nice icon libraries
   - Typography libraries
     <https://docs.astro.build/en/recipes/tailwind-rendered-markdown/>
+
+## Future
+
+- Maybe add in easy editing
+- - Decap is older, https://strapi.io/ and
+    https://github.com/sveltia/sveltia-cms & www.Sitepins.com
+-
 
 ## You can run locally (e.g., in Visual Studio Code) with
 
@@ -78,3 +99,12 @@ for TailwindCSS support.
   help flush it out and test, comment and promote it as anyone wants. Let me
   know if you want editing rights, a quick intro to the file structure, etc.
   This is NOT an individual effort!
+
+## ToDo
+
+- get approval for the site, ask for support
+- Nice favicon/log complementing PugetMesh's logo
+- get PugetMesh expert here for 2/12?
+- Add basic content to pages
+- Figure out blogs
+- figure out devices w/ links

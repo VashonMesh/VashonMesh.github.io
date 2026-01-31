@@ -107,3 +107,12 @@ Spenser likes:
 - [WisBlock Meshtastic Starter Kit](https://www.amazon.com/RAKwireless-WisBlock-Meshtastic-Starter-RAK19007/dp/B0CHKZJK9C/)
   & RAK Wireless Solar Unify Enclosure Case: This is going to be my experimental
   repeater for trying out code changes.
+
+## Action Items
+
+- Hang some test repeaters on PugetMesh
+- Settle on MeshCore
+- Consider future VashonMesh on separate frequency
+- Consider separate EMCOMM channel on VashonMesh
+- Create a Wiki on Groups.io with simple get started instructions
+- Michael to set up meeting at Farcy+Library - try for Feb 12 or 19
