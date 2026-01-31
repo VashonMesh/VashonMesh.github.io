@@ -32,8 +32,8 @@ import NormalLayout from '../layouts/NormalLayout.astro';
     <summary>
       <span>What are the basic features?</span>
 
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
       </svg>
     </summary>
 
@@ -51,8 +51,8 @@ import NormalLayout from '../layouts/NormalLayout.astro';
     <summary>
       <span>How do I get started?</span>
 
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
       </svg>
     </summary>
 
@@ -70,8 +70,8 @@ import NormalLayout from '../layouts/NormalLayout.astro';
     <summary>
       <span>What support options are available?</span>
 
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
       </svg>
     </summary>
 
@@ -142,7 +142,16 @@ import NormalLayout from '../layouts/NormalLayout.astro';
     list-style: none;
   }
 
+  /* Hide default disclosure triangle/marker across all browsers */
   summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  summary::marker {
+    display: none;
+  }
+  
+  summary::before {
     display: none;
   }
 
@@ -157,6 +166,8 @@ import NormalLayout from '../layouts/NormalLayout.astro';
   summary svg {
     width: 1.25rem;
     height: 1.25rem;
+    max-width: 1.25rem;
+    max-height: 1.25rem;
     flex-shrink: 0;
     transition: transform 0.3s;
   }
