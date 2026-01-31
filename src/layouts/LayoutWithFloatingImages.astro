@@ -61,7 +61,7 @@ const shuffledImages = [...images].sort(() => Math.random() - 0.5);
       <Footer />
     </div>
   </body>
-  <script data-goatcounter="https://vashonmesh.goatcounter.com/count"
+  <script is:inline data-goatcounter="https://vashonmesh.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </html>
 
@@ -402,7 +402,7 @@ const shuffledImages = [...images].sort(() => Math.random() - 0.5);
     const floatClasses = ['float-1', 'float-2', 'float-3', 'float-4', 'float-5', 'float-6', 
                           'float-7', 'float-8', 'float-9', 'float-10', 'float-11', 'float-12'];
     
-    function shuffleArray(array) {
+    function shuffleArray(array: string[]) {
       const shuffled = [...array];
       for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
