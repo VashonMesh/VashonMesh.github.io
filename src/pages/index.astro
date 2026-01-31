@@ -143,8 +143,10 @@ import { Image } from 'astro:assets';
   }
 
   .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) scale(1.05);
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.6))
+            drop-shadow(0 0 40px rgba(102, 126, 234, 0.4));
   }
 
   .card h2 {

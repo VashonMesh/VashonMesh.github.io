@@ -1,14 +1,15 @@
-# <VashonMesh.github.io>, aka <VashonMesh.org>
+# VashonMesh.github.io, aka VashonMesh.org
 
 [VashonMesh.org](https://VashonMesh.org) Website Technical Notes
 
 ## Welcome
 
 VashonMesh is a small group of rebels helping others connect to MeshCore and
-related local area mesh networks.
+related local area mesh networks. To visit the site go to
+<https://VashonMesh.org>!
 
-This readme introduces technology used to create VashonMesh.org, and some of the
-features available to editors and browsers.
+**This readme is not the site**, but introduces technology used to create
+VashonMesh.org, and some of the features available to editors & the curious.
 
 ## Astro
 
@@ -95,10 +96,10 @@ for TailwindCSS support.
 ## Contributing
 
 - [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
-- John Cornelison started this site in Jan 2026, but is counting on others to
-  help flush it out and test, comment and promote it as anyone wants. Let me
-  know if you want editing rights, a quick intro to the file structure, etc.
-  This is NOT an individual effort!
+- John Cornelison (aka Vashon Software) started this site in Jan 2026, but is
+  counting on others to help flush it out and test, comment and promote it as
+  anyone wants. Let me know if you want editing rights, a quick intro to the
+  file structure, etc. This is NOT an individual effort!
 
 ## ToDo
 
