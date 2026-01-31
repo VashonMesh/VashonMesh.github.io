@@ -1,0 +1,333 @@
+---
+import Header from '../components/header.astro';
+import Footer from '../components/footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  images?: string[];
+  imageDir?: string;
+  imageCount?: number;
+}
+
+const { title, images, imageDir = 'hero-imgs', imageCount = 10 } = Astro.props;
+
+let allImages: string[] = [];
+
+if (images) {
+  // Use provided images array
+  allImages = images;
+} else {
+  // Dynamically discover all images in the specified directory
+  const imageGlob = import.meta.glob('/public/**/*.{png,jpg,jpeg,gif,webp,svg}', { eager: true });
+  
+  // Extract paths and filter by imageDir
+  allImages = Object.keys(imageGlob)
+    .map(path => path.replace('/public/', ''))
+    .filter(path => path.startsWith(imageDir));
+}
+
+// Shuffle and select requested number of images
+const shuffledImages = [...allImages]
+  .sort(() => Math.random() - 0.5)
+  .slice(0, imageCount);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="VashonMesh - Community mesh networks connecting neighbors" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet">
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="floating-container">
+      {shuffledImages.map((img, index) => (
+        <div class="floating-image" data-index={index}>
+          <span class="img-wrapper">
+            <img src={`/${img}`} alt={img.replace(/\.(png|jpg|jpeg|gif|webp|svg)$/i, '').split('/').pop()} style="max-width: 80px; width: 80px; height: auto;" />
+          </span>
+        </div>
+      ))}
+    </div>
+    <div class="site-wrapper">
+      <Header />
+      <div class="page-content">
+        <slot />
+      </div>
+      <Footer />
+    </div>
+  </body>
+  <script is:inline data-goatcounter="https://vashonmesh.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</html>
+
+<style is:global>
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+    
+    /* Light mode colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --header-bg: #ffffff;
+    --footer-bg: #f3f4f6;
+    --border-color: #e5e7eb;
+    --hover-bg: #f3f4f6;
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --bg-primary: rgba(10, 10, 10, 0.85);
+    --bg-secondary: rgba(26, 26, 46, 0.85);
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --header-bg: rgba(17, 24, 39, 0.95);
+    --footer-bg: rgba(31, 41, 55, 0.95);
+    --border-color: #374151;
+    --hover-bg: #1f2937;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: #0a0a0a;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .site-wrapper {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    position: relative;
+    z-index: 100;
+  }
+
+  footer {
+    position: relative;
+    z-index: 100;
+    margin-top: auto;
+  }
+
+  .page-content {
+    flex: 1;
+    position: relative;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .page-content > * {
+    pointer-events: auto;
+  }
+
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
+
+  .floating-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .floating-image {
+    position: absolute;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .floating-image:hover {
+    z-index: 200 !important;
+  }
+
+  .img-wrapper {
+    display: inline-block;
+    opacity: 0.5;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(1);
+  }
+
+  .floating-image:hover .img-wrapper {
+    opacity: 1 !important;
+    transform: scale(2.5) rotate(5deg) !important;
+  }
+
+  .floating-image img {
+    display: block;
+    max-width: 80px !important;
+    width: 80px !important;
+    height: auto !important;
+    filter: drop-shadow(0 0 25px rgba(100, 200, 255, 0.45)) drop-shadow(0 0 40px rgba(100, 200, 255, 0.2));
+    border-radius: 8px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .floating-image img {
+      max-width: 50px !important;
+      width: 50px !important;
+    }
+  }
+</style>
+
+<script>
+  // Theme toggle functionality
+  function initTheme() {
+    const theme = localStorage.getItem('theme') || 'dark';
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  // Initialize theme immediately
+  initTheme();
+
+  // Add event listener after page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('theme-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    }
+
+    // Dynamic floating image animation system
+    const floatingImages = document.querySelectorAll('.floating-image');
+    let animationCounter = 0;
+
+    function randomRange(min: number, max: number): number {
+      return Math.random() * (max - min) + min;
+    }
+
+    function generateKeyframes(index: number): string {
+      const keyframeName = `dynamicFloat${animationCounter}_${index}`;
+      
+      // Random waypoints for more varied paths
+      const waypoints = Math.random() > 0.5 ? 4 : 2;
+      const percentages = waypoints === 4 ? [0, 25, 50, 75, 100] : [0, 50, 100];
+      
+      let keyframeString = `@keyframes ${keyframeName} {`;
+      
+      percentages.forEach(percent => {
+        const translateX = percent === 0 
+          ? randomRange(-40, -15)
+          : percent === 100
+            ? randomRange(115, 145)
+            : randomRange(percent * 1.2 - 30, percent * 1.2 + 10);
+        
+        const translateY = randomRange(-20, 20);
+        const scale = randomRange(0.7, 1.5);
+        const rotate = randomRange(-30, 30);
+        
+        keyframeString += `
+          ${percent}% { transform: translate(${translateX}vw, ${translateY}vh) scale(${scale}) rotate(${rotate}deg); }`;
+      });
+      
+      keyframeString += `\n}`;
+      return keyframeString;
+    }
+
+    function applyRandomAnimation(img: Element, index: number) {
+      const element = img as HTMLElement;
+      
+      // Generate unique keyframe
+      const keyframes = generateKeyframes(index);
+      const keyframeName = `dynamicFloat${animationCounter}_${index}`;
+      
+      // Remove old style tag if exists
+      const oldStyle = document.getElementById(`anim-${index}`);
+      if (oldStyle) oldStyle.remove();
+      
+      // Inject new keyframe
+      const styleTag = document.createElement('style');
+      styleTag.id = `anim-${index}`;
+      styleTag.textContent = keyframes;
+      document.head.appendChild(styleTag);
+      
+      // Random starting position
+      const top = randomRange(5, 85);
+      const left = randomRange(5, 90);
+      
+      // Random duration between 33-50 seconds
+      const duration = randomRange(33, 50);
+      
+      // Apply styles
+      element.style.top = `${top}%`;
+      element.style.left = `${left}%`;
+      element.style.animationName = keyframeName;
+      element.style.animationDuration = `${duration}s`;
+      element.style.animationTimingFunction = 'linear';
+      element.style.animationIterationCount = '1';
+      element.style.animationFillMode = 'forwards';
+    }
+
+    function randomizeAllAnimations() {
+      animationCounter++;
+      floatingImages.forEach((img, index) => {
+        applyRandomAnimation(img, index);
+      });
+    }
+
+    // Listen for animation end on each image
+    floatingImages.forEach((img) => {
+      img.addEventListener('animationend', () => {
+        randomizeAllAnimations();
+      });
+    });
+
+    // Initial randomization
+    randomizeAllAnimations();
+  });
+</script>

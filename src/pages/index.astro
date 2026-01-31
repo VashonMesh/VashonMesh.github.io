@@ -1,8 +1,8 @@
 ---
-import LayoutWithFloatingImages from '../layouts/LayoutWithFloatingImages.astro';
+import FloatingImagesLayout from '../layouts/FloatingImages.astro';
 ---
 
-<LayoutWithFloatingImages title="VashonMesh - Community Mesh Networks">
+<FloatingImagesLayout title="VashonMesh - Community Mesh Networks">
   <main>
     <section class="hero">
       <img src="/VashonMesh.svg" alt="VashonMesh Logo" class="thumbnail" />
@@ -74,7 +74,7 @@ import LayoutWithFloatingImages from '../layouts/LayoutWithFloatingImages.astro'
       </div>
     </section>
   </main>
-</LayoutWithFloatingImages>
+</FloatingImagesLayout>
 
 <style>
   main {
@@ -94,6 +94,7 @@ import LayoutWithFloatingImages from '../layouts/LayoutWithFloatingImages.astro'
     pointer-events: auto;
     position: relative;
     overflow: visible;
+    z-index: 250;
   }
 
   .hero .thumbnail {
@@ -101,6 +102,8 @@ import LayoutWithFloatingImages from '../layouts/LayoutWithFloatingImages.astro'
     margin-left: 2rem;
     width: 325px;
     height: auto;
+    position: relative;
+    z-index: 300;
   }
 
   h1 {
@@ -171,6 +174,9 @@ import LayoutWithFloatingImages from '../layouts/LayoutWithFloatingImages.astro'
 
 .thumbnail {
     transition: all 0.8s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 300;
 }
 
 :global(.dark) .thumbnail {
@@ -183,10 +189,12 @@ import LayoutWithFloatingImages from '../layouts/LayoutWithFloatingImages.astro'
     margin-right: 35px;
     filter: hue-rotate(180deg);
     background: rgba(255, 255, 255, 0.1);
+    z-index: 400;
 }
 
 :global(.dark) .thumbnail:hover {
     filter: hue-rotate(180deg) drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+    z-index: 400;
 }
 
 .thumbnail:hover ~ h1,
