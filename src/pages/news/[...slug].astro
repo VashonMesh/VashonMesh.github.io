@@ -19,13 +19,25 @@ const { Content } = await render(post);
 >
   <article class="max-w-3xl mx-auto">
     {post.data.image && (
-      <div class="aspect-video overflow-hidden rounded-lg mb-8">
-        <img
-          src={post.data.image.url}
-          alt={post.data.image.alt}
-          class="w-full h-full object-cover"
-        />
-      </div>
+      <figure class="mb-8">
+        <div class="aspect-video overflow-hidden rounded-lg">
+          <img
+            src={post.data.image.url}
+            alt={post.data.image.alt}
+            class="w-full h-full object-cover"
+          />
+        </div>
+        {(post.data.image.alt || post.data.image.photographer) && (
+          <figcaption class="mt-2 text-sm text-center text-[var(--text-secondary)] italic">
+            {post.data.image.alt}
+            {post.data.image.photographer && (
+              <span class="block mt-1">
+                Photo by {post.data.image.photographer}
+              </span>
+            )}
+          </figcaption>
+        )}
+      </figure>
     )}
     
     <header class="mb-8">
@@ -74,7 +86,12 @@ const { Content } = await render(post);
                 prose-code:bg-gray-100 dark:prose-code:bg-gray-800
                 prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
                 prose-blockquote:border-l-blue-500
-                prose-img:rounded-lg">
+                prose-img:rounded-lg
+                prose-figcaption:text-center
+                prose-figcaption:text-sm
+                prose-figcaption:italic
+                prose-figcaption:text-[var(--text-secondary)]
+                prose-figcaption:mt-2">
       <Content />
     </div>
     
@@ -94,5 +111,27 @@ const { Content } = await render(post);
   article :global(img) {
     max-width: 100%;
     height: auto;
+  }
+  
+  /* Style for figure elements in markdown content */
+  article :global(figure) {
+    margin: 2rem 0;
+  }
+  
+  article :global(figcaption) {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  
+  /* Support for images followed by emphasis text as captions */
+  article :global(img + em) {
+    display: block;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
   }
 </style>

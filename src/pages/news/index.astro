@@ -10,43 +10,100 @@ const allPosts = (await getCollection("blog"))
     return dateB - dateA;
   });
 
-// Get unique years for filter
-const years = [...new Set(allPosts
-  .map(post => post.data.pubDate ? new Date(post.data.pubDate).getFullYear() : null)
-  .filter(year => year !== null))].sort((a, b) => b! - a!);
+// Get unique months for filter
+const months = [...new Set(allPosts
+  .map(post => {
+    if (!post.data.pubDate) return null;
+    const date = new Date(post.data.pubDate);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+  })
+  .filter(month => month !== null))].sort((a, b) => b!.localeCompare(a!));
+
+// Convert month strings to readable format
+const monthOptions = months.map(month => {
+  if (!month) return null;
+  const [year, monthNum] = month.split('-');
+  const date = new Date(parseInt(year), parseInt(monthNum) - 1);
+  return {
+    value: month,
+    label: date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
+  };
+}).filter(m => m !== null);
 ---
 
 <NormalLayout title="News">
   <div class="max-w-5xl mx-auto">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+    <div class="flex flex-col gap-4 mb-8">
       <h1 class="text-4xl font-bold">News & Updates</h1>
       
-      <div class="flex items-center gap-2">
-        <label for="year-filter" class="text-sm font-medium text-[var(--text-secondary)]">
-          Filter by year:
-        </label>
-        <select 
-          id="year-filter" 
-          class="px-3 py-2 rounded-md border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">All Years</option>
-          {years.map(year => (
-            <option value={year}>{year}</option>
-          ))}
-        </select>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <!-- Search input -->
+        <div class="flex-1">
+          <label for="search-input" class="sr-only">Search posts</label>
+          <div class="relative">
+            <svg 
+              class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-secondary)]" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input 
+              type="text"
+              id="search-input"
+              placeholder="Search posts by title, description, tags, or author..."
+              class="w-full pl-10 pr-10 py-2 rounded-md border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              id="clear-search"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hidden"
+              aria-label="Clear search"
+              type="button"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Month filter -->
+        <div class="flex items-center gap-2">
+          <label for="month-filter" class="text-sm font-medium text-[var(--text-secondary)] whitespace-nowrap">
+            Filter by month:
+          </label>
+          <select 
+            id="month-filter" 
+            class="px-3 py-2 rounded-md border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">All Months</option>
+            {monthOptions.map(month => (
+              <option value={month.value}>{month.label}</option>
+            ))}
+          </select>
+        </div>
       </div>
     </div>
     
     <div id="posts-info" class="text-sm text-[var(--text-secondary)] mb-4">
       Showing <span id="visible-count">{allPosts.length}</span> of {allPosts.length} posts
+      <span id="search-status" class="hidden"> matching "<span id="search-term"></span>"</span>
     </div>
     
     <div class="grid gap-8 md:grid-cols-2" id="news-grid">
       {allPosts.map((post) => (
         <article 
           class="news-item group flex flex-col overflow-hidden rounded-lg border border-[var(--border-color)] bg-[var(--card-bg)] transition-all hover:shadow-lg"
-          data-year={post.data.pubDate ? new Date(post.data.pubDate).getFullYear() : ''}
+          data-month={post.data.pubDate ? (() => {
+            const date = new Date(post.data.pubDate);
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+          })() : ''}
           data-date={post.data.pubDate ? new Date(post.data.pubDate).toISOString() : ''}
+          data-title={post.data.title?.toLowerCase() || ''}
+          data-description={post.data.description?.toLowerCase() || ''}
+          data-author={post.data.author?.toLowerCase() || ''}
+          data-tags={post.data.tags?.map(tag => tag.toLowerCase()).join(' ') || ''}
         >
           <a href={`/news/${post.id}`} class="flex flex-col h-full">
             {post.data.image ? (
@@ -112,7 +169,11 @@ const years = [...new Set(allPosts
     </div>
 
     <div id="no-results" class="hidden text-center py-12 text-[var(--text-secondary)]">
-      <p class="text-xl">No posts found for the selected year.</p>
+      <svg class="w-16 h-16 mx-auto mb-4 text-[var(--text-secondary)] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p class="text-xl mb-2">No posts found</p>
+      <p class="text-sm">Try adjusting your search or filter criteria</p>
     </div>
   </div>
 </NormalLayout>
@@ -124,24 +185,50 @@ const years = [...new Set(allPosts
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Fix dropdown option colors */
+  #month-filter,
+  #month-filter option {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
 </style>
 
 <script>
-  // Client-side year filtering
-  const yearFilter = document.getElementById('year-filter') as HTMLSelectElement;
+  // Client-side search and month filtering
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const clearSearch = document.getElementById('clear-search') as HTMLButtonElement;
+  const monthFilter = document.getElementById('month-filter') as HTMLSelectElement;
   const newsItems = document.querySelectorAll('.news-item');
   const visibleCount = document.getElementById('visible-count');
+  const searchStatus = document.getElementById('search-status');
+  const searchTerm = document.getElementById('search-term');
   const noResults = document.getElementById('no-results');
   const newsGrid = document.getElementById('news-grid');
 
   function updateDisplay() {
-    const selectedYear = yearFilter?.value;
+    const selectedMonth = monthFilter?.value;
+    const searchQuery = searchInput?.value.toLowerCase().trim() || '';
     let visibleItems = 0;
     
     newsItems.forEach((item) => {
-      const itemYear = item.getAttribute('data-year');
+      const itemMonth = item.getAttribute('data-month');
+      const title = item.getAttribute('data-title') || '';
+      const description = item.getAttribute('data-description') || '';
+      const author = item.getAttribute('data-author') || '';
+      const tags = item.getAttribute('data-tags') || '';
       
-      if (!selectedYear || itemYear === selectedYear) {
+      // Check month filter
+      const monthMatch = !selectedMonth || itemMonth === selectedMonth;
+      
+      // Check search query - search across title, description, author, and tags
+      const searchMatch = !searchQuery || 
+        title.includes(searchQuery) ||
+        description.includes(searchQuery) ||
+        author.includes(searchQuery) ||
+        tags.includes(searchQuery);
+      
+      if (monthMatch && searchMatch) {
         (item as HTMLElement).style.display = '';
         visibleItems++;
       } else {
@@ -149,8 +236,24 @@ const years = [...new Set(allPosts
       }
     });
 
+    // Update visible count
     if (visibleCount) {
       visibleCount.textContent = visibleItems.toString();
+    }
+
+    // Update search status
+    if (searchQuery && searchStatus && searchTerm) {
+      searchStatus.classList.remove('hidden');
+      searchTerm.textContent = searchQuery;
+    } else if (searchStatus) {
+      searchStatus.classList.add('hidden');
+    }
+
+    // Show/hide clear button
+    if (searchQuery && clearSearch) {
+      clearSearch.classList.remove('hidden');
+    } else if (clearSearch) {
+      clearSearch.classList.add('hidden');
     }
 
     // Toggle no results message
@@ -163,5 +266,23 @@ const years = [...new Set(allPosts
     }
   }
 
-  yearFilter?.addEventListener('change', updateDisplay);
+  // Event listeners
+  searchInput?.addEventListener('input', updateDisplay);
+  monthFilter?.addEventListener('change', updateDisplay);
+  
+  clearSearch?.addEventListener('click', () => {
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
+      updateDisplay();
+    }
+  });
+
+  // Allow Escape key to clear search
+  searchInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && searchInput.value) {
+      searchInput.value = '';
+      updateDisplay();
+    }
+  });
 </script>
