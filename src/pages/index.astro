@@ -6,7 +6,7 @@ import { Image } from 'astro:assets';
 <LayoutWithFloatingImages title="VashonMesh - Community Mesh Networks">
   <main>
     <section class="hero">
-      <img src="/VashonMesh.svg" alt="VashonMesh Logo" class="thumbnail" style="width: 325px; height: auto; float: right;" />
+      <img src="/VashonMesh.svg" alt="VashonMesh Logo" class="thumbnail" />
       <h1 class="rubik-maps-regular">VashonMesh</h1>
       <p class="tagline">Connecting Vashon & Maury Islanders <br/>...with Local Mesh Networks</p>
       
@@ -93,6 +93,15 @@ import { Image } from 'astro:assets';
     border-radius: 12px;
     margin-bottom: 3rem;
     pointer-events: auto;
+    position: relative;
+    overflow: visible;
+  }
+
+  .hero .thumbnail {
+    float: right;
+    margin-left: 2rem;
+    width: 325px;
+    height: auto;
   }
 
   h1 {
@@ -100,12 +109,14 @@ import { Image } from 'astro:assets';
     font-weight: 800;
     margin: 0;
     line-height: 1;
+    transition: transform 0.8s ease;
   }
 
   .tagline {
     font-size: 1.5rem;
     margin-top: 1rem;
     opacity: 0.95;
+    transition: transform 0.8s ease;
   }
 
   .content {
@@ -161,6 +172,10 @@ import { Image } from 'astro:assets';
     transition: all 0.8s ease;
 }
 
+:global(.dark) .thumbnail {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
 .thumbnail:hover {
     transform: scale(1.75);
     margin-top: -15px;
@@ -169,11 +184,80 @@ import { Image } from 'astro:assets';
     background: rgba(255, 255, 255, 0.1);
 }
 
+:global(.dark) .thumbnail:hover {
+    filter: hue-rotate(180deg) drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+}
+
+.thumbnail:hover ~ h1,
+.thumbnail:hover ~ .tagline {
+    transform: scale(0.8);
+}
+
 .rubik-maps-regular {
   font-family: "Rubik Maps", system-ui;
   font-weight: 400;
   font-style: normal;
   font-size: 80px;
+  transition: transform 0.8s ease;
+}
+
+@media (max-width: 1000px) {
+  .hero .thumbnail {
+    width: 250px !important;
+    float: none !important;
+    display: block !important;
+    margin: 0 auto 1.5rem !important;
+  }
+
+  .rubik-maps-regular {
+    font-size: 56px;
+  }
+
+  .tagline {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .rubik-maps-regular {
+    font-size: 48px;
+  }
+
+  .hero {
+    padding: 3rem 1rem;
+  }
+
+  .hero .thumbnail {
+    width: 200px !important;
+    float: none !important;
+    display: block !important;
+    margin: 0 auto 1.5rem !important;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rubik-maps-regular {
+    font-size: 36px;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero .thumbnail {
+    width: 150px !important;
+    float: none !important;
+    display: block !important;
+    margin: 0 auto 1rem !important;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
 }
 
 </style>
