@@ -3,14 +3,14 @@ import NormalLayout from '../layouts/NormalLayout.astro';
 ---
 
 <NormalLayout title="VashonMesh - About Us">
-  <section class="content">
-    <div class="card">
-        <h2>Welcome</h2>
-        <p>
+  <section class="flex flex-col gap-8">
+    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+        <h2 class="text-[#667eea] text-2xl mt-0">Welcome</h2>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           VashonMesh is a small group of rebels informally helping islanders connect with MeshCore and
           related local area mesh networks.
         </p>
-        <p>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           Our mission is to empower neighbors to build resilient, decentralized networks that
           foster communication and collaboration.
         </p>
@@ -27,18 +27,18 @@ import NormalLayout from '../layouts/NormalLayout.astro';
 
 
 
-<div class="space-y-2">
-  <details class="group" open>
-    <summary>
+<div class="flex flex-col gap-2">
+  <details class="border border-[var(--border-color)] rounded-lg bg-[var(--bg-primary)] overflow-hidden faq-item" open>
+    <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 font-medium text-[var(--text-primary)] transition-colors list-none hover:bg-[var(--hover-bg)]">
       <span>What are the basic features?</span>
 
-      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 max-w-5 max-h-5 flex-shrink-0 transition-transform duration-300 arrow">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
       </svg>
     </summary>
 
     <div class="p-4">
-      <p>
+      <p class="text-[var(--text-secondary)] leading-relaxed">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique, quae hic
         dicta quo facere facilis praesentium a sunt, est quia pariatur nam, modi aut minus iste
         odio consectetur molestias iusto cupiditate ullam laborum veniam quos officia. Quos,
@@ -47,17 +47,17 @@ import NormalLayout from '../layouts/NormalLayout.astro';
     </div>
   </details>
 
-  <details class="group" open>
-    <summary>
+  <details class="border border-[var(--border-color)] rounded-lg bg-[var(--bg-primary)] overflow-hidden faq-item" open>
+    <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 font-medium text-[var(--text-primary)] transition-colors list-none hover:bg-[var(--hover-bg)]">
       <span>How do I get started?</span>
 
-      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 max-w-5 max-h-5 flex-shrink-0 transition-transform duration-300 arrow">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
       </svg>
     </summary>
 
     <div class="p-4">
-      <p>
+      <p class="text-[var(--text-secondary)] leading-relaxed">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique, quae hic
         dicta quo facere facilis praesentium a sunt, est quia pariatur nam, modi aut minus iste
         odio consectetur molestias iusto cupiditate ullam laborum veniam quos officia. Quos,
@@ -66,17 +66,17 @@ import NormalLayout from '../layouts/NormalLayout.astro';
     </div>
   </details>
 
-  <details class="group">
-    <summary>
+  <details class="border border-[var(--border-color)] rounded-lg bg-[var(--bg-primary)] overflow-hidden faq-item">
+    <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 font-medium text-[var(--text-primary)] transition-colors list-none hover:bg-[var(--hover-bg)]">
       <span>What support options are available?</span>
 
-      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 max-w-5 max-h-5 flex-shrink-0 transition-transform duration-300 arrow">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
       </svg>
     </summary>
 
     <div class="p-4">
-      <p>
+      <p class="text-[var(--text-secondary)] leading-relaxed">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique, quae hic
         dicta quo facere facilis praesentium a sunt, est quia pariatur nam, modi aut minus iste
         odio consectetur molestias iusto cupiditate ullam laborum veniam quos officia. Quos,
@@ -91,58 +91,7 @@ import NormalLayout from '../layouts/NormalLayout.astro';
 </NormalLayout>
 
 <style>
-  .content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .card {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .card h2 {
-    color: #667eea;
-    font-size: 1.5rem;
-    margin-top: 0;
-  }
-
-  .card p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  .space-y-2 {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  details {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--bg-primary);
-    overflow: hidden;
-  }
-
-  summary {
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.75rem 1rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    transition: background-color 0.2s;
-    list-style: none;
-  }
-
-  /* Hide default disclosure triangle/marker across all browsers */
+  /* Hide default disclosure markers */
   summary::-webkit-details-marker {
     display: none;
   }
@@ -155,29 +104,8 @@ import NormalLayout from '../layouts/NormalLayout.astro';
     display: none;
   }
 
-  summary:hover {
-    background-color: var(--hover-bg);
-  }
-
-  details[open] summary svg {
+  /* Rotate arrow when details is open */
+  details[open] summary .arrow {
     transform: rotate(-180deg);
-  }
-
-  summary svg {
-    width: 1.25rem;
-    height: 1.25rem;
-    max-width: 1.25rem;
-    max-height: 1.25rem;
-    flex-shrink: 0;
-    transition: transform 0.3s;
-  }
-
-  details .p-4 {
-    padding: 1rem;
-  }
-
-  details p {
-    color: var(--text-secondary);
-    line-height: 1.6;
   }
 </style>

@@ -3,24 +3,24 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
 ---
 
 <FloatingImagesLayout title="VashonMesh - Community Mesh Networks">
-  <main>
+  <main class="mx-auto px-4 max-w-[1200px] pointer-events-none">
     <section class="hero">
       <img src="/VashonMesh.svg" alt="VashonMesh Logo" class="thumbnail" />
       <h1 class="rubik-maps-regular">VashonMesh</h1>
-      <p class="tagline">Connecting Vashon & Maury Islanders <br/>...with Local Mesh Networks</p>
+      <p class="text-2xl mt-4 opacity-95 transition-transform duration-700 tagline">Connecting Vashon & Maury Islanders <br/>...with Local Mesh Networks</p>
       
       
       
     </section>
 
-    <section class="content">
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pointer-events-none">
       <div class="card">
-        <h2>Welcome</h2>
-        <p>
+        <h2 class="text-[#667eea] text-2xl mt-0">Welcome</h2>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           VashonMesh is a small group of rebels informally helping islanders connect with MeshCore and
           related local area mesh networks.
         </p>
-        <p>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           Our mission is to empower neighbors to build resilient, decentralized networks that
           foster communication and collaboration.
         </p>
@@ -31,19 +31,19 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
       </div>
 
       <div class="card">
-        <h2>What is Mesh Networking?</h2>
-        <p>
+        <h2 class="text-[#667eea] text-2xl mt-0">What is Mesh Networking?</h2>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           Mesh networks enable direct, peer-to-peer connections between devices, creating
           resilient communication systems that don't rely on traditional internet infrastructure: no cell towers, no subscriptions, inexpensive radios without license requirements, and better range than FRMS walkie-talkies.
           </p>
-        <p>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           Read more about <a href="https://meshcore.net/" target="_blank" rel="noopener">LoRa (Long Range) Technology</a>.
         </p>
       </div>
 
       <div class="card">
-        <h2>Get Involved</h2>
-        <p>
+        <h2 class="text-[#667eea] text-2xl mt-0">Get Involved</h2>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           Interested in joining or learning more about local mesh networks? 
           We are all learning and experimenting. Join with us to learn more!
         </p>
@@ -51,24 +51,24 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
       </div>
 
       <div class="card">
-        <h2>Get a Radio</h2>
-        <p>
+        <h2 class="text-[#667eea] text-2xl mt-0">Get a Radio</h2>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           Interested in how to get started? 
           We're here to help you get connected.
         </p>
       </div>
 
       <div class="card">
-        <h2>Set up a Neighborhood Repeater</h2>
-        <p>
+        <h2 class="text-[#667eea] text-2xl mt-0">Set up a Neighborhood Repeater</h2>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           Ensure your neighborhood has great connectivity. 
           We're here to help you get connected.
         </p>
       </div>
 
       <div class="card">
-        <h2>Current Activities</h2>
-        <p>
+        <h2 class="text-[#667eea] text-2xl mt-0">Current Activities</h2>
+        <p class="text-[var(--text-secondary)] leading-relaxed">
           See what we've been up to and how you can participate!
         </p>
       </div>
@@ -77,13 +77,7 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
 </FloatingImagesLayout>
 
 <style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    max-width: 1200px;
-    pointer-events: none;
-  }
-
+  /* Hero section with gradient background */
   .hero {
     text-align: center;
     padding: 4rem 1rem;
@@ -106,28 +100,7 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
     z-index: 300;
   }
 
-  h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    margin: 0;
-    line-height: 1;
-    transition: transform 0.8s ease;
-  }
-
-  .tagline {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    opacity: 0.95;
-    transition: transform 0.8s ease;
-  }
-
-  .content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    pointer-events: none;
-  }
-
+  /* Card styling with hover effects */
   .card {
     background: rgba(255, 255, 255, 0.75);
     border: 1px solid var(--border-color);
@@ -151,122 +124,106 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
             drop-shadow(0 0 40px rgba(102, 126, 234, 0.4));
   }
 
-  .card h2 {
-    color: #667eea;
-    font-size: 1.5rem;
-    margin-top: 0;
+  /* Custom font for title */
+  .rubik-maps-regular {
+    font-family: "Rubik Maps", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 80px;
+    transition: transform 0.8s ease;
+    margin: 0;
+    line-height: 1;
   }
 
-  .card p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-
-.thumbnail-unused{
-  width: 100px;
-  height: 100px;
-  display:block;
-  z-index:999;
-  cursor: pointer;
-  -webkit-transition-property: all;
-}
-
-.thumbnail {
+  /* Thumbnail image hover and dark mode effects */
+  .thumbnail {
     transition: all 0.8s ease;
     cursor: pointer;
     position: relative;
     z-index: 300;
-}
+  }
 
-:global(.dark) .thumbnail {
+  :global(.dark) .thumbnail {
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
-}
+  }
 
-.thumbnail:hover {
+  .thumbnail:hover {
     transform: scale(1.75);
     margin-top: -15px;
     margin-right: 35px;
     filter: hue-rotate(180deg);
     background: rgba(255, 255, 255, 0.1);
     z-index: 400;
-}
+  }
 
-:global(.dark) .thumbnail:hover {
+  :global(.dark) .thumbnail:hover {
     filter: hue-rotate(180deg) drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
     z-index: 400;
-}
+  }
 
-.thumbnail:hover ~ h1,
-.thumbnail:hover ~ .tagline {
+  .thumbnail:hover ~ h1,
+  .thumbnail:hover ~ .tagline {
     transform: scale(0.8);
-}
-
-.rubik-maps-regular {
-  font-family: "Rubik Maps", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 80px;
-  transition: transform 0.8s ease;
-}
-
-@media (max-width: 1000px) {
-  .hero .thumbnail {
-    width: 250px !important;
-    float: none !important;
-    display: block !important;
-    margin: 0 auto 1.5rem !important;
   }
 
-  .rubik-maps-regular {
-    font-size: 56px;
+  /* Responsive layout adjustments */
+  @media (max-width: 1000px) {
+    .hero .thumbnail {
+      width: 250px !important;
+      float: none !important;
+      display: block !important;
+      margin: 0 auto 1.5rem !important;
+    }
+
+    .rubik-maps-regular {
+      font-size: 56px;
+    }
+
+    .tagline {
+      font-size: 1.3rem !important;
+    }
   }
 
-  .tagline {
-    font-size: 1.3rem;
-  }
-}
+  @media (max-width: 768px) {
+    .rubik-maps-regular {
+      font-size: 48px;
+    }
 
-@media (max-width: 768px) {
-  .rubik-maps-regular {
-    font-size: 48px;
-  }
+    .hero {
+      padding: 3rem 1rem;
+    }
 
-  .hero {
-    padding: 3rem 1rem;
-  }
+    .hero .thumbnail {
+      width: 200px !important;
+      float: none !important;
+      display: block !important;
+      margin: 0 auto 1.5rem !important;
+    }
 
-  .hero .thumbnail {
-    width: 200px !important;
-    float: none !important;
-    display: block !important;
-    margin: 0 auto 1.5rem !important;
-  }
-
-  .tagline {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .rubik-maps-regular {
-    font-size: 36px;
+    .tagline {
+      font-size: 1.2rem !important;
+    }
   }
 
-  .hero {
-    padding: 2rem 1rem;
-  }
+  @media (max-width: 480px) {
+    .rubik-maps-regular {
+      font-size: 36px;
+    }
 
-  .hero .thumbnail {
-    width: 150px !important;
-    float: none !important;
-    display: block !important;
-    margin: 0 auto 1rem !important;
-  }
+    .hero {
+      padding: 2rem 1rem;
+    }
 
-  .tagline {
-    font-size: 1rem;
-  }
-}
+    .hero .thumbnail {
+      width: 150px !important;
+      float: none !important;
+      display: block !important;
+      margin: 0 auto 1rem !important;
+    }
 
+    .tagline {
+      font-size: 1rem !important;
+    }
+  }
 </style>
+

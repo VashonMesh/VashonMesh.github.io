@@ -2,43 +2,22 @@
 const year = new Date().getFullYear();
 ---
 
-<footer>
-  <div class="content">
-    <p>&copy; {year} VashonMesh.org, All rights reserved.</p>
-    <p><a href="https://vashonsoftware.com" class="com">Site by Vashon Software</a></p>
-    <div class="social-links">
-      <a href="https://github.com/VashonMesh/VashonMesh.github.io" target="_blank" rel="noopener">
-       <img src="/GitHub-Mark-32px.png" alt="Edit on GitHub" style="width:32px; height:32px; vertical-align:middle; margin-right:10px;"/>Edit on GitHub
+<footer class="bg-[var(--footer-bg)] px-4 py-8 mt-16 border-t border-[var(--border-color)]">
+  <div class="max-w-[1200px] mx-auto flex justify-between items-center flex-wrap gap-4">
+    <p class="text-[var(--text-secondary)] m-0">&copy; {year} VashonMesh.org, All rights reserved.</p>
+    <p class="m-0"><a href="https://vashonsoftware.com" class="com">Site by Vashon Software</a></p>
+    <div class="flex items-center social-links">
+      <a href="https://github.com/VashonMesh/VashonMesh.github.io" target="_blank" rel="noopener" class="inline-flex items-center">
+       <img src="/GitHub-Mark-32px.png" alt="Edit on GitHub" class="w-8 h-8 align-middle mr-2.5"/>Edit on GitHub
       </a>
-      <a href="https://W7VMI.org" target="_blank" rel="noopener">
-       <img src="/w7vmi_new_logo.svg" alt="W7VMI" style="width:32px; height:32px; vertical-align:middle; margin-right:10px; margin-left: 40px;" />Affiliated with W7VMI</a>
+      <a href="https://W7VMI.org" target="_blank" rel="noopener" class="inline-flex items-center">
+       <img src="/w7vmi_new_logo.svg" alt="W7VMI" class="w-8 h-8 align-middle mr-2.5 ml-10" />Affiliated with W7VMI</a>
     </div>
   </div>
 </footer>
 
 <style>
-  footer {
-    background-color: var(--footer-bg);
-    padding: 2rem 1rem;
-    margin-top: 4rem;
-    border-top: 1px solid var(--border-color);
-  }
-
-  .content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  p {
-    color: var(--text-secondary);
-    margin: 0;
-  }
-
+  /* Vashon Software link with color swirl animation */
   .com {
     display: inline-block;
     transition: all 0.5s ease;
@@ -64,17 +43,11 @@ const year = new Date().getFullYear();
     100% { filter: hue-rotate(360deg) drop-shadow(0 0 8px rgba(102, 126, 234, 0.8)); }
   }
 
-  .social-links {
-    display: flex;
-    align-items: center;
-  }
-
+  /* Social links styling */
   .social-links a {
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s, transform 0.3s ease;
-    display: inline-flex;
-    align-items: center;
   }
 
   .social-links a:hover {
@@ -82,7 +55,7 @@ const year = new Date().getFullYear();
     transform: scale(1.1);
   }
 
-  /* Add glow effect to icons in dark mode */
+  /* Icon glow effect in dark mode */
   :global(.dark) .social-links img {
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
     transition: transform 0.3s ease, filter 0.3s ease;

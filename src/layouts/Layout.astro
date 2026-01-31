@@ -35,69 +35,7 @@ const { title } = Astro.props;
 </html>
 
 <style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-    
-    /* Light mode colors */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f9fafb;
-    --text-primary: #111827;
-    --text-secondary: #6b7280;
-    --header-bg: #ffffff;
-    --footer-bg: #f3f4f6;
-    --border-color: #e5e7eb;
-    --hover-bg: #f3f4f6;
-  }
-
-  .dark {
-    /* Dark mode colors */
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #1a1a2e;
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --header-bg: #111827;
-    --footer-bg: #1f2937;
-    --border-color: #374151;
-    --hover-bg: #1f2937;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background: var(--bg-secondary);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-  }
-
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  }
+  /* Base styles handled in global.css */
 </style>
 
 <script>

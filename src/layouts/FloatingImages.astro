@@ -71,55 +71,23 @@ const shuffledImages = [...allImages]
 </html>
 
 <style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-    
-    /* Light mode colors */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f9fafb;
-    --text-primary: #111827;
-    --text-secondary: #6b7280;
-    --header-bg: #ffffff;
-    --footer-bg: #f3f4f6;
-    --border-color: #e5e7eb;
-    --hover-bg: #f3f4f6;
-  }
-
+  /* Base styles handled in global.css */
+  
+  /* FloatingImages-specific dark mode overrides */
   .dark {
-    /* Dark mode colors */
     --bg-primary: rgba(10, 10, 10, 0.85);
     --bg-secondary: rgba(26, 26, 46, 0.85);
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
     --header-bg: rgba(17, 24, 39, 0.95);
     --footer-bg: rgba(31, 41, 55, 0.95);
-    --border-color: #374151;
-    --hover-bg: #1f2937;
   }
 
-  * {
-    box-sizing: border-box;
-  }
-
+  /* FloatingImages-specific layout styles */
   html {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: #0a0a0a;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   body {
-    margin: 0;
-    padding: 0;
     background: transparent;
-    color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
