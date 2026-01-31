@@ -1,0 +1,98 @@
+---
+import { getCollection, render } from "astro:content";
+import NormalLayout from "../../layouts/NormalLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<NormalLayout 
+  title={post.data.title || "News"}
+>
+  <article class="max-w-3xl mx-auto">
+    {post.data.image && (
+      <div class="aspect-video overflow-hidden rounded-lg mb-8">
+        <img
+          src={post.data.image.url}
+          alt={post.data.image.alt}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    )}
+    
+    <header class="mb-8">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">
+        {post.data.title}
+      </h1>
+      
+      <div class="flex items-center gap-4 text-[var(--text-secondary)] mb-4">
+        {post.data.pubDate && (
+          <time datetime={new Date(post.data.pubDate).toISOString()}>
+            {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+        )}
+        {post.data.author && (
+          <span>by {post.data.author}</span>
+        )}
+      </div>
+      
+      {post.data.description && (
+        <p class="text-xl text-[var(--text-secondary)] italic">
+          {post.data.description}
+        </p>
+      )}
+      
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {post.data.tags.map((tag) => (
+            <span class="inline-block px-3 py-1 text-sm rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+    
+    <div class="prose prose-lg dark:prose-invert max-w-none
+                prose-headings:text-[var(--text-primary)]
+                prose-p:text-[var(--text-secondary)]
+                prose-a:text-blue-600 dark:prose-a:text-blue-400
+                prose-strong:text-[var(--text-primary)]
+                prose-code:text-[var(--text-primary)]
+                prose-code:bg-gray-100 dark:prose-code:bg-gray-800
+                prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
+                prose-blockquote:border-l-blue-500
+                prose-img:rounded-lg">
+      <Content />
+    </div>
+    
+    <footer class="mt-12 pt-8 border-t border-[var(--border-color)]">
+      <a 
+        href="/news" 
+        class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
+      >
+        ← Back to all news
+      </a>
+    </footer>
+  </article>
+</NormalLayout>
+
+<style>
+  /* Ensure embedded images in markdown content are responsive */
+  article :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

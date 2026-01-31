@@ -1,5 +1,16 @@
 ---
 import FloatingImagesLayout from '../layouts/FloatingImages.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .filter(post => post.data.title && post.data.title.toLowerCase() !== 'readme')
+  .sort((a, b) => {
+    const dateA = a.data.pubDate ? new Date(a.data.pubDate).valueOf() : 0;
+    const dateB = b.data.pubDate ? new Date(b.data.pubDate).valueOf() : 0;
+    return dateB - dateA;
+  })
+  .slice(0, 3);
 ---
 
 <FloatingImagesLayout title="VashonMesh - Community Mesh Networks">
@@ -11,6 +22,49 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
       
       
       
+    </section>
+
+    <section class="recent-news pointer-events-auto">
+      <h2 class="text-3xl font-bold mb-6 text-[var(--text-primary)]">Latest News</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {recentPosts.map((post) => (
+          <a href={`/news/${post.id}`} class="news-card group">
+            {post.data.image && (
+              <div class="news-image">
+                <img
+                  src={post.data.image.url}
+                  alt={post.data.image.alt}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            )}
+            <div class="news-content">
+              <h3 class="text-lg font-bold mb-2 text-[var(--text-primary)] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {post.data.title}
+              </h3>
+              {post.data.pubDate && (
+                <time class="text-sm text-[var(--text-secondary)] block mb-2">
+                  {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+              )}
+              {post.data.description && (
+                <p class="text-sm text-[var(--text-secondary)] line-clamp-3">
+                  {post.data.description}
+                </p>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-6">
+        <a href="/news" class="inline-block px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full transition-colors">
+          View All News →
+        </a>
+      </div>
     </section>
 
     <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pointer-events-none">
@@ -122,6 +176,55 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
     filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.6))
             drop-shadow(0 0 40px rgba(102, 126, 234, 0.4));
+  }
+
+  /* Recent news section */
+  .recent-news {
+    margin-bottom: 3rem;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+
+  :global(.dark) .recent-news {
+    background: rgba(10, 10, 10, 0.75);
+    border-color: rgba(55, 65, 81, 0.5);
+  }
+
+  .news-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .news-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .news-content {
+    padding: 1.25rem;
+    flex: 1;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   /* Custom font for title */
