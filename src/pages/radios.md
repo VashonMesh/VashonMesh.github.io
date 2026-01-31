@@ -1,6 +1,7 @@
 ---
-layout: ../layouts/Layout.astro
+layout: ../layouts/NormalLayout.astro
 title: Get a Radio
+description: Guide to choosing and setting up mesh networking devices and radios
 ---
 
 # Get a Radio

@@ -1,3 +1,10 @@
+---
+layout: ../layouts/NormalLayout.astro
+title: Mesh Networking
+description:
+  Learn about LoRa, Meshtastic, MeshCore and other mesh networking technologies
+---
+
 # Mesh-Networking
 
 - an item

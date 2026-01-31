@@ -1,4 +1,6 @@
 ---
+import NormalLayout from '../../layouts/NormalLayout.astro';
+
 export function getStaticPaths() {
   return [
     { params: { dog: "clifford" }},
@@ -9,4 +11,6 @@ export function getStaticPaths() {
 
 const { dog } = Astro.params;
 ---
-<div>Good dog, {dog}!</div>
+<NormalLayout title={`Good dog, ${dog}!`}>
+  <div>Good dog, {dog}!</div>
+</NormalLayout>

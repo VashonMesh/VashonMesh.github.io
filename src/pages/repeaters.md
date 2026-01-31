@@ -1,3 +1,10 @@
+---
+layout: ../layouts/NormalLayout.astro
+title: Repeaters
+description:
+  Information about setting up fixed repeater nodes for mesh network coverage
+---
+
 Most radios can be reflashed to become a repeater. The distinction is more the
 use case, and what we refer to here as a fixed repeater: something with
 batteries or solar panels for multi-day power, weather-proofed, and often fewer

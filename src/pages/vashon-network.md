@@ -1,3 +1,10 @@
+---
+layout: ../layouts/NormalLayout.astro
+title: Vashon Network
+description:
+  Coverage map and infrastructure details for Vashon Island's mesh network
+---
+
 # Mesh-Networking
 
 - an item

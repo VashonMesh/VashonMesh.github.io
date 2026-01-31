@@ -1,4 +1,7 @@
 ---
+layout: ../layouts/NormalLayout.astro
+title: Glossary
+description: Common terms and acronyms used in mesh networking and amateur radio
 ---
 
 End User Device (EUD) Bill Of Materials (BOM) HaMPR: Human Attached Mesh

@@ -1,3 +1,11 @@
+---
+layout: ../layouts/NormalLayout.astro
+title: Emergency Communications
+description:
+  Using mesh networks for emergency preparedness and disaster response on Vashon
+  Island
+---
+
 # Hobby and experimentation
 
 ## EMCOMM

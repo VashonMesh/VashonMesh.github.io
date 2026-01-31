@@ -1,11 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import NormalLayout from '../layouts/NormalLayout.astro';
 ---
 
-<Layout title="VashonMesh - About Us">
-  <main>
-    <section class="content">
-      <div class="card">
+<NormalLayout title="VashonMesh - About Us">
+  <section class="content">
+    <div class="card">
         <h2>Welcome</h2>
         <p>
           VashonMesh is a small group of rebels informally helping islanders connect with MeshCore and
@@ -29,17 +28,17 @@ import Layout from '../layouts/Layout.astro';
 
 
 <div class="space-y-2">
-  <details class="group [&amp;_summary::-webkit-details-marker]:hidden" open="">
-    <summary class="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white px-4 py-3 font-medium text-gray-900 hover:bg-gray-50">
+  <details class="group" open>
+    <summary>
       <span>What are the basic features?</span>
 
-      <svg class="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
     </summary>
 
     <div class="p-4">
-      <p class="text-gray-700">
+      <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique, quae hic
         dicta quo facere facilis praesentium a sunt, est quia pariatur nam, modi aut minus iste
         odio consectetur molestias iusto cupiditate ullam laborum veniam quos officia. Quos,
@@ -48,17 +47,17 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </details>
 
-  <details class="group [&amp;_summary::-webkit-details-marker]:hidden" open="">
-    <summary class="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white px-4 py-3 font-medium text-gray-900 hover:bg-gray-50">
+  <details class="group" open>
+    <summary>
       <span>How do I get started?</span>
 
-      <svg class="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
     </summary>
 
     <div class="p-4">
-      <p class="text-gray-700">
+      <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique, quae hic
         dicta quo facere facilis praesentium a sunt, est quia pariatur nam, modi aut minus iste
         odio consectetur molestias iusto cupiditate ullam laborum veniam quos officia. Quos,
@@ -67,17 +66,17 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </details>
 
-  <details class="group [&amp;_summary::-webkit-details-marker]:hidden">
-    <summary class="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white px-4 py-3 font-medium text-gray-900 hover:bg-gray-50">
+  <details class="group">
+    <summary>
       <span>What support options are available?</span>
 
-      <svg class="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
     </summary>
 
     <div class="p-4">
-      <p class="text-gray-700">
+      <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique, quae hic
         dicta quo facere facilis praesentium a sunt, est quia pariatur nam, modi aut minus iste
         odio consectetur molestias iusto cupiditate ullam laborum veniam quos officia. Quos,
@@ -88,6 +87,86 @@ import Layout from '../layouts/Layout.astro';
 
   
 </div>
-    </section>
-  </main>
-  </Layout>
+  </section>
+</NormalLayout>
+
+<style>
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .card h2 {
+    color: #667eea;
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+
+  .card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .space-y-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  details {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    overflow: hidden;
+  }
+
+  summary {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: background-color 0.2s;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover {
+    background-color: var(--hover-bg);
+  }
+
+  details[open] summary svg {
+    transform: rotate(-180deg);
+  }
+
+  summary svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+
+  details .p-4 {
+    padding: 1rem;
+  }
+
+  details p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+</style>
