@@ -1,18 +1,50 @@
 ---
 const currentPath = Astro.url.pathname;
 
-const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/news', label: 'Posts' },
-  { href: '/about', label: 'About' },
+interface NavItem {
+  href: string;
+  label: string;
+  children?: NavItem[];
+}
+
+const navItems: NavItem[] = [
+  { 
+    href: '/', 
+    label: 'Home',
+    children: [
+      { href: '/about', label: 'About Us' },
+      { href: '/contact-us', label: 'Contact Us' },
+      { href: '/get-involved', label: 'Get Involved' }
+    ]
+  },
+  { 
+    href: '/mesh-network', 
+    label: 'Mesh Tech',
+    children: [
+      { href: '/radios', label: 'Devices' },
+      { href: '/repeaters', label: 'Repeaters' }
+    ]
+  },
+  { 
+    href: '/vashon-network', 
+    label: 'Vashon Network',
+    children: [
+      { href: '/emcomm', label: 'Emergency Comms' }
+    ]
+  },
+  { href: '/news', label: 'Posts' }
 ];
 
-// Function to check if current path matches nav item
-function isActive(itemPath: string, currentPath: string): boolean {
+// Function to check if current path matches nav item or its children
+function isActive(itemPath: string, currentPath: string, children?: NavItem[]): boolean {
   if (itemPath === '/') {
-    return currentPath === '/';
+    if (currentPath === '/') return true;
+    // Check if any child is active
+    return children?.some(child => currentPath.startsWith(child.href)) ?? false;
   }
-  return currentPath.startsWith(itemPath);
+  if (currentPath.startsWith(itemPath)) return true;
+  // Check if any child is active
+  return children?.some(child => currentPath.startsWith(child.href)) ?? false;
 }
 ---
 
@@ -47,12 +79,27 @@ function isActive(itemPath: string, currentPath: string): boolean {
     </div>
     <div class="flex items-center gap-6 links">
       {navItems.map(item => (
-        <a 
-          href={item.href} 
-          class={`no-underline font-medium transition-all duration-300 inline-block nav-link ${isActive(item.href, currentPath) ? 'active' : ''}`}
-        >
-          {item.label}
-        </a>
+        <div class={`nav-item ${item.children ? 'has-dropdown' : ''}`}>
+          <a 
+            href={item.href} 
+            class={`nav-link ${isActive(item.href, currentPath, item.children) ? 'active' : ''}`}
+          >
+            {item.label}
+            {item.children && <span class="dropdown-arrow">▾</span>}
+          </a>
+          {item.children && (
+            <div class="dropdown-menu">
+              {item.children.map(child => (
+                <a 
+                  href={child.href}
+                  class={`dropdown-item ${isActive(child.href, currentPath) ? 'active' : ''}`}
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
       ))}
       <button id="theme-toggle" class="bg-transparent border-none cursor-pointer p-2 flex items-center justify-center rounded-md transition-all duration-200" aria-label="Toggle dark mode" title="Toggle dark mode">
         <svg class="sun-icon hidden dark:block" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -98,8 +145,23 @@ function isActive(itemPath: string, currentPath: string): boolean {
   }
 
   /* Nav links styling */
+  .nav-item {
+    position: relative;
+  }
+
   .nav-link {
     color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s, transform 0.3s ease, filter 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .dropdown-arrow {
+    font-size: 0.875rem;
+    margin-left: 0.125rem;
   }
 
   .nav-link.active {
@@ -123,6 +185,57 @@ function isActive(itemPath: string, currentPath: string): boolean {
     color: #667eea;
     transform: scale(1.1);
     filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.8)) drop-shadow(0 0 4px rgba(102, 126, 234, 1));
+  }
+
+  /* Dropdown menu styling */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    background: var(--header-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    z-index: 200;
+  }
+
+  .nav-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .dropdown-item:hover {
+    background-color: var(--hover-bg);
+    color: #667eea;
+  }
+
+  .dropdown-item.active {
+    color: #667eea;
+    background-color: var(--hover-bg);
+  }
+
+  .dropdown-item:first-child {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .dropdown-item:last-child {
+    border-radius: 0 0 8px 8px;
   }
 
   /* Theme toggle button */
