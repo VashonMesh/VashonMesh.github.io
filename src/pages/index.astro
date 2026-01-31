@@ -87,7 +87,7 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
     margin-bottom: 3rem;
     pointer-events: auto;
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     z-index: 250;
   }
 
@@ -148,9 +148,7 @@ import FloatingImagesLayout from '../layouts/FloatingImages.astro';
   }
 
   .thumbnail:hover {
-    transform: scale(1.75);
-    margin-top: -15px;
-    margin-right: 35px;
+    transform: scale(1.5);
     filter: hue-rotate(180deg);
     background: rgba(255, 255, 255, 0.1);
     z-index: 400;
