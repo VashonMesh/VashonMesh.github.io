@@ -1,2 +1,23 @@
 @import "tailwindcss";
 /*  https://docs.astro.build/en/guides/styling/#global-styles */
+
+/* Dark mode overrides for Tailwind classes */
+.dark .bg-white {
+  background-color: var(--bg-primary) !important;
+}
+
+.dark .text-gray-900 {
+  color: var(--text-primary) !important;
+}
+
+.dark .text-gray-700 {
+  color: var(--text-secondary) !important;
+}
+
+.dark .border-gray-200 {
+  border-color: var(--border-color) !important;
+}
+
+.dark .hover\:bg-gray-50:hover {
+  background-color: var(--hover-bg) !important;
+}

@@ -1,5 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Header from '../components/header.astro';
+import Footer from '../components/footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 
 const images = [
   'custom-Meshtastic.png',
@@ -17,49 +25,138 @@ const images = [
 ];
 ---
 
-<Layout title="Floating Gallery - Vashon Mesh">
-  <div class="floating-container">
-    {images.map((img, index) => (
-      <div class={`floating-image float-${index + 1}`}>
-        <span class="img-wrapper">
-          <img src={`/hero-imgs/${img}`} alt={img.replace(/\.(png|jpg|jpeg)$/, '')} />
-        </span>
-      </div>
-    ))}
-  </div>
-  <main class="content">
-    <!-- Content goes here -->
-  </main>
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="VashonMesh - Community mesh networks connecting neighbors" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
 
-<style>
-  :global(body) {
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet">
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="floating-container">
+      {images.map((img, index) => (
+        <div class={`floating-image float-${index + 1}`}>
+          <span class="img-wrapper">
+            <img src={`/hero-imgs/${img}`} alt={img.replace(/\.(png|jpg|jpeg)$/, '')} style="max-width: 80px; width: 80px; height: auto;" />
+          </span>
+        </div>
+      ))}
+    </div>
+    <div class="site-wrapper">
+      <Header />
+      <div class="page-content">
+        <slot />
+      </div>
+      <Footer />
+    </div>
+  </body>
+  <script data-goatcounter="https://vashonmesh.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</html>
+
+<style is:global>
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+    
+    /* Light mode colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --header-bg: #ffffff;
+    --footer-bg: #f3f4f6;
+    --border-color: #e5e7eb;
+    --hover-bg: #f3f4f6;
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --bg-primary: rgba(10, 10, 10, 0.85);
+    --bg-secondary: rgba(26, 26, 46, 0.85);
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --header-bg: rgba(17, 24, 39, 0.95);
+    --footer-bg: rgba(31, 41, 55, 0.95);
+    --border-color: #374151;
+    --hover-bg: #1f2937;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: #0a0a0a;
-    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body {
     margin: 0;
     padding: 0;
+    background: transparent;
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .site-wrapper {
+    position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
 
-  :global(header) {
+  header {
     position: relative;
-    z-index: 10;
+    z-index: 100;
   }
 
-  :global(footer) {
+  footer {
     position: relative;
-    z-index: 10;
+    z-index: 100;
     margin-top: auto;
   }
 
-  .content {
+  .page-content {
     flex: 1;
     position: relative;
-    z-index: 1;
-    min-height: 60vh;
+    z-index: 3;
     pointer-events: none;
+  }
+
+  .page-content > * {
+    pointer-events: auto;
+  }
+
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
   }
 
   .floating-container {
@@ -70,15 +167,15 @@ const images = [
     height: 100vh;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
     overflow: hidden;
-    z-index: 0;
+    z-index: 2;
     pointer-events: none;
   }
 
   .floating-image {
     position: absolute;
     pointer-events: auto;
-    z-index: 1;
     cursor: pointer;
+    z-index: 1;
   }
 
   .floating-image:hover {
@@ -88,19 +185,20 @@ const images = [
   .img-wrapper {
     display: inline-block;
     opacity: 0.5;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform: scale(1);
   }
 
   .floating-image:hover .img-wrapper {
     opacity: 1 !important;
-    transform: scale(1.5) !important;
+    transform: scale(2.5) rotate(5deg) !important;
   }
 
   .floating-image img {
     display: block;
-    max-width: 80px;
-    height: auto;
+    max-width: 80px !important;
+    width: 80px !important;
+    height: auto !important;
     filter: drop-shadow(0 0 25px rgba(100, 200, 255, 0.45)) drop-shadow(0 0 40px rgba(100, 200, 255, 0.2));
     border-radius: 8px;
   }
@@ -178,7 +276,7 @@ const images = [
     animation: float12 28s linear infinite;
   }
 
-  /* Combined floating and morphing keyframes - all moving left to right with slight upward drift */
+  /* Combined floating and morphing keyframes */
   @keyframes float1 {
     0% { transform: translate(-20vw, 10vh) scale(1) rotate(0deg); }
     25% { transform: translate(15vw, 2vh) scale(1.3) rotate(15deg); }
@@ -266,7 +364,34 @@ const images = [
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .floating-image img {
-      max-width: 50px;
+      max-width: 50px !important;
+      width: 50px !important;
     }
   }
 </style>
+
+<script>
+  // Theme toggle functionality
+  function initTheme() {
+    const theme = localStorage.getItem('theme') || 'dark';
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  // Initialize theme immediately
+  initTheme();
+
+  // Add event listener after page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('theme-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    }
+  });
+</script>

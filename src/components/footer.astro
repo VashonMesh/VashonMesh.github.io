@@ -17,10 +17,10 @@ const year = new Date().getFullYear();
 
 <style>
   footer {
-    background-color: #f3f4f6;
+    background-color: var(--footer-bg);
     padding: 2rem 1rem;
     margin-top: 4rem;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--border-color);
   }
 
   .content {
@@ -34,7 +34,7 @@ const year = new Date().getFullYear();
   }
 
   p {
-    color: #6b7280;
+    color: var(--text-secondary);
     margin: 0;
   }
 
@@ -44,7 +44,7 @@ const year = new Date().getFullYear();
   }
 
   .social-links a {
-    color: #6b7280;
+    color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s;
     display: inline-flex;
