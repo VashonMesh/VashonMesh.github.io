@@ -34,12 +34,14 @@ const recentPosts = allPosts
         {recentPosts.map((post) => (
           <a href={`/news/${post.id}`} class="news-card group">
             {post.data.image && (
-              <div class="news-image">
-                <img
-                  src={post.data.image.url}
-                  alt={post.data.image.alt}
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
+              <div class="image-tooltip-container" data-caption={post.data.image.alt} data-photographer={post.data.image.photographer}>
+                <div class="news-image">
+                  <img
+                    src={post.data.image.url}
+                    alt={post.data.image.alt}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
               </div>
             )}
             <div class="news-content">
@@ -215,7 +217,7 @@ const recentPosts = allPosts
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
     transition: all 0.3s;
     text-decoration: none;
     pointer-events: auto;
@@ -230,10 +232,68 @@ const recentPosts = allPosts
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
   }
 
+  .image-tooltip-container {
+    position: relative;
+    width: 100%;
+  }
+
   .news-image {
     width: 100%;
     height: 180px;
     overflow: hidden;
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* Image tooltip */
+  .image-tooltip-container::after {
+    content: attr(data-caption);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.92);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: normal;
+    max-width: 100%;
+    width: max-content;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10000;
+    line-height: 1.3;
+  }
+
+  .image-tooltip-container[data-photographer]::after {
+    content: attr(data-caption) "\A\A- " attr(data-photographer);
+    white-space: pre-wrap;
+    text-align: right;
+    font-weight: 400;
+  }
+
+  .image-tooltip-container[data-photographer]::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .news-card:hover .image-tooltip-container::after,
+  .image-tooltip-container:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+  }
+
+  :global(.dark) .image-tooltip-container::after {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #111827;
   }
 
   .news-content {
