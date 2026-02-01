@@ -41,11 +41,27 @@ const { title } = Astro.props;
 <script>
   // Theme toggle functionality
   function initTheme() {
-    const theme = localStorage.getItem('theme') || 'dark';
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+    const storedTheme = localStorage.getItem('theme');
+    
+    if (storedTheme) {
+      // Use stored preference
+      if (storedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
     } else {
-      document.documentElement.classList.remove('dark');
+      // No stored preference, check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDark) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
     }
   }
 

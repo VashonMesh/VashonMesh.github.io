@@ -83,7 +83,19 @@ const shuffledImages = [...allImages]
 
   /* FloatingImages-specific layout styles */
   html {
+    background: #f9fafb; /* Light mode default */
+  }
+
+  /* Dark mode via manual toggle */
+  :global(.dark) html {
     background: #0a0a0a;
+  }
+
+  /* Dark mode via system preference (fallback when no manual preference set) */
+  @media (prefers-color-scheme: dark) {
+    html:not(.dark):not(.light) {
+      background: #0a0a0a;
+    }
   }
 
   body {
@@ -140,10 +152,22 @@ const shuffledImages = [...allImages]
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 50%, #e5e7eb 100%); /* Light mode */
     overflow: hidden;
     z-index: 2;
     pointer-events: none;
+  }
+
+  /* Dark mode via manual toggle */
+  :global(.dark) .floating-container {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+  }
+
+  /* Dark mode via system preference (fallback when no manual preference set) */
+  @media (prefers-color-scheme: dark) {
+    html:not(.dark):not(.light) .floating-container {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    }
   }
 
   .floating-image {
@@ -174,8 +198,20 @@ const shuffledImages = [...allImages]
     max-width: 80px !important;
     width: 80px !important;
     height: auto !important;
-    filter: drop-shadow(0 0 25px rgba(100, 200, 255, 0.45)) drop-shadow(0 0 40px rgba(100, 200, 255, 0.2));
+    filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.35)) drop-shadow(0 0 25px rgba(102, 126, 234, 0.15)); /* Light mode */
     border-radius: 8px;
+  }
+
+  /* Dark mode via manual toggle */
+  :global(.dark) .floating-image img {
+    filter: drop-shadow(0 0 25px rgba(100, 200, 255, 0.45)) drop-shadow(0 0 40px rgba(100, 200, 255, 0.2));
+  }
+
+  /* Dark mode via system preference (fallback when no manual preference set) */
+  @media (prefers-color-scheme: dark) {
+    html:not(.dark):not(.light) .floating-image img {
+      filter: drop-shadow(0 0 25px rgba(100, 200, 255, 0.45)) drop-shadow(0 0 40px rgba(100, 200, 255, 0.2));
+    }
   }
 
   /* Responsive adjustments */
@@ -190,11 +226,27 @@ const shuffledImages = [...allImages]
 <script>
   // Theme toggle functionality
   function initTheme() {
-    const theme = localStorage.getItem('theme') || 'dark';
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+    const storedTheme = localStorage.getItem('theme');
+    
+    if (storedTheme) {
+      // Use stored preference
+      if (storedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
     } else {
-      document.documentElement.classList.remove('dark');
+      // No stored preference, check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDark) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
     }
   }
 
