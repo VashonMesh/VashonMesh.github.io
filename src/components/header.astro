@@ -252,4 +252,103 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
   :global(.dark) #theme-toggle:hover {
     filter: drop-shadow(0 0 6px rgba(102, 126, 234, 0.5));
   }
+
+  /* Mobile-specific styles */
+  @media (max-width: 768px) {
+    /* On mobile, show dropdown only when active class is present */
+    .dropdown-menu {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+    }
+
+    .nav-item.mobile-active .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Disable hover effect on mobile */
+    .nav-item:hover .dropdown-menu {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+    }
+
+    .nav-item.mobile-active:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  /* Desktop hover behavior */
+  @media (min-width: 769px) {
+    .nav-item:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
 </style>
+
+<script>
+  // Mobile navigation toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const navItems = document.querySelectorAll('.nav-item.has-dropdown');
+    const isMobile = () => window.innerWidth <= 768;
+
+    navItems.forEach(navItem => {
+      const navLink = navItem.querySelector('.nav-link');
+      
+      if (navLink) {
+        navLink.addEventListener('click', (e) => {
+          // Only handle click on mobile devices
+          if (isMobile()) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Close all other open dropdowns
+            navItems.forEach(item => {
+              if (item !== navItem) {
+                item.classList.remove('mobile-active');
+              }
+            });
+
+            // Toggle current dropdown
+            navItem.classList.toggle('mobile-active');
+          }
+        });
+      }
+    });
+
+    // Close dropdowns when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (isMobile()) {
+        const clickedInsideNav = Array.from(navItems).some(item => 
+          item.contains(e.target as Node)
+        );
+        
+        if (!clickedInsideNav) {
+          navItems.forEach(item => {
+            item.classList.remove('mobile-active');
+          });
+        }
+      }
+    });
+
+    // Handle window resize to clean up mobile state when switching to desktop
+    let resizeTimer: number;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        if (!isMobile()) {
+          // Remove mobile-active class when switching to desktop
+          navItems.forEach(item => {
+            item.classList.remove('mobile-active');
+          });
+        }
+      }, 250);
+    });
+  });
+</script>
