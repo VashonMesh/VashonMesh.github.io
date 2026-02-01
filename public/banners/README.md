@@ -112,18 +112,43 @@ public/banners/
 
 ### Optimization
 
-After creating banners, optimize them:
+After creating banners, optimize them using one of these methods:
+
+**Recommended: Online Tools (No Installation Required)**
+
+- [TinyPNG](https://tinypng.com) - Compress PNG and JPEG images
+- [Squoosh](https://squoosh.app) - Google's image compression tool with WebP
+  support (drag & drop your images, adjust quality, download optimized versions)
+
+These tools are the easiest way to optimize banner images - just upload your PNG
+files and download the compressed versions.
+
+**Advanced: Command Line with Sharp (Optional)**
+
+If you need to automate optimization for many banners:
 
 ```bash
-# Install tools
-npm install -g sharp-cli
+# Install sharp as a dev dependency (only if you need automation)
+npm install --save-dev sharp
 
-# Optimize PNG
-npx @squoosh/cli --mozjpeg auto --webp '{"quality":85}' input.png
+# Create a simple optimization script (optimize.js):
+# const sharp = require('sharp');
+# sharp('input.png')
+#   .webp({ quality: 85 })
+#   .toFile('output.webp');
 
-# Or use online tools:
-# - TinyPNG: https://tinypng.com
-# - Squoosh: https://squoosh.app
+# Run your script
+node optimize.js
+```
+
+**Alternative: Batch Processing**
+
+```bash
+# Install imagemin-cli globally
+npm install -g imagemin-cli imagemin-webp
+
+# Convert PNG to WebP
+imagemin input.png --plugin=webp --out-dir=./output
 ```
 
 ## Quick Start Template
