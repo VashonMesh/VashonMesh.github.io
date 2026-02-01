@@ -52,13 +52,6 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 <title>Vashon Mesh Networking</title>
 <meta name="description" content="Vashon's mesh networking team">
 
-<!-- const { title = "Vashon Mesh Networking", ...props } = Astro.props;  -->
-<!-- this page per https://docs.astro.build/en/guides/configuring-astro/#add-site-metadata -->
-<!-- import SomeOtherTags from "./SomeOtherTags.astro"; -->
-
-<!-- Web analytics -->
-<!-- <script data-goatcounter="https://vashonmesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
-
 <!-- Open Graph tags -->
 <meta property="og:title" content="VashonMesh Website" />
 <meta property="og:type" content="website" />
@@ -67,10 +60,6 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 <meta property="og:image" content="https://www.VashonMesh.org/seo-banner.webp">
 <meta property="og:image:alt" content="">
 
-<!-- SomeOtherTags /-->
-
-
-
 <header class="header-transparent shadow-sm px-4 py-4 sticky top-0 z-[100]">
   <nav class="max-w-[1200px] mx-auto flex justify-between items-center">
     <div class="flex items-center logo">
@@ -78,7 +67,15 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
         <img src="../../favicon.svg" alt="VashonMesh Logo" class="align-middle w-8 h-8" />
       </a>
     </div>
-    <div class="flex items-center gap-6 links">
+    
+    <!-- Hamburger button for mobile -->
+    <button id="hamburger-toggle" class="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <div class="flex items-center gap-6 links" id="nav-menu">
       {navItems.map(item => (
         <div class={`nav-item ${item.children ? 'has-dropdown' : ''}`}>
           <a 
@@ -155,8 +152,8 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     content: attr(data-tooltip);
     position: absolute;
     bottom: -2.5rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(-5px);
+    left: 0;
+    transform: translateY(-5px);
     padding: 0.5rem 0.75rem;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -176,8 +173,7 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     content: '';
     position: absolute;
     bottom: -0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 1rem;
     border: 6px solid transparent;
     border-bottom-color: #667eea;
     opacity: 0;
@@ -194,11 +190,52 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
   }
 
   .logo-link-container:hover::after {
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 
   :global(.dark) .logo-link-container:hover::after {
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+
+  /* Hamburger button - hidden on desktop */
+  .hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 28px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 300;
+    transition: transform 0.3s ease;
+  }
+
+  .hamburger-line {
+    width: 28px;
+    height: 3px;
+    background-color: var(--text-secondary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .hamburger-btn:hover .hamburger-line {
+    background-color: #667eea;
+  }
+
+  /* Hamburger animation when active */
+  .hamburger-btn.active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-btn.active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   /* Nav links styling */
@@ -282,6 +319,13 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     border-bottom: 1px solid var(--border-color);
   }
 
+  /* Hide parent overview links on desktop - top-level items are directly clickable */
+  @media (min-width: 769px) {
+    .dropdown-item.parent-link {
+      display: none;
+    }
+  }
+
   .dropdown-item:hover {
     background-color: var(--hover-bg);
     color: #667eea;
@@ -298,6 +342,13 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 
   .dropdown-item:last-child {
     border-radius: 0 0 8px 8px;
+  }
+
+  /* On desktop, since parent-link is hidden, ensure first visible item has top radius */
+  @media (min-width: 769px) {
+    .dropdown-item:first-of-type:not(.parent-link) {
+      border-radius: 8px 8px 0 0;
+    }
   }
 
   /* Theme toggle button */
@@ -317,16 +368,71 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 
   /* Mobile-specific styles */
   @media (max-width: 768px) {
+    /* Show hamburger button on mobile */
+    .hamburger-btn {
+      display: flex;
+    }
+
+    /* Hide navigation menu by default on mobile */
+    .links {
+      position: fixed;
+      top: 72px;
+      right: -100%;
+      width: 280px;
+      height: calc(100vh - 72px);
+      background: var(--header-bg);
+      border-left: 1px solid var(--border-color);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding: 1.5rem;
+      overflow-y: auto;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Show menu when active */
+    .links.mobile-menu-open {
+      right: 0;
+    }
+
+    /* Adjust nav items for vertical layout */
+    .nav-item {
+      width: 100%;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 0;
+    }
+
+    .nav-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Adjust dropdown menu for mobile */
+    .dropdown-menu {
+      position: static;
+      margin-top: 0.75rem;
+      margin-left: 1rem;
+      box-shadow: none;
+      border: none;
+      border-left: 2px solid #667eea;
+      border-radius: 0;
+      background: transparent;
+    }
+
     /* On mobile, show dropdown only when active class is present */
     .dropdown-menu {
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-10px);
+      max-height: 0;
+      transform: translateY(0);
+      overflow: hidden;
+      transition: opacity 0.3s ease, max-height 0.3s ease, visibility 0.3s ease;
     }
 
     .nav-item.mobile-active .dropdown-menu {
       opacity: 1;
       visibility: visible;
+      max-height: 500px;
       transform: translateY(0);
     }
 
@@ -334,13 +440,31 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     .nav-item:hover .dropdown-menu {
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-10px);
+      max-height: 0;
     }
 
     .nav-item.mobile-active:hover .dropdown-menu {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      max-height: 500px;
+    }
+
+    /* Adjust dropdown items for mobile */
+    .dropdown-item {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .dropdown-item.parent-link {
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 0.25rem;
+    }
+
+    /* Keep theme toggle visible */
+    #theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 5rem;
     }
   }
 
@@ -357,9 +481,32 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 <script>
   // Mobile navigation toggle functionality
   document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.getElementById('hamburger-toggle');
+    const navMenu = document.getElementById('nav-menu');
     const navItems = document.querySelectorAll('.nav-item.has-dropdown');
     const isMobile = () => window.innerWidth <= 768;
 
+    // Hamburger menu toggle
+    if (hamburgerBtn && navMenu) {
+      hamburgerBtn.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('mobile-menu-open');
+        hamburgerBtn.classList.toggle('active');
+        hamburgerBtn.setAttribute('aria-expanded', isOpen.toString());
+        
+        // Prevent body scroll when menu is open
+        if (isOpen) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+          // Close all dropdowns when closing menu
+          navItems.forEach(item => {
+            item.classList.remove('mobile-active');
+          });
+        }
+      });
+    }
+
+    // Dropdown navigation for mobile
     navItems.forEach(navItem => {
       const navLink = navItem.querySelector('.nav-link');
       
@@ -384,14 +531,19 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
       }
     });
 
-    // Close dropdowns when clicking outside on mobile
+    // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (isMobile()) {
-        const clickedInsideNav = Array.from(navItems).some(item => 
-          item.contains(e.target as Node)
-        );
+      if (isMobile() && navMenu && hamburgerBtn) {
+        const isClickInsideNav = navMenu.contains(e.target as Node);
+        const isClickOnHamburger = hamburgerBtn.contains(e.target as Node);
         
-        if (!clickedInsideNav) {
+        if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('mobile-menu-open')) {
+          navMenu.classList.remove('mobile-menu-open');
+          hamburgerBtn.classList.remove('active');
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+          
+          // Close all dropdowns
           navItems.forEach(item => {
             item.classList.remove('mobile-active');
           });
@@ -399,13 +551,22 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
       }
     });
 
-    // Handle window resize to clean up mobile state when switching to desktop
+    // Handle window resize
     let resizeTimer: number;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
         if (!isMobile()) {
-          // Remove mobile-active class when switching to desktop
+          // Remove mobile-specific classes when switching to desktop
+          if (navMenu) {
+            navMenu.classList.remove('mobile-menu-open');
+          }
+          if (hamburgerBtn) {
+            hamburgerBtn.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+          }
+          document.body.style.overflow = '';
+          
           navItems.forEach(item => {
             item.classList.remove('mobile-active');
           });

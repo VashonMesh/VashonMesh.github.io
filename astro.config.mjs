@@ -1,12 +1,30 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://vashonmesh.github.io',
-    vite: {
-        plugins: [tailwindcss()],
-    },
-});
+  site: 'https://vashonmesh.org', // was github.io
 
-// markdown options: https://docs.astro.build/en/guides/markdown-content/#markdown-plugins
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  integrations: [sitemap({
+    changefreq: 'weekly',
+    priority: 0.7,
+    customize(item, page) {
+      // News pages get higher priority and weekly updates
+      if (page.includes('/news/')) {
+        item.changefreq = 'weekly';
+        item.priority = 0.9;
+      }
+      // Homepage gets highest priority
+      if (page === 'https://vashonmesh.org/') {
+        item.priority = 1.0;
+      }
+      return item;
+    }
+  })],
+});
