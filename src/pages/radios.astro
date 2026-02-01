@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Get a Radio"
+  floatingImages={true}
+  imageDir="hero-imgs/devices"
+  imageCount={15}
+>
+  <main class="max-w-4xl mx-auto px-4 py-8 pointer-events-auto">
+    <article class="prose prose-lg dark:prose-invert max-w-none
+                  prose-headings:text-[var(--text-primary)]
+                  prose-p:text-[var(--text-secondary)]
+                  prose-a:text-blue-600 dark:prose-a:text-blue-400
+                  prose-strong:text-[var(--text-primary)]
+                  prose-code:text-[var(--text-primary)]
+                  prose-code:bg-gray-100 dark:prose-code:bg-gray-800
+                  prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
+                  prose-blockquote:border-l-blue-500
+                  prose-ul:text-[var(--text-secondary)]
+                  prose-ol:text-[var(--text-secondary)]
+                  prose-li:text-[var(--text-secondary)]
+                  bg-[var(--bg-primary)] rounded-lg p-8 shadow-lg">
+      
+      <h1>Get a Radio</h1>
+      
+      <p>How to get started, <strong>Devices</strong></p>
+      
+      <ul>
+        <li>Maps of current users</li>
+        <li>Expectations of range/channel selection</li>
+        <li>Handheld Devices</li>
+        <li>Repeaters</li>
+        <li>Antennas</li>
+        <li>Sensors</li>
+        <li>EmComm</li>
+      </ul>
+      
+      <h2>Some Options</h2>
+      
+      <p>Hi Susan, I'm no expert and don't have personal experience (yet!), but am also trying to learn! A couple ideas/considerations:</p>
+      
+      <ul>
+        <li>Most devices can be used either as a repeater or a client. Different software is loaded ("flashed") on to the same device, so you can switch roles as you wish in the future.</li>
+        <li>Any device that works with Meshtastic generally will be able to work with MeshCore. Just load different software on to it.</li>
+        <li>Ensure you buy one that supports the US frequency 915MHz. Most will.</li>
+        <li>Most devices will use bluetooth to interact with an app on your smartphone, since most don't have keyboards.</li>
+      </ul>
+      
+      <p>See <a href="https://meshtastic.org/docs/hardware/devices/">https://meshtastic.org/docs/hardware/devices/</a> has some great general tips, and a full listing of devices.</p>
+      
+      <p>Popular vendors for trackers:</p>
+      <ul>
+        <li><strong>Seeed Studio:</strong> I just bought this: <a href="https://www.seeedstudio.com/Wio-Tracker-L1-Pro-p-6454.html">https://www.seeedstudio.com/Wio-Tracker-L1-Pro-p-6454.html</a></li>
+        <li><strong>M5Stack:</strong> Dan bought this: <a href="https://shop.m5stack.com/products/m5stack-cardputer-adv-version-esp32-s3">https://shop.m5stack.com/products/m5stack-cardputer-adv-version-esp32-s3</a> + <a href="https://shop.m5stack.com/products/cap-lora-1262-for-cardputer-adv-sx1262-atgm336h?variant=47023567274241">https://shop.m5stack.com/products/cap-lora-1262-for-cardputer-adv-sx1262-atgm336h?variant=47023567274241</a> which has all you need, no smartphone required!</li>
+        <li><strong>LilyGo:</strong> <a href="https://lilygo.cc/collections/lora-or-gps">https://lilygo.cc/collections/lora-or-gps</a></li>
+        <li><strong>Heltec:</strong> <a href="https://heltec.org/product-category/plug-and-play/">https://heltec.org/product-category/plug-and-play/</a> shows just some of their options</li>
+        <li><strong>RAK</strong></li>
+      </ul>
+      
+      <p>For fixed position repeater use:</p>
+      <ul>
+        <li>PugetMesh uses a Raspberry Pi connected to a Lora Radio: more software options, more complex, more power consumption</li>
+        <li>Recommendations from overseas: <a href="https://www.localmesh.nl/en/meshcore-repeater/">https://www.localmesh.nl/en/meshcore-repeater/</a></li>
+        <li><a href="https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-Pro-for-Meshtastic-LoRa-p-6412.html">https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-Pro-for-Meshtastic-LoRa-p-6412.html</a> is a nice all-in-one unit that I've just ordered for my rooftop.</li>
+        <li>Dan used a HelTec for his repeater setup</li>
+        <li>Small antennas seem popular, but large 5 foot antennas (if well built and tuned- many apparently are not) help for repeater setups: e.g. <a href="https://www.dxengineering.com/parts/dmn-bc920">https://www.dxengineering.com/parts/dmn-bc920</a></li>
+      </ul>
+      
+      <p>More discussion: <a href="https://www.facebook.com/groups/2195603327524397/">https://www.facebook.com/groups/2195603327524397/</a> And of course the PugetMesh Discord server has a #hardware-mc (MeshCore) channel. <a href="https://discord.gg/Y4PddSUd">https://discord.gg/Y4PddSUd</a></p>
+      
+      <h2>Decide Your Form Factor</h2>
+      
+      <p>What are you looking for:</p>
+      <ul>
+        <li><strong>Simple, little to no UI:</strong> Seeed tracker, companion to your smartphone</li>
+        <li><strong>All in one:</strong> Dan's computer</li>
+        <li><strong>Futuristic:</strong> cell phone lookalike</li>
+      </ul>
+      
+      <h2>Flashing</h2>
+      
+      <ul>
+        <li><a href="https://flasher.meshtastic.org/">https://flasher.meshtastic.org/</a></li>
+        <li><a href="https://flasher.meshcore.dev/">https://flasher.meshcore.dev/</a></li>
+        <li><a href="https://www.youtube.com/watch?v=uyIYIUaElUQ">https://www.youtube.com/watch?v=uyIYIUaElUQ</a></li>
+      </ul>
+      
+      <h2>Popular Devices</h2>
+      
+      <p>This compares ~8 devices - with real world experience! <a href="https://www.youtube.com/watch?v=VGiNDgdkyhs">https://www.youtube.com/watch?v=VGiNDgdkyhs</a></p>
+      
+      <p>Also <a href="https://www.youtube.com/watch?v=CZMHWFDZ77Y">https://www.youtube.com/watch?v=CZMHWFDZ77Y</a> does a comparison & has lots of related videos with related topics if you also have a boring Saturday night!</p>
+      
+      <p><a href="https://github.com/adafruit/Adafruit_nRF52_Bootloader/tree/master">https://github.com/adafruit/Adafruit_nRF52_Bootloader/tree/master</a> USB-enabled bootloaders for the nRF52 BLE SoC chips</p>
+      
+      <h3>Seeed Studio Wio-WM1100 (Tracker)</h3>
+      <ul>
+        <li><a href="https://wiki.seeedstudio.com/wio_tracker_kit_meshtastic/">https://wiki.seeedstudio.com/wio_tracker_kit_meshtastic/</a></li>
+        <li><a href="https://www.youtube.com/watch?v=uyIYIUaElUQ">https://www.youtube.com/watch?v=uyIYIUaElUQ</a></li>
+        <li><a href="https://meshtastic.org/docs/hardware/devices/community-supported/seeed-studio/wio-series/seeed-wm1110/">https://meshtastic.org/docs/hardware/devices/community-supported/seeed-studio/wio-series/seeed-wm1110/</a></li>
+      </ul>
+      
+      <h3>Additional Resources</h3>
+      <ul>
+        <li>Red board: Flashing Meshtastic on the WIO Tracker 1110 from Seeed Studio - <a href="https://www.youtube.com/watch?v=uyIYIUaElUQ">https://www.youtube.com/watch?v=uyIYIUaElUQ</a></li>
+        <li><a href="https://wiki.seeedstudio.com/solar_node/">https://wiki.seeedstudio.com/solar_node/</a></li>
+        <li><a href="https://wiki.seeedstudio.com/t1000_e_tracker_meshtastic/">https://wiki.seeedstudio.com/t1000_e_tracker_meshtastic/</a></li>
+        <li><a href="https://adrelien.com/meshtastic-diy-how-to-build-your-own-meshtatic-node-esp32-lora-radio/">https://adrelien.com/meshtastic-diy-how-to-build-your-own-meshtatic-node-esp32-lora-radio/</a></li>
+      </ul>
+      
+      <h3>Heltec.org</h3>
+      <ul>
+        <li>WiFi LoRa 32 series</li>
+        <li><a href="https://heltec.org/project/wifi-lora-32-v4-expansion-housing/">https://heltec.org/project/wifi-lora-32-v4-expansion-housing/</a></li>
+      </ul>
+      
+      <h3>Other Links</h3>
+      <ul>
+        <li><a href="https://docs.astro.build/en/guides/routing/#pagination">https://docs.astro.build/en/guides/routing/#pagination</a></li>
+        <li><a href="https://lilygo.cc/products/t-display-p4">https://lilygo.cc/products/t-display-p4</a></li>
+      </ul>
+    </article>
+  </main>
+</Layout>
+

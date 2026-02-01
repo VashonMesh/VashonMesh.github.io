@@ -2,7 +2,7 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-[var(--footer-bg)] px-4 py-8 mt-16 border-t border-[var(--border-color)]">
+<footer class="footer-transparent px-4 py-8 mt-16 border-t border-[var(--border-color)]">
   <div class="max-w-[1200px] mx-auto flex justify-between items-center flex-wrap gap-4">
     <p class="text-[var(--text-secondary)] m-0">&copy; {year} VashonMesh.org, All rights reserved.</p>
     <p class="m-0"><a href="https://vashonsoftware.com" class="com">Site by Vashon Software</a></p>
@@ -17,6 +17,17 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
+  /* Footer transparency with backdrop blur */
+  .footer-transparent {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  :global(.dark) .footer-transparent {
+    background-color: rgba(17, 24, 39, 0.8);
+  }
+
   /* Vashon Software link with color swirl animation */
   .com {
     display: inline-block;

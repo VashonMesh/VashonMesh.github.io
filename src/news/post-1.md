@@ -12,8 +12,6 @@ tags: ["VashonMesh", "W7VMI", "VMIRC"]
 
 ## Our 1st Meeting
 
-Published on: 2026-01-28
-
 The local ham radio club's [message server](https://groups.io/g/W7VMI) has seen
 a number of posts related to mesh-networking in the last few years.
 

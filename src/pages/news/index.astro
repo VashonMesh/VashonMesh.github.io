@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import NormalLayout from "../../layouts/NormalLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 
 const allPosts = (await getCollection("blog"))
   .filter(post => post.data.title && post.data.title.toLowerCase() !== 'readme')
@@ -9,6 +9,26 @@ const allPosts = (await getCollection("blog"))
     const dateB = b.data.pubDate ? new Date(b.data.pubDate).valueOf() : 0;
     return dateB - dateA;
   });
+
+// Get all unique tags for reference
+const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sort();
+
+// Get all unique authors
+const allAuthors = [...new Set(allPosts
+  .map(post => post.data.author)
+  .filter(author => author))].sort();
+
+// Count posts per tag
+const tagCounts = allTags.reduce((acc, tag) => {
+  acc[tag] = allPosts.filter(post => post.data.tags?.includes(tag)).length;
+  return acc;
+}, {} as Record<string, number>);
+
+// Count posts per author
+const authorCounts = allAuthors.reduce((acc, author) => {
+  acc[author!] = allPosts.filter(post => post.data.author === author).length;
+  return acc;
+}, {} as Record<string, number>);
 
 // Get unique months for filter
 const months = [...new Set(allPosts
@@ -31,8 +51,7 @@ const monthOptions = months.map(month => {
 }).filter(m => m !== null);
 ---
 
-<NormalLayout title="News">
-  <div class="max-w-5xl mx-auto">
+<Layout title="News" twoColumn={true}>
     <div class="flex flex-col gap-4 mb-8">
       <h1 class="text-4xl font-bold">News & Updates</h1>
       
@@ -89,6 +108,8 @@ const monthOptions = months.map(month => {
     <div id="posts-info" class="text-sm text-[var(--text-secondary)] mb-4">
       Showing <span id="visible-count">{allPosts.length}</span> of {allPosts.length} posts
       <span id="search-status" class="hidden"> matching "<span id="search-term"></span>"</span>
+      <span id="tag-status" class="hidden"> with tag "<span id="tag-name"></span>" <button id="clear-tag" class="ml-2 text-blue-600 dark:text-blue-400 hover:underline">clear</button></span>
+      <span id="author-status" class="hidden"> by <span id="author-name"></span> <button id="clear-author" class="ml-2 text-blue-600 dark:text-blue-400 hover:underline">clear</button></span>
     </div>
     
     <div class="grid gap-8 md:grid-cols-2" id="news-grid">
@@ -149,12 +170,16 @@ const monthOptions = months.map(month => {
                 </p>
               )}
               
-              {post.data.tags && post.data.tags.length > 0 && (
+                      {post.data.tags && post.data.tags.length > 0 && (
                 <div class="flex flex-wrap gap-2 mb-4">
                   {post.data.tags.map((tag) => (
-                    <span class="inline-block px-3 py-1 text-xs rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
+                    <a 
+                      href={`/news?tag=${encodeURIComponent(tag)}`}
+                      class="inline-block px-3 py-1 text-xs rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/40 transition-colors"
+                      onclick="event.stopPropagation();"
+                    >
                       {tag}
-                    </span>
+                    </a>
                   ))}
                 </div>
               )}
@@ -175,8 +200,41 @@ const monthOptions = months.map(month => {
       <p class="text-xl mb-2">No posts found</p>
       <p class="text-sm">Try adjusting your search or filter criteria</p>
     </div>
+
+  <div slot="sidebar" class="space-y-6">
+    <!-- Tags Section -->
+    <div class="bg-[var(--card-bg)] rounded-lg border border-[var(--border-color)] p-4">
+      <h3 class="text-lg font-semibold mb-3 text-[var(--text-primary)]">Tags</h3>
+      <div class="flex flex-wrap gap-2">
+        {allTags.map((tag) => (
+          <a 
+            href={`/news?tag=${encodeURIComponent(tag)}`}
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/40 transition-colors"
+          >
+            <span>{tag}</span>
+            <span class="text-xs opacity-70">({tagCounts[tag]})</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Authors Section -->
+    <div class="bg-[var(--card-bg)] rounded-lg border border-[var(--border-color)] p-4">
+      <h3 class="text-lg font-semibold mb-3 text-[var(--text-primary)]">Authors</h3>
+      <div class="space-y-2">
+        {allAuthors.map((author) => (
+          <a 
+            href={`/news?author=${encodeURIComponent(author!)}`}
+            class="flex items-center justify-between px-3 py-2 rounded-md hover:bg-[var(--bg-secondary)] transition-colors"
+          >
+            <span class="text-[var(--text-primary)] font-medium">{author}</span>
+            <span class="text-sm text-[var(--text-secondary)]">{authorCounts[author!]}</span>
+          </a>
+        ))}
+      </div>
+    </div>
   </div>
-</NormalLayout>
+</Layout>
 
 <style>
   .line-clamp-3 {
@@ -203,8 +261,19 @@ const monthOptions = months.map(month => {
   const visibleCount = document.getElementById('visible-count');
   const searchStatus = document.getElementById('search-status');
   const searchTerm = document.getElementById('search-term');
+  const tagStatus = document.getElementById('tag-status');
+  const tagName = document.getElementById('tag-name');
+  const clearTagBtn = document.getElementById('clear-tag');
+  const authorStatus = document.getElementById('author-status');
+  const authorName = document.getElementById('author-name');
+  const clearAuthorBtn = document.getElementById('clear-author');
   const noResults = document.getElementById('no-results');
   const newsGrid = document.getElementById('news-grid');
+
+  // Get tag and author from URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  let activeTag = urlParams.get('tag');
+  let activeAuthor = urlParams.get('author');
 
   function updateDisplay() {
     const selectedMonth = monthFilter?.value;
@@ -228,7 +297,13 @@ const monthOptions = months.map(month => {
         author.includes(searchQuery) ||
         tags.includes(searchQuery);
       
-      if (monthMatch && searchMatch) {
+      // Check tag filter
+      const tagMatch = !activeTag || tags.includes(activeTag.toLowerCase());
+      
+      // Check author filter
+      const authorMatch = !activeAuthor || author === activeAuthor.toLowerCase();
+      
+      if (monthMatch && searchMatch && tagMatch && authorMatch) {
         (item as HTMLElement).style.display = '';
         visibleItems++;
       } else {
@@ -247,6 +322,22 @@ const monthOptions = months.map(month => {
       searchTerm.textContent = searchQuery;
     } else if (searchStatus) {
       searchStatus.classList.add('hidden');
+    }
+
+    // Update tag status
+    if (activeTag && tagStatus && tagName) {
+      tagStatus.classList.remove('hidden');
+      tagName.textContent = activeTag;
+    } else if (tagStatus) {
+      tagStatus.classList.add('hidden');
+    }
+
+    // Update author status
+    if (activeAuthor && authorStatus && authorName) {
+      authorStatus.classList.remove('hidden');
+      authorName.textContent = activeAuthor;
+    } else if (authorStatus) {
+      authorStatus.classList.add('hidden');
     }
 
     // Show/hide clear button
@@ -285,4 +376,30 @@ const monthOptions = months.map(month => {
       updateDisplay();
     }
   });
+
+  // Clear tag filter
+  clearTagBtn?.addEventListener('click', () => {
+    activeTag = null;
+    // Update URL without tag parameter
+    const url = new URL(window.location.href);
+    url.searchParams.delete('tag');
+    window.history.pushState({}, '', url);
+    updateDisplay();
+  });
+
+  // Clear author filter
+  clearAuthorBtn?.addEventListener('click', () => {
+    activeAuthor = null;
+    // Update URL without author parameter
+    const url = new URL(window.location.href);
+    url.searchParams.delete('author');
+    window.history.pushState({}, '', url);
+    updateDisplay();
+  });
+
+  // Initial display update to apply filters from URL
+  if (activeTag || activeAuthor) {
+    updateDisplay();
+  }
 </script>
+

@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Repeaters"
+  floatingImages={true}
+  imageDir="hero-imgs/solar"
+  imageCount={12}
+>
+  <main class="max-w-4xl mx-auto px-4 py-8 pointer-events-auto">
+    <article class="prose prose-lg dark:prose-invert max-w-none
+                  prose-headings:text-[var(--text-primary)]
+                  prose-p:text-[var(--text-secondary)]
+                  prose-a:text-blue-600 dark:prose-a:text-blue-400
+                  prose-strong:text-[var(--text-primary)]
+                  prose-code:text-[var(--text-primary)]
+                  prose-code:bg-gray-100 dark:prose-code:bg-gray-800
+                  prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
+                  prose-blockquote:border-l-blue-500
+                  prose-ul:text-[var(--text-secondary)]
+                  prose-ol:text-[var(--text-secondary)]
+                  prose-li:text-[var(--text-secondary)]
+                  bg-[var(--bg-primary)] rounded-lg p-8 shadow-lg">
+      
+      <h1>Repeaters</h1>
+      
+      <p>Most radios can be reflashed to become a repeater. The distinction is more the use case, and what we refer to here as a fixed repeater: something with batteries or solar panels for multi-day power, weather-proofed, and often fewer UI elements.</p>
+      
+      <h2>Some Devices</h2>
+      
+      <ul>
+        <li><a href="https://wiki.seeedstudio.com/meshtastic_solar_node/">https://wiki.seeedstudio.com/meshtastic_solar_node/</a></li>
+      </ul>
+      
+      <h3>Radios and Repeater Devices to Consider</h3>
+      
+      <p>Spenser likes:</p>
+      
+      <ul>
+        <li>
+          <strong><a href="https://www.amazon.com/gp/product/B0F1MWPF7G/">KEEPTEEN D5L Mesh Solar LoRa Repeater</a>:</strong> All in one. Sounds like it's well supported and well regarded. This is going to be my "plug and play" repeater for travel and events.
+        </li>
+        <li>
+          <strong><a href="https://www.amazon.com/RAKwireless-WisBlock-Meshtastic-Starter-RAK19007/dp/B0CHKZJK9C/">WisBlock Meshtastic Starter Kit</a> & RAK Wireless Solar Unify Enclosure Case:</strong> This is going to be my experimental repeater for trying out code changes.
+        </li>
+      </ul>
+    </article>
+  </main>
+</Layout>
+
