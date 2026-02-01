@@ -5,7 +5,7 @@ sizes and formats.
 
 ## Directory Structure
 
-```
+```text
 public/banners/
 ├── README.md (this file)
 ├── vashonmesh-social-1200x630.png     # Social media sharing (Facebook, Twitter, LinkedIn)
@@ -85,16 +85,16 @@ public/banners/
 
 ### Tools for Creating Banners
 
-- **Figma**: https://figma.com (recommended for design)
-- **Canva**: https://canva.com (user-friendly templates)
-- **GIMP**: https://gimp.org (free Photoshop alternative)
+- **Figma**: <https://figma.com> (recommended for design)
+- **Canva**: <https://canva.com> (user-friendly templates)
+- **GIMP**: <https://gimp.org> (free Photoshop alternative)
 - **Photoshop**: Adobe's professional tool
 
 ### Export Settings
 
 **PNG Format:**
 
-```
+```text
 - Color Mode: RGB
 - Bit Depth: 8-bit
 - Compression: 9 (maximum)
@@ -104,7 +104,7 @@ public/banners/
 
 **WebP Format:**
 
-```
+```text
 - Quality: 85-90
 - Method: 6 (best compression)
 - Supports transparency
@@ -114,7 +114,7 @@ public/banners/
 
 After creating banners, optimize them using one of these methods:
 
-**Recommended: Online Tools (No Installation Required)**
+#### Recommended: Online Tools (No Installation Required)
 
 - [TinyPNG](https://tinypng.com) - Compress PNG and JPEG images
 - [Squoosh](https://squoosh.app) - Google's image compression tool with WebP
@@ -123,7 +123,7 @@ After creating banners, optimize them using one of these methods:
 These tools are the easiest way to optimize banner images - just upload your PNG
 files and download the compressed versions.
 
-**Advanced: Command Line with Sharp (Optional)**
+#### Advanced: Command Line with Sharp (Optional)
 
 If you need to automate optimization for many banners:
 
@@ -141,7 +141,7 @@ npm install --save-dev sharp
 node optimize.js
 ```
 
-**Alternative: Batch Processing**
+#### Alternative: Batch Processing
 
 ```bash
 # Install imagemin-cli globally

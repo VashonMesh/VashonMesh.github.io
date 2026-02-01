@@ -41,7 +41,7 @@
    npm run dev
    ```
 
-2. Navigate to: http://localhost:4321/banner
+2. Navigate to: <http://localhost:4321/banner>
 
 ### Using the SEO Component
 
