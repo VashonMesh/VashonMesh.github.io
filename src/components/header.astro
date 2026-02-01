@@ -90,6 +90,12 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
           </a>
           {item.children && (
             <div class="dropdown-menu">
+              <a 
+                href={item.href}
+                class={`dropdown-item parent-link ${currentPath === item.href || (item.href === '/' && currentPath === '/') ? 'active' : ''}`}
+              >
+                {item.href === '/' ? 'Home' : `${item.label} Overview`}
+              </a>
               {item.children.map(child => (
                 <a 
                   href={child.href}
@@ -269,6 +275,11 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     text-decoration: none;
     font-weight: 500;
     transition: background-color 0.2s, color 0.2s;
+  }
+
+  .dropdown-item.parent-link {
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
   }
 
   .dropdown-item:hover {
