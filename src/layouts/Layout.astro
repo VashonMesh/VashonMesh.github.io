@@ -63,14 +63,13 @@ if (floatingImages) {
             document.documentElement.classList.remove('dark');
           }
         } else {
-          // No saved preference - check system preference or default to dark
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (prefersDark) {
-            document.documentElement.classList.add('dark');
-          } else {
-            // Default to dark mode if no system preference
+          // No saved preference - check system preference, default to dark if not explicitly light
+          const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          if (!prefersLight) {
+            // Apply dark mode if system prefers dark OR has no preference
             document.documentElement.classList.add('dark');
           }
+          // If user explicitly prefers light mode, don't add dark class
         }
       })();
     </script>
