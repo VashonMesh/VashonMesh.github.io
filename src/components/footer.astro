@@ -1,10 +1,12 @@
 ---
+import pkg from '../../package.json';
+
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer-transparent px-4 py-8 mt-16 border-t border-[var(--border-color)]">
   <div class="max-w-[1200px] mx-auto flex justify-between items-center flex-wrap gap-4">
-    <p class="text-[var(--text-secondary)] m-0">&copy; {year} VashonMesh.org, All rights reserved.</p>
+    <p class="text-[var(--text-secondary)] m-0">&copy; {year} VashonMesh.org, All rights reserved. <!--span class="text-xs opacity-70">v{pkg.version}</span--></p>
     <p class="m-0"><a href="https://vashonsoftware.com" class="com">Site by Vashon Software</a></p>
     <div class="flex items-center social-links">
       <a href="https://github.com/VashonMesh/VashonMesh.github.io" target="_blank" rel="noopener" class="inline-flex items-center">

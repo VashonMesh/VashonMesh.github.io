@@ -68,6 +68,14 @@ VashonMesh.org, and some of the features available to editors & the curious.
   - Typography libraries
     <https://docs.astro.build/en/recipes/tailwind-rendered-markdown/>
 
+## Versioning
+
+''' npm version patch # 0.0.1 -> 0.0.2
+
+npm version minor # 0.0.1 -> 0.1.0
+
+npm version major # 0.0.1 -> 1.0.0 '''
+
 ## Future
 
 - Maybe add in easy editing
@@ -86,13 +94,16 @@ npm run build  # Build for production
 
 ## Deployment
 
-**Important**: Changes must be merged to the `main` branch to appear on the live site!
+**Important**: Changes must be merged to the `main` branch to appear on the live
+site!
 
-- GitHub Actions automatically builds and deploys when changes are pushed to `main`
+- GitHub Actions automatically builds and deploys when changes are pushed to
+  `main`
 - Deployments typically take 2-5 minutes to complete
 - You can also manually trigger a deployment from the Actions tab
 
 📖 **See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions on:**
+
 - Why your changes aren't showing up
 - How to get your changes to the live site
 - How to force a manual build

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import pkg from '../../package.json';
 ---
 
 <Layout title="VashonMesh - About Us">
@@ -13,6 +14,9 @@ import Layout from '../layouts/Layout.astro';
         <p class="text-[var(--text-secondary)] leading-relaxed">
           Our mission is to empower neighbors to build resilient, decentralized networks that
           foster communication and collaboration.
+        </p>
+        <p class="text-sm text-[var(--text-secondary)] opacity-70 mt-4">
+          Website version: {pkg.version}
         </p>
       </div>
 

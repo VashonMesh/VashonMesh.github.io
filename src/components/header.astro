@@ -1,4 +1,6 @@
 ---
+import pkg from '../../package.json';
+
 const currentPath = Astro.url.pathname;
 
 interface NavItem {
@@ -51,6 +53,7 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 <link rel="sitemap" href="/sitemap-index.xml">
 <title>Vashon Mesh Networking</title>
 <meta name="description" content="Vashon's mesh networking team">
+<meta name="version" content={pkg.version}>
 
 <!-- Open Graph tags -->
 <meta property="og:title" content="VashonMesh Website" />
@@ -479,6 +482,10 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 </style>
 
 <script>
+  // Log version for developers
+  import pkg from '../../package.json';
+  console.log(`VashonMesh.org v${pkg.version}`);
+
   // Mobile navigation toggle functionality
   document.addEventListener('DOMContentLoaded', () => {
     const hamburgerBtn = document.getElementById('hamburger-toggle');
