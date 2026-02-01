@@ -4,7 +4,7 @@ pubDate: 2026-01-28
 description: "Michael Meyer calls local mesh enthusiasts to order"
 author: "John Cornelison"
 image:
-  url: "/news/imgs/post-1.1134-andersen-crowd-large-1218297396.jpg"
+  url: "/news/post-1.1134-andersen-crowd-large-1218297396.jpg"
   alt: "The initial meeting did not have quite this many participants..."
   photographer: "Andersen"
 tags: ["VashonMesh", "W7VMI", "VMIRC"]
@@ -25,7 +25,7 @@ He called a gathering of local mesh-networking enthusiasts to explore its use
 for EmComm.
 
 <figure>
-  <img src="/news/imgs/post-1.Mesh%20Networking%20Brainstorm.png" alt="Mesh Networking Brainstorm whiteboard" />
+  <img src="/news/post-1.Mesh%20Networking%20Brainstorm.png" alt="Mesh Networking Brainstorm whiteboard" />
   <figcaption>Brainstorming session notes from the initial meeting</figcaption>
 </figure>
 
