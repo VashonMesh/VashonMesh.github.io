@@ -10,6 +10,7 @@ interface Props {
   floatingImages?: boolean;
   imageDir?: string;
   imageCount?: number;
+  noWrapper?: boolean;
 }
 
 const { 
@@ -18,7 +19,8 @@ const {
   twoColumn = false,
   floatingImages = false,
   imageDir = 'hero-imgs',
-  imageCount = 10
+  imageCount = 10,
+  noWrapper = false
 } = Astro.props;
 
 // Floating images setup
@@ -65,22 +67,26 @@ if (floatingImages) {
     )}
     <div class={floatingImages ? "site-wrapper" : ""}>
       <Header />
-      <div class={`mx-auto px-4 py-8 w-full flex-1 ${floatingImages ? 'page-content' : ''}`} style={`max-width: ${maxWidth}`}>
-        {twoColumn ? (
-          <div class="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 items-start">
-            <main class="min-w-0">
+      {noWrapper ? (
+        <slot />
+      ) : (
+        <div class={`mx-auto px-4 py-8 w-full flex-1 ${floatingImages ? 'page-content' : ''}`} style={`max-width: ${maxWidth}`}>
+          {twoColumn ? (
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 items-start">
+              <main class="min-w-0">
+                <slot />
+              </main>
+              <aside class="md:sticky md:top-4">
+                <slot name="sidebar" />
+              </aside>
+            </div>
+          ) : (
+            <main class="max-w-full">
               <slot />
             </main>
-            <aside class="md:sticky md:top-4">
-              <slot name="sidebar" />
-            </aside>
-          </div>
-        ) : (
-          <main class="max-w-full">
-            <slot />
-          </main>
-        )}
-      </div>
+          )}
+        </div>
+      )}
       <Footer />
     </div>
   </body>
