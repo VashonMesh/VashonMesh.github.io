@@ -199,8 +199,6 @@ for TailwindCSS support.
 ## ToDo
 
 - get approval for the site, ask for support
-- Nice favicon/log complementing PugetMesh's logo
 - get PugetMesh expert here for 2/12?
 - Add basic content to pages
-- Figure out blogs
 - figure out devices w/ links
