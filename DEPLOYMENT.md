@@ -2,19 +2,25 @@
 
 ## Why aren't my changes showing up on the site?
 
-The VashonMesh.org website is hosted on GitHub Pages and uses GitHub Actions to automatically build and deploy the site. However, **deployments only happen when changes are pushed to the `main` branch**.
+The VashonMesh.org website is hosted on GitHub Pages and uses GitHub Actions to
+automatically build and deploy the site. However, **deployments only happen when
+changes are pushed to the `main` branch**.
 
-If you've made changes on a different branch (like a feature branch or pull request branch), those changes won't appear on the live site until they're merged into `main`.
+If you've made changes on a different branch (like a feature branch or pull
+request branch), those changes won't appear on the live site until they're
+merged into `main`.
 
 ## How the Deployment Process Works
 
-1. **Automatic Deployment**: 
-   - The site automatically rebuilds and deploys when changes are pushed to the `main` branch
+1. **Automatic Deployment**:
+   - The site automatically rebuilds and deploys when changes are pushed to the
+     `main` branch
    - The deployment workflow is defined in `.github/workflows/deploy.yml`
    - It typically takes 2-5 minutes for changes to appear on the live site
 
 2. **Manual Deployment**:
-   - You can also trigger a deployment manually using GitHub's workflow_dispatch feature
+   - You can also trigger a deployment manually using GitHub's workflow_dispatch
+     feature
    - See the "How to Force a Build" section below
 
 ## Getting Your Changes to the Live Site
@@ -24,6 +30,7 @@ If you've made changes on a different branch (like a feature branch or pull requ
 If you're working on a feature branch or pull request:
 
 1. **Commit your changes** (if not already committed):
+
    ```bash
    git add .
    git commit -m "Description of your changes"
@@ -59,11 +66,13 @@ git merge your-branch-name
 git push origin main
 ```
 
-**⚠️ Warning**: Pushing directly to `main` bypasses code review. It's better to use pull requests.
+**⚠️ Warning**: Pushing directly to `main` bypasses code review. It's better to
+use pull requests.
 
 ## How to Force a Build
 
-If you need to trigger a deployment manually (for example, to rebuild the site without making code changes):
+If you need to trigger a deployment manually (for example, to rebuild the site
+without making code changes):
 
 ### Using GitHub Web Interface:
 
@@ -108,9 +117,11 @@ gh workflow run deploy.yml --ref main
    - Or open the site in an incognito/private browsing window
 
 3. **Check if you're on the right branch**:
+
    ```bash
    git branch --show-current
    ```
+
    - If not on `main`, your changes aren't deployed yet
 
 4. **Verify your changes were pushed**:
@@ -122,9 +133,11 @@ gh workflow run deploy.yml --ref main
 ### Build is failing?
 
 1. **Test locally first**:
+
    ```bash
    npm run build
    ```
+
    - Fix any errors before pushing
 
 2. **Check the build logs**:
@@ -141,17 +154,20 @@ gh workflow run deploy.yml --ref main
 Recommended workflow for making changes:
 
 1. **Create a feature branch**:
+
    ```bash
    git checkout -b feature/my-changes
    ```
 
 2. **Make your changes and test locally**:
+
    ```bash
    npm run dev  # Test in development mode
    npm run build  # Verify it builds successfully
    ```
 
 3. **Commit and push**:
+
    ```bash
    git add .
    git commit -m "Description of changes"
@@ -162,17 +178,35 @@ Recommended workflow for making changes:
 
 5. **After merge**: Deployment happens automatically!
 
+## Versioning
+
+The site uses semantic versioning (`MAJOR.MINOR.PATCH`) from `package.json`. The
+version number is automatically displayed in:
+
+- Meta tag in page head
+- Footer (small text)
+- About page
+- Browser console (for developers)
+
+Update version using npm:
+
+```bash
+npm version patch  # Bug fixes: 0.1.0 -> 0.1.1
+npm version minor  # New features: 0.1.0 -> 0.2.0
+npm version major  # Breaking changes: 0.1.0 -> 1.0.0
+```
+
 ## Quick Reference
 
-| Action | Command/Steps |
-|--------|---------------|
-| Check current branch | `git branch --show-current` |
-| Switch to main | `git checkout main` |
-| Update main branch | `git pull origin main` |
+| Action                | Command/Steps                                                    |
+| --------------------- | ---------------------------------------------------------------- |
+| Check current branch  | `git branch --show-current`                                      |
+| Switch to main        | `git checkout main`                                              |
+| Update main branch    | `git pull origin main`                                           |
 | Merge feature to main | `git checkout main && git merge feature/branch-name && git push` |
-| Force rebuild | Go to Actions → Deploy to GitHub Pages → Run workflow |
-| View deployment logs | https://github.com/VashonMesh/VashonMesh.github.io/actions |
-| Live site | https://vashonmesh.github.io/ |
+| Force rebuild         | Go to Actions → Deploy to GitHub Pages → Run workflow            |
+| View deployment logs  | https://github.com/VashonMesh/VashonMesh.github.io/actions       |
+| Live site             | https://vashonmesh.github.io/                                    |
 
 ## Need Help?
 
