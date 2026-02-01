@@ -249,9 +249,20 @@ const recentPosts = allPosts
     font-weight: 400;
     font-style: normal;
     font-size: 80px;
-    transition: transform 0.8s ease;
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                color 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                text-shadow 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     margin: 0;
     line-height: 1;
+    cursor: pointer;
+    transform-origin: center center;
+    display: inline-block;
+  }
+
+  .rubik-maps-regular:hover {
+    transform: scale(1.1);
+    color: #4a5fd8;
+    text-shadow: 0 0 20px rgba(102, 126, 234, 0.6), 0 0 40px rgba(102, 126, 234, 0.4);
   }
 
   /* Thumbnail image hover and dark mode effects */
