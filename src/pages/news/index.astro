@@ -177,8 +177,7 @@ const monthOptions = months.map(month => {
                   {post.data.tags.map((tag) => (
                     <a 
                       href={`/news?tag=${encodeURIComponent(tag)}`}
-                      class="inline-block px-3 py-1 text-xs rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/40 transition-colors"
-                      onclick="((e) => e.stopPropagation())(event)"
+                      class="tag-link inline-block px-3 py-1 text-xs rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/40 transition-colors"
                     >
                       {tag}
                     </a>
@@ -444,6 +443,13 @@ const monthOptions = months.map(month => {
     url.searchParams.delete('author');
     window.history.pushState({}, '', url);
     updateDisplay();
+  });
+
+  // Handle tag link clicks to prevent navigation to parent article
+  document.querySelectorAll('.tag-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
   });
 
   // Initial display update to apply filters from URL
