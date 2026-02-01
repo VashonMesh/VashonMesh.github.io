@@ -75,14 +75,28 @@ VashonMesh.org, and some of the features available to editors & the curious.
     https://github.com/sveltia/sveltia-cms & www.Sitepins.com
 -
 
-## You can run locally (e.g., in Visual Studio Code) with
+## Local Development
 
-'''npm run dev''' - Start dev server
+You can run locally (e.g., in Visual Studio Code) with:
 
-'''npm run build''' - Build for production
+```bash
+npm run dev    # Start dev server
+npm run build  # Build for production
+```
 
-If committing changes to the GitHub repository, there is a github action to
-automatically build and redeploy the site.
+## Deployment
+
+**Important**: Changes must be merged to the `main` branch to appear on the live site!
+
+- GitHub Actions automatically builds and deploys when changes are pushed to `main`
+- Deployments typically take 2-5 minutes to complete
+- You can also manually trigger a deployment from the Actions tab
+
+📖 **See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions on:**
+- Why your changes aren't showing up
+- How to get your changes to the live site
+- How to force a manual build
+- Troubleshooting deployment issues
 
 This site is developed with the Astro framework, which basically allows pages to
 be either MarkDown or straight HTML (but with an 'astro' file extension). If
