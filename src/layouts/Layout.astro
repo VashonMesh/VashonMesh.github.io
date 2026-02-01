@@ -48,6 +48,32 @@ if (floatingImages) {
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet">
 
     <title>{title}</title>
+    
+    <!-- Theme initialization - must run before body renders to prevent FOUC -->
+    <script is:inline>
+      (function() {
+        // Check if user has a saved preference
+        const savedTheme = localStorage.getItem('theme');
+        
+        if (savedTheme) {
+          // User has explicitly set a preference
+          if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } else {
+          // No saved preference - check system preference or default to dark
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (prefersDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            // Default to dark mode if no system preference
+            document.documentElement.classList.add('dark');
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     {floatingImages && (
@@ -235,20 +261,7 @@ if (floatingImages) {
 )}
 
 <script>
-  // Theme toggle functionality
-  function initTheme() {
-    const theme = localStorage.getItem('theme') || 'dark';
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }
-
-  // Initialize theme immediately
-  initTheme();
-
-  // Add event listener after page loads
+  // Theme toggle functionality - initialization happens in <head>
   document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.getElementById('theme-toggle');
     if (toggle) {
