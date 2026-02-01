@@ -12,11 +12,14 @@ image:
 tags: ["Meshtastic", "Hardware", "LILYGO P4"]
 ---
 
+import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
+
 The new LilyGo P4 radio might be the future of Meshtastic devices and -
 eventually - MeshCore.
 
-Looking at the YouTube video <https://www.youtube.com/watch?v=z6IOVYemF20>, it
-looks super friendly to use.
+Check out this demo video showing how user-friendly it is:
+
+<YouTubeEmbed id="z6IOVYemF20" title="LilyGo P4 Meshtastic Demo" />
 
 It also sounded like the software for Meshtastic is still being worked on, and I
 doubt the MeshCore software has this level of user interface support yet. Anyone
