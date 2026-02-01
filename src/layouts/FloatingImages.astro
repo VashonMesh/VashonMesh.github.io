@@ -38,7 +38,7 @@ const shuffledImages = [...allImages]
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="VashonMesh - Community mesh networks connecting neighbors" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
@@ -93,6 +93,8 @@ const shuffledImages = [...allImages]
   html {
     background: #f9fafb;
     transition: background-color 0.3s ease;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   html.dark {
@@ -104,6 +106,8 @@ const shuffledImages = [...allImages]
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    width: 100%;
+    max-width: 100vw;
   }
 
   .site-wrapper {
@@ -111,6 +115,8 @@ const shuffledImages = [...allImages]
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 100vw;
   }
 
   header {
@@ -157,6 +163,7 @@ const shuffledImages = [...allImages]
     z-index: 2;
     pointer-events: none;
     transition: background 0.3s ease;
+    max-width: 100%;
   }
 
   html.dark .floating-container {
