@@ -29,13 +29,13 @@ for EmComm.
   <figcaption>Brainstorming session notes from the initial meeting</figcaption>
 </figure>
 
-## Agenda & Real(tm) Meeting Notes
+## Agenda & Real™ Meeting Notes
 
 Michael arranged an initial January 22nd meeting at the library, He showed a
 brief Powerpoint slideshow available on the
 [club's file server](https://groups.io/g/W7VMI/files) and updated it during the
 meeting with notes. File access is for group members. It contains a list of the
-initial 10 attendees.
+initial dozen or so attendees.
 
 All but one participants had a ham radio sign and should have server access, but
 since the intent is to serve the public (including non-radio club members), a
@@ -52,9 +52,10 @@ can be between 2km in urban environments up to 10 km in ideal, open conditions.
 
 These radios are inexpensive, roughly $25-50. No license is required to use.
 Most devices can serve either as a radio or repeater - upload ('flash') the
-software for the desired purpose. Fixed repeaters with solar backed power
-supplies and mounted antennas might cost ~$100 or more. Spenser suggests
-evaluating higher performance repeaters too.
+software for the desired purpose.
+
+Fixed repeaters with solar backed power supplies and mounted antennas can cost
+~$100 or more. Spenser suggests evaluating higher performance repeaters too.
 
 A half-dozen repeaters might cover much of Vashon-Maury Island. Additional
 repeaters could extend coverage where desired & valued. Spenser is
@@ -68,11 +69,12 @@ of radio operators. It sounds like radios & repeaters are manually tuned to one
 channel (below) and don't have scanning & other advanced capabilities. He'll
 shut up until he actual has one!]
 
-Mesh-networks use specific terminology. We need to figure that out & adopt it.
+Mesh-networks use specific terminology. We (I?) need to figure that out & adopt
+it.
 
 - Channels don't need a device, they propagate via flood.
 - "Rooms" are per device, which makes them single point of failure. Fault
-  tolerant options mat exist.
+  tolerant options may exist.
 
 Vashon might start with a couple channels, then expand as we learn more:
 

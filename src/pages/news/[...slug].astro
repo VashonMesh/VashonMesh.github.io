@@ -17,124 +17,692 @@ const { Content } = await render(post);
 <Layout 
   title={post.data.title || "News"}
 >
-  <article class="max-w-3xl mx-auto">
-    {post.data.image && (
-      <figure class="mb-8">
-        <div class="aspect-video overflow-hidden rounded-lg">
-          <img
-            src={post.data.image.url}
-            alt={post.data.image.alt}
-            class="w-full h-full object-cover"
-          />
-        </div>
-        {(post.data.image.alt || post.data.image.photographer) && (
-          <figcaption class="mt-2 text-sm text-center text-[var(--text-secondary)] italic">
-            {post.data.image.alt}
-            {post.data.image.photographer && (
-              <span class="block mt-1">
-                Photo by {post.data.image.photographer}
-              </span>
-            )}
-          </figcaption>
-        )}
-      </figure>
-    )}
-    
-    <header class="mb-8">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">
-        {post.data.title}
-      </h1>
+  <div class="blog-post-container">
+    <!-- Mobile TOC Toggle Button -->
+    <button id="toc-toggle" class="toc-toggle lg:hidden">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <span>Table of Contents</span>
+    </button>
+
+    <!-- Main Article -->
+    <article class="article-main">
+      {post.data.image && (
+        <figure class="mb-8">
+          <div class="aspect-video overflow-hidden rounded-lg">
+            <img
+              src={post.data.image.url}
+              alt={post.data.image.alt}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          {(post.data.image.alt || post.data.image.photographer) && (
+            <figcaption class="mt-2 text-lg text-center font-bold text-[var(--text-secondary)] ">
+              {post.data.image.alt}
+              {post.data.image.photographer && (
+                <span class="block mt-1 text-right font-normal">
+                  Photo by {post.data.image.photographer}
+                </span>
+              )}
+            </figcaption>
+          )}
+        </figure>
+      )}
       
-      <div class="flex items-center gap-4 text-[var(--text-secondary)] mb-4">
-        {post.data.pubDate && (
-          <time datetime={new Date(post.data.pubDate).toISOString()}>
-            {new Date(post.data.pubDate).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </time>
+      <header class="mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">
+          {post.data.title}
+        </h1>
+        
+        <div class="flex items-center gap-4 text-[var(--text-secondary)] mb-4">
+          {post.data.pubDate && (
+            <time datetime={new Date(post.data.pubDate).toISOString()}>
+              {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+          )}
+          {post.data.author && (
+            <span>by {post.data.author}</span>
+          )}
+        </div>
+        
+        {post.data.description && (
+          <p class="text-xl text-[var(--text-secondary)] italic">
+            {post.data.description}
+          </p>
         )}
-        {post.data.author && (
-          <span>by {post.data.author}</span>
+        
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mt-4">
+            {post.data.tags.map((tag) => (
+              <a 
+                href={`/news?tag=${encodeURIComponent(tag)}`}
+                class="inline-block px-3 py-1 text-sm rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/40 transition-colors"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
         )}
+      </header>
+      
+      <div class="article-content">
+        <Content />
       </div>
       
-      {post.data.description && (
-        <p class="text-xl text-[var(--text-secondary)] italic">
-          {post.data.description}
-        </p>
-      )}
-      
-      {post.data.tags && post.data.tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 mt-4">
-          {post.data.tags.map((tag) => (
-            <a 
-              href={`/news?tag=${encodeURIComponent(tag)}`}
-              class="inline-block px-3 py-1 text-sm rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/40 transition-colors"
-            >
-              {tag}
-            </a>
-          ))}
-        </div>
-      )}
-    </header>
-    
-    <div class="prose prose-lg dark:prose-invert max-w-none
-                prose-headings:text-[var(--text-primary)]
-                prose-p:text-[var(--text-secondary)]
-                prose-a:text-blue-600 dark:prose-a:text-blue-400
-                prose-strong:text-[var(--text-primary)]
-                prose-code:text-[var(--text-primary)]
-                prose-code:bg-gray-100 dark:prose-code:bg-gray-800
-                prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
-                prose-blockquote:border-l-blue-500
-                prose-img:rounded-lg
-                prose-figcaption:text-center
-                prose-figcaption:text-sm
-                prose-figcaption:italic
-                prose-figcaption:text-[var(--text-secondary)]
-                prose-figcaption:mt-2">
-      <Content />
-    </div>
-    
-    <footer class="mt-12 pt-8 border-t border-[var(--border-color)]">
-      <a 
-        href="/news" 
-        class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
-      >
-        ← Back to all news
-      </a>
-    </footer>
-  </article>
+      <footer class="mt-12 pt-8 border-t border-[var(--border-color)]">
+        <a 
+          href="/news" 
+          class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          ← Back to all news
+        </a>
+      </footer>
+    </article>
+
+    <!-- TOC Sidebar -->
+    <aside id="toc-sidebar" class="toc-sidebar">
+      <div class="toc-sticky">
+        <button id="toc-close" class="toc-close lg:hidden">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <h3 class="toc-heading">Table of Contents</h3>
+        <nav id="toc-nav" class="toc-nav">
+          <!-- TOC will be generated here by JavaScript -->
+        </nav>
+      </div>
+    </aside>
+  </div>
 </Layout>
 
+<script>
+  // Generate Table of Contents from headings
+  function generateTOC() {
+    const content = document.querySelector('.article-content');
+    const tocNav = document.getElementById('toc-nav');
+    const tocSidebar = document.getElementById('toc-sidebar');
+    
+    if (!content || !tocNav) return;
+    
+    const headings = content.querySelectorAll('h2, h3');
+    
+    if (headings.length === 0) {
+      // No headings, hide TOC
+      if (tocSidebar) tocSidebar.style.display = 'none';
+      const toggle = document.getElementById('toc-toggle');
+      if (toggle) toggle.style.display = 'none';
+      return;
+    }
+    
+    const tocList = document.createElement('ul');
+    tocList.className = 'toc-list';
+    
+    headings.forEach((heading) => {
+      // Skip if it's the "Table of Contents" heading itself
+      if (heading.id === 'table-of-contents' || heading.id === 'contents') {
+        (heading as HTMLElement).style.display = 'none';
+        return;
+      }
+      
+      const li = document.createElement('li');
+      const level = heading.tagName === 'H2' ? 'toc-level-2' : 'toc-level-3';
+      li.className = `toc-item ${level}`;
+      
+      const link = document.createElement('a');
+      link.href = `#${heading.id}`;
+      link.textContent = heading.textContent;
+      link.className = 'toc-link';
+      
+      // Highlight active section on scroll
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Close mobile TOC after clicking
+        if (window.innerWidth < 1024) {
+          tocSidebar?.classList.remove('open');
+        }
+      });
+      
+      li.appendChild(link);
+      tocList.appendChild(li);
+    });
+    
+    tocNav.appendChild(tocList);
+    
+    // Highlight active section on scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveTOC();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  
+  function updateActiveTOC() {
+    const headings = document.querySelectorAll('.article-content h2, .article-content h3');
+    const tocLinks = document.querySelectorAll('.toc-link');
+    
+    if (headings.length === 0 || tocLinks.length === 0) return;
+    
+    let current = '';
+    const scrollPosition = window.scrollY + 150;
+    
+    // Find the current section based on scroll position
+    headings.forEach(heading => {
+      const top = heading.getBoundingClientRect().top + window.scrollY;
+      if (scrollPosition >= top) {
+        current = heading.id;
+      }
+    });
+    
+    // If no current section found, use the first heading
+    if (!current && headings.length > 0) {
+      current = headings[0].id;
+    }
+    
+    // Update active states
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+        
+        // Scroll TOC to show active item
+        const tocNav = document.getElementById('toc-nav');
+        if (tocNav) {
+          const linkRect = link.getBoundingClientRect();
+          const navRect = tocNav.getBoundingClientRect();
+          if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
+            link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+      }
+    });
+  }
+  
+  // Mobile TOC toggle
+  const tocToggle = document.getElementById('toc-toggle');
+  const tocSidebar = document.getElementById('toc-sidebar');
+  const tocClose = document.getElementById('toc-close');
+  
+  tocToggle?.addEventListener('click', () => {
+    tocSidebar?.classList.add('open');
+  });
+  
+  tocClose?.addEventListener('click', () => {
+    tocSidebar?.classList.remove('open');
+  });
+  
+  // Close on outside click (mobile)
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth < 1024 && 
+        tocSidebar?.classList.contains('open') &&
+        !tocSidebar.contains(e.target as Node) &&
+        !tocToggle?.contains(e.target as Node)) {
+      tocSidebar.classList.remove('open');
+    }
+  });
+  
+  // Initialize TOC
+  generateTOC();
+</script>
+
 <style>
-  /* Ensure embedded images in markdown content are responsive */
-  article :global(img) {
+  /* Blog Post Container with Sidebar Layout */
+  .blog-post-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .blog-post-container {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 3rem;
+      padding: 0 2rem;
+      align-items: start;
+      overflow: visible;
+    }
+  }
+
+  .article-main {
+    max-width: 800px;
+    width: 100%;
+    overflow: visible;
+  }
+
+  /* Mobile TOC Toggle Button */
+  .toc-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+  }
+
+  @media (min-width: 1024px) {
+    .toc-toggle {
+      display: none;
+    }
+  }
+
+  .toc-toggle:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+  }
+
+  @media (min-width: 1024px) {
+    .toc-sidebar {
+      display: block;
+      order: 2;
+      overflow: visible;
+    }
+  }
+
+  /* Mobile: Full Screen Overlay */
+  @media (max-width: 1023px) {
+    .toc-sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 85%;
+      max-width: 320px;
+      background-color: var(--bg-primary);
+      box-shadow: -4px 0 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      overflow-y: auto;
+    }
+
+    .toc-sidebar.open {
+      display: block;
+      transform: translateX(0);
+    }
+  }
+
+  .toc-sticky {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .toc-sticky {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 2rem;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      overflow-x: hidden;
+      will-change: transform;
+      z-index: 10;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .toc-sticky {
+      position: static;
+      height: 100%;
+      max-height: none;
+      border: none;
+      border-radius: 0;
+    }
+  }
+
+  .toc-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+  }
+
+  .toc-close:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+  }
+
+  :global(.dark) .toc-close:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .toc-heading {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  .toc-nav :global(.toc-list) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-nav :global(.toc-item) {
+    margin-bottom: 0;
+  }
+
+  .toc-nav :global(.toc-level-2) {
+    margin-bottom: 0.75rem;
+  }
+
+  .toc-nav :global(.toc-level-3) {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .toc-nav :global(.toc-link) {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .toc-nav :global(.toc-link:hover) {
+    background-color: rgba(37, 99, 235, 0.05);
+    color: var(--text-primary);
+    border-left-color: #2563eb;
+  }
+
+  .toc-nav :global(.toc-link.active) {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+    font-weight: 600;
+    border-left-color: #2563eb;
+  }
+
+  :global(.dark) .toc-nav :global(.toc-link:hover) {
+    background-color: rgba(96, 165, 250, 0.1);
+  }
+
+  :global(.dark) .toc-nav :global(.toc-link.active) {
+    background-color: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+    border-left-color: #60a5fa;
+  }
+
+  /* Article Content Styling */
+  .article-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  /* Headings */
+  .article-content :global(h2) {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .article-content :global(h3) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .article-content :global(h4) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  /* First heading shouldn't have top margin */
+  .article-content :global(h2:first-child),
+  .article-content :global(h3:first-child) {
+    margin-top: 0;
+  }
+
+  /* Paragraphs */
+  .article-content :global(p) {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+  }
+
+  /* Links */
+  .article-content :global(a) {
+    color: #2563eb;
+    text-decoration: underline;
+    text-decoration-color: rgba(37, 99, 235, 0.3);
+    text-underline-offset: 2px;
+    transition: all 0.2s;
+  }
+
+  .article-content :global(a:hover) {
+    color: #1d4ed8;
+    text-decoration-color: rgba(29, 78, 216, 0.6);
+  }
+
+  :global(.dark) .article-content :global(a) {
+    color: #60a5fa;
+    text-decoration-color: rgba(96, 165, 250, 0.3);
+  }
+
+  :global(.dark) .article-content :global(a:hover) {
+    color: #93c5fd;
+    text-decoration-color: rgba(147, 197, 253, 0.6);
+  }
+
+  /* Lists */
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.75rem;
+  }
+
+  .article-content :global(ul) {
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  .article-content :global(ol) {
+    list-style-type: decimal;
+    list-style-position: outside;
+  }
+
+  .article-content :global(li) {
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+    display: list-item;
+  }
+
+  .article-content :global(ul ul),
+  .article-content :global(ol ol),
+  .article-content :global(ul ol),
+  .article-content :global(ol ul) {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-content :global(ul > li) {
+    padding-left: 0.25rem;
+  }
+
+  /* Nested list bullets */
+  .article-content :global(ul ul) {
+    list-style-type: circle;
+  }
+
+  .article-content :global(ul ul ul) {
+    list-style-type: square;
+  }
+
+  /* Blockquotes */
+  .article-content :global(blockquote) {
+    border-left: 4px solid #3b82f6;
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background-color: rgba(59, 130, 246, 0.05);
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-style: italic;
+    font-size: larger;
+  }
+
+  :global(.dark) .article-content :global(blockquote) {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+
+  .article-content :global(blockquote p) {
+    margin-bottom: 0.75rem;
+  }
+
+  .article-content :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Code */
+  .article-content :global(code) {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+    font-family: 'Courier New', monospace;
+    color: var(--text-primary);
+  }
+
+  :global(.dark) .article-content :global(code) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .article-content :global(pre) {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  :global(.dark) .article-content :global(pre) {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .article-content :global(pre code) {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.95rem;
+  }
+
+  /* Strong/Bold */
+  .article-content :global(strong) {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Images and Figures */
+  .article-content :global(img) {
     max-width: 100%;
     height: auto;
+    border-radius: 0.5rem;
+    margin: 2rem auto;
+    display: block;
   }
   
-  /* Style for figure elements in markdown content */
-  article :global(figure) {
-    margin: 2rem 0;
+  .article-content :global(figure) {
+    margin: 3rem 0;
   }
   
-  article :global(figcaption) {
-    margin-top: 0.5rem;
+  .article-content :global(figcaption) {
+    margin-top: 0.75rem;
     text-align: center;
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     font-style: italic;
     color: var(--text-secondary);
+    line-height: 1.5;
   }
   
   /* Support for images followed by emphasis text as captions */
-  article :global(img + em) {
+  .article-content :global(img + em) {
     display: block;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     text-align: center;
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
+  }
+
+  /* Horizontal Rules */
+  .article-content :global(hr) {
+    border: none;
+    border-top: 2px solid var(--border-color);
+    margin: 3rem 0;
+  }
+
+  /* Tables */
+  .article-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+  }
+
+  .article-content :global(th),
+  .article-content :global(td) {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+  }
+
+  .article-content :global(th) {
+    background-color: rgba(0, 0, 0, 0.03);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  :global(.dark) .article-content :global(th) {
+    background-color: rgba(255, 255, 255, 0.05);
   }
 </style>
