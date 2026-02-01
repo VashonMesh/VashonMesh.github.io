@@ -31,7 +31,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
   <main class="news-post-main">
     <div class="blog-post-container">
       <!-- Mobile TOC Toggle Button -->
-    <button id="toc-toggle" class="toc-toggle lg:hidden">
+    <button id="toc-toggle" class="toc-toggle">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
@@ -321,9 +321,9 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
   /* Mobile TOC Toggle Button */
   .toc-toggle {
     position: fixed;
-    bottom: 1.5rem;
+    bottom: 2rem;
     right: 1.5rem;
-    z-index: 40;
+    z-index: 100;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -337,6 +337,12 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     font-weight: 600;
     font-size: 0.875rem;
     transition: all 0.2s;
+  }
+
+  /* Ensure SVG icon has size even if Tailwind fails */
+  .toc-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   @media (min-width: 1024px) {
