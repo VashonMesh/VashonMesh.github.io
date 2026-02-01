@@ -1,17 +1,25 @@
 ---
-title: "Future of Meshtastic Devices"
+title: "The Future of Meshtastic Devices?!"
 pubDate: 2026-01-30
 description:
   "Exploring the T-Display-P4 and the evolving landscape of user-friendly mesh
   devices"
 author: "VashonMesh Team"
-tags: ["Meshtastic", "Hardware", "LILYGO"]
+image:
+  url: "/news/imgs/post-3.LILYGO-T-DISPLAY-P4.png"
+  alt: "It looks like a smartphone, but is really all LoRa!"
+  photographer: "staff"
+tags: ["Meshtastic", "Hardware", "LILYGO P4"]
 ---
 
-This might be the future of Meshtastic devices and - eventually - MeshCore. Very
-nice, but it sounds like the software for Meshtastic is still being worked on,
-and I doubt the MeshCore software has this level of user interface support yet. 
+The new LilyGo P4 radio might be the future of Meshtastic devices and -
+eventually - MeshCore.
 
-Very friendly - if unproven as of yet?
-https://www.youtube.com/watch?v=z6IOVYemF20 using
-https://lilygo.cc/products/t-display-p4
+Looking at the YouTube video <https://www.youtube.com/watch?v=z6IOVYemF20>, it
+looks super friendly to use.
+
+It also sounded like the software for Meshtastic is still being worked on, and I
+doubt the MeshCore software has this level of user interface support yet. Anyone
+know about sophisticated user interfaces for Meshtastic or MeshCore?
+
+ANyone want to buy it? Find it at: <https://lilygo.cc/products/t-display-p4>
