@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1200" height="630" fill="url(#grad)"/>
+
+    <!-- Decorative circles -->
+    <circle cx="100" cy="100" r="80" fill="rgba(255,255,255,0.1)"/>
+    <circle cx="1100" cy="530" r="100" fill="rgba(255,255,255,0.1)"/>
+    <circle cx="200" cy="500" r="60" fill="rgba(255,255,255,0.08)"/>
+    <circle cx="1000" cy="150" r="70" fill="rgba(255,255,255,0.08)"/>
+
+    <!-- Logo placeholder (centered top) -->
+    <circle cx="600" cy="180" r="60" fill="rgba(255,255,255,0.95)"/>
+    <text x="600" y="195" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#667eea" text-anchor="middle">VM</text>
+
+    <!-- Title -->
+    <text x="600" y="300" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">VashonMesh</text>
+
+    <!-- Tagline -->
+    <text x="600" y="360" font-family="Arial, sans-serif" font-size="28" fill="rgba(255,255,255,0.95)" text-anchor="middle">Connecting Vashon &amp; Maury Islanders</text>
+    <text x="600" y="400" font-family="Arial, sans-serif" font-size="28" fill="rgba(255,255,255,0.95)" text-anchor="middle">with Local Mesh Networks</text>
+
+    <!-- Website -->
+    <text x="600" y="500" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle">vashonmesh.org</text>
+
+    <!-- Network icon decoration -->
+    <g opacity="0.3" stroke="white" fill="none" stroke-width="3">
+        <line x1="300" y1="180" x2="400" y2="180"/>
+        <line x1="800" y1="180" x2="900" y2="180"/>
+        <circle cx="280" cy="180" r="12" fill="white"/>
+        <circle cx="920" cy="180" r="12" fill="white"/>
+    </g>
+</svg>

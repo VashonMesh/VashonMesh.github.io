@@ -47,6 +47,9 @@ if (floatingImages) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet">
     <title>{title}</title>
+    
+    <!-- Allow pages to inject custom SEO meta tags -->
+    <slot name="head" />
   </head>
   <body>
     {floatingImages && (

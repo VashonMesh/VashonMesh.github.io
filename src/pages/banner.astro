@@ -1,0 +1,590 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SEO from '../components/SEO.astro';
+
+// Banner configurations for different use cases
+const banners = [
+  {
+    id: 'social-share',
+    title: 'Social Media Banner',
+    description: 'Optimized for Facebook, Twitter, LinkedIn sharing (1200×630px)',
+    path: '/banners/vashonmesh-social-1200x630.svg',
+    width: 1200,
+    height: 630,
+    fileSize: '~85KB',
+    formats: ['SVG', 'PNG', 'WebP']
+  },
+  {
+    id: 'web-leaderboard',
+    title: 'Web Leaderboard',
+    description: 'Standard web banner for websites and blogs (728×90px)',
+    path: '/banners/vashonmesh-leaderboard-728x90.svg',
+    width: 728,
+    height: 90,
+    fileSize: '~25KB',
+    formats: ['SVG', 'PNG', 'WebP']
+  },
+  {
+    id: 'web-rectangle',
+    title: 'Medium Rectangle',
+    description: 'Sidebar and content banner (300×250px)',
+    path: '/banners/vashonmesh-rectangle-300x250.svg',
+    width: 300,
+    height: 250,
+    fileSize: '~35KB',
+    formats: ['SVG', 'PNG', 'WebP']
+  },
+  {
+    id: 'email-header',
+    title: 'Email Header',
+    description: 'Newsletter and email campaigns (600×200px)',
+    path: '/banners/vashonmesh-email-600x200.svg',
+    width: 600,
+    height: 200,
+    fileSize: '~45KB',
+    formats: ['SVG', 'PNG', 'WebP']
+  }
+];
+
+const embedCode = `<a href="https://vashonmesh.org" target="_blank" rel="noopener">
+  <img src="https://vashonmesh.org/banners/vashonmesh-leaderboard-728x90.svg" 
+       alt="VashonMesh - Community Mesh Networks" 
+       width="728" 
+       height="90" 
+       loading="lazy" />
+</a>`;
+---
+
+<Layout title="VashonMesh Promotional Banners" maxWidth="1000px">
+  <SEO 
+    slot="head"
+    title="Promotional Banners & Assets"
+    description="Download VashonMesh promotional banners and marketing materials. Share our community mesh network initiative on social media, websites, and newsletters."
+    image="https://vashonmesh.org/banners/vashonmesh-social-1200x630.svg"
+    imageAlt="VashonMesh promotional banner showing mesh network connectivity"
+    type="website"
+  />
+
+  <article class="banner-page">
+    <!-- Hero Section -->
+    <header class="page-header">
+      <h1 class="page-title">Promotional Banners</h1>
+      <p class="page-subtitle">
+        Help spread the word about VashonMesh! Download and share these banners on social media, 
+        websites, newsletters, or print materials.
+      </p>
+    </header>
+
+    <!-- Quick Stats -->
+    <section class="stats-banner">
+      <div class="stat">
+        <span class="stat-number">{banners.length}</span>
+        <span class="stat-label">Banner Sizes</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">2</span>
+        <span class="stat-label">Formats Available</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">Free</span>
+        <span class="stat-label">Always</span>
+      </div>
+    </section>
+
+    <!-- Banner Gallery -->
+    <section class="banner-gallery">
+      <h2 class="section-title">Available Banners</h2>
+      
+      {banners.map((banner) => (
+        <div class="banner-card" id={banner.id}>
+          <div class="banner-preview">
+            <div class="banner-frame" style={`aspect-ratio: ${banner.width}/${banner.height};`}>
+              <img 
+                src={banner.path} 
+                alt={banner.title}
+                width={banner.width}
+                height={banner.height}
+                loading="lazy"
+                onerror="this.style.display='none';"
+              />
+            </div>
+          </div>
+          
+          <div class="banner-info">
+            <h3 class="banner-title">{banner.title}</h3>
+            <p class="banner-description">{banner.description}</p>
+            
+            <div class="banner-specs">
+              <span class="spec-item">
+                <svg class="spec-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {banner.width}×{banner.height}px
+              </span>
+              <span class="spec-item">
+                <svg class="spec-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                {banner.fileSize}
+              </span>
+            </div>
+            
+            <div class="download-buttons">
+              {banner.formats.map((format) => (
+                <a 
+                  href={banner.path.replace('.svg', `.${format.toLowerCase()}`)} 
+                  download
+                  class="download-btn"
+                >
+                  Download {format}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <!-- Usage Guidelines -->
+    <section class="guidelines-section">
+      <h2 class="section-title">Usage Guidelines</h2>
+      
+      <div class="guideline-grid">
+        <div class="guideline-card">
+          <div class="guideline-icon">✓</div>
+          <h3>Do's</h3>
+          <ul>
+            <li>Use on websites, social media, and print materials</li>
+            <li>Link back to vashonmesh.org when possible</li>
+            <li>Maintain aspect ratio and readability</li>
+            <li>Use appropriate size for your platform</li>
+          </ul>
+        </div>
+        
+        <div class="guideline-card">
+          <div class="guideline-icon warning">✗</div>
+          <h3>Don'ts</h3>
+          <ul>
+            <li>Modify colors, text, or logo placement</li>
+            <li>Use for commercial purposes without permission</li>
+            <li>Distort or stretch the banner</li>
+            <li>Remove attribution or watermarks</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HTML Embed Code -->
+    <section class="embed-section">
+      <h2 class="section-title">HTML Embed Code</h2>
+      <p class="section-description">
+        Copy and paste this code to embed a banner on your website:
+      </p>
+      
+      <div class="code-block">
+        <pre><code>{embedCode}</code></pre>
+        <button class="copy-btn" onclick={`navigator.clipboard.writeText(${JSON.stringify(embedCode)}); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy Code', 2000)`}>
+          Copy Code
+        </button>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+      <h2>Need Custom Banners?</h2>
+      <p>
+        If you need a specific size or custom design for your use case, 
+        <a href="/contact-us">contact us</a> and we'll be happy to help!
+      </p>
+      <div class="cta-buttons">
+        <a href="/contact-us" class="cta-btn primary">Contact Us</a>
+        <a href="/get-involved" class="cta-btn secondary">Get Involved</a>
+      </div>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .banner-page {
+    background: var(--bg-primary);
+    padding: 2rem 0;
+  }
+
+  /* Header */
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Stats Banner */
+  .stats-banner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Section Styling */
+  .section-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  .section-description {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Banner Gallery */
+  .banner-gallery {
+    margin-bottom: 3rem;
+  }
+
+  .banner-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .banner-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .banner-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border: 2px dashed var(--border-color);
+  }
+
+  :global(.dark) .banner-preview {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .banner-frame {
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .banner-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .banner-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .banner-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .banner-description {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .banner-specs {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .spec-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .spec-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .download-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .download-btn {
+    padding: 0.625rem 1.25rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .download-btn:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+
+  /* Guidelines Section */
+  .guidelines-section {
+    margin-bottom: 3rem;
+  }
+
+  .guideline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .guideline-card {
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+  }
+
+  .guideline-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #10b981;
+  }
+
+  .guideline-icon.warning {
+    color: #ef4444;
+  }
+
+  .guideline-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .guideline-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .guideline-card li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .guideline-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+  }
+
+  /* Embed Section */
+  .embed-section {
+    margin-bottom: 3rem;
+  }
+
+  .code-block {
+    position: relative;
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    margin: 0;
+    color: #d4d4d4;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .code-block code {
+    display: block;
+    white-space: pre;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .copy-btn:hover {
+    background: #5568d3;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .cta-btn.primary {
+    background: #667eea;
+    color: white;
+  }
+
+  .cta-btn.primary:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+
+  .cta-btn.secondary {
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+  }
+
+  .cta-btn.secondary:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .banner-card {
+      grid-template-columns: 1fr;
+    }
+
+    .banner-preview {
+      order: -1;
+    }
+
+    .stats-banner {
+      gap: 1rem;
+    }
+
+    .cta-section {
+      padding: 2rem 1rem;
+    }
+
+    .cta-section h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

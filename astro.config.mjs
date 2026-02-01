@@ -24,6 +24,11 @@ export default defineConfig({
       if (page === 'https://vashonmesh.org/') {
         item.priority = 1.0;
       }
+      // Banner page gets high priority (important for sharing)
+      if (page.includes('/banner')) {
+        item.priority = 0.8;
+        item.changefreq = 'monthly';
+      }
       return item;
     }
   })],
