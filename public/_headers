@@ -1,0 +1,75 @@
+# Cache headers for Netlify deployment
+# These headers optimize caching to improve performance and reduce server load
+
+# Cache static assets (images, fonts, etc.) for 1 year
+# Use immutable to indicate these files never change at their URL
+/hero-imgs/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/news-imgs/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/site-imgs/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/logo/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/banners/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache CSS and JS files for 1 year (they have content hashes in filenames)
+/_astro/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/_astro/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache SVG files for 1 year
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache other static assets for 1 year
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.gif
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache HTML files for 1 hour (allows for content updates)
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Cache root HTML for 1 hour
+/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Cache sitemap for 1 day
+/sitemap*.xml
+  Cache-Control: public, max-age=86400
+
+# Cache robots.txt for 1 day
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+# Add security headers for all pages
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin

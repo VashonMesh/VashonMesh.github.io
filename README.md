@@ -188,6 +188,26 @@ and
 <https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode>
 for TailwindCSS support.
 
+## Performance Optimization
+
+The site is configured for optimal performance with proper caching headers and asset optimization.
+
+📖 **See [CACHE-OPTIMIZATION.md](CACHE-OPTIMIZATION.md) for:**
+
+- How to improve cache lifetimes from 10 minutes to 1 year
+- Migration options (Netlify, Vercel, or Cloudflare + GitHub Pages)
+- Image optimization techniques to reduce file sizes by 75%+
+- Expected performance gains (75% faster repeat visits, 91% less data transfer)
+
+🚀 **See [NETLIFY-SETUP.md](NETLIFY-SETUP.md) for:**
+
+- Step-by-step Netlify deployment guide (15 minutes)
+- DNS configuration instructions
+- Automatic deployment setup
+- Performance comparison and benefits
+
+Configuration files for Netlify and Vercel are already included and ready to use.
+
 ## Contributing
 
 - [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)

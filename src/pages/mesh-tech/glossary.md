@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Layout.astro
+layout: ../../layouts/Layout.astro
 title: Glossary
 description: Common terms and acronyms used in mesh networking and amateur radio
 ---

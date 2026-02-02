@@ -19,9 +19,13 @@
         "Meshcore",
         "Meshtastic",
         "Mestastic",
+        "nosniff",
         "reflashed",
         "Seeed",
-        "Segoe"
+        "Segoe",
+        "Squoosh",
+        "SVGOMG",
+        "vashonmesh"
     ],
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",

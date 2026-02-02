@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Layout.astro
+layout: ../../layouts/Layout.astro
 title: Emergency Communications
 description:
   Using mesh networks for emergency preparedness and disaster response on Vashon

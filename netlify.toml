@@ -1,0 +1,28 @@
+# Netlify configuration file
+# This file configures build settings and cache headers for optimal performance
+
+[build]
+  # Build command
+  command = "npm run build"
+  
+  # Output directory
+  publish = "dist"
+
+# Header rules are automatically applied from public/_headers file
+
+# Redirect rules (if needed in the future)
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Build plugin configuration
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  # Performance thresholds
+  [plugins.inputs.thresholds]
+    performance = 0.9
+    accessibility = 0.9
+    best-practices = 0.9
+    seo = 0.9

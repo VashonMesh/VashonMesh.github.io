@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Layout.astro
+layout: ../../layouts/Layout.astro
 title: Mesh Networking
 description: Learn about LoRa, Meshtastic, MeshCore and other mesh networking technologies
 ---
