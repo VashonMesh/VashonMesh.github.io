@@ -19,5 +19,10 @@
         "reflashed",
         "Seeed",
         "Segoe"
-    ]
+    ],
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[astro]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

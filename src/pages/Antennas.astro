@@ -1,0 +1,188 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout
+  title="Get an Antenna"
+  floatingImages={true}
+  imageDir="hero-imgs/devices"
+  imageCount={15}
+>
+  <main class="max-w-4xl mx-auto px-4 py-8 pointer-events-auto">
+    <article
+      class="prose prose-lg dark:prose-invert max-w-none
+                  prose-headings:text-[var(--text-primary)]
+                  prose-p:text-[var(--text-secondary)]
+                  prose-a:text-blue-600 dark:prose-a:text-blue-400
+                  prose-strong:text-[var(--text-primary)]
+                  prose-code:text-[var(--text-primary)]
+                  prose-code:bg-gray-100 dark:prose-code:bg-gray-800
+                  prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
+                  prose-blockquote:border-l-blue-500
+                  prose-ul:text-[var(--text-secondary)]
+                  prose-ol:text-[var(--text-secondary)]
+                  prose-li:text-[var(--text-secondary)]
+                  bg-[var(--bg-primary)] rounded-lg p-8 shadow-lg"
+    >
+      <h1>Get an Antenna</h1>
+
+      <p>
+        When selecting an antenna, consider these factors:
+        <ul>
+          <li>
+            <strong>Frequency Range:</strong> Ensure the antenna supports your region's
+            LoRa frequency bands (for the US public).
+          </li>
+          <li>
+            <strong>Use:</strong> Will you be using this at a fixed site, or does
+            it need to be portable & rugged? Will it be indoors or outdoors. (Most
+            are fully weatherproofed.)
+          </li>
+          <li>
+            <strong>Gain:</strong> Higher gain antennas can improve signal strength
+            and range for fixed antennas. However they don't radiate up or down as
+            well, so won't reach as effectively into valleys & hilltops or if not
+            kept vertically aligned.
+          </li>
+          <li>
+            <strong>Type:</strong> Choose between omnidirectional (360-degree coverage)
+            or directional (focused signal) antennas based on your needs.
+          </li>
+          <li>
+            <strong>Connector Type:</strong> Verify compatibility with your SDR device
+            (e.g., SMA, BNC).
+          </li>
+          <li>
+            <strong>Build Quality:</strong> Look for durable materials, especially
+            for outdoor use. Others have characterized many antennas on the internet
+            as being of inferior quality.
+          </li>
+        </ul>
+
+        <p>
+          Proper placement and orientation of the antenna can significantly
+          impact reception quality. While LoRa signals can through some trees
+          and other obstructions, less is definitely better. Mount your antenna
+          as high as you can get it.
+        </p>
+
+        <p>
+          Consider disconnecting external antennas when lightening storms
+          threaten.
+        </p>
+
+        <h2>Recommended Antennas</h2>
+
+        <p>
+          As rated by Andy Kirby, at
+          https://www.youtube.com/watch?v=znQAsYs12y8, here are some recommended
+          antennas for receiving HD Radio signals:
+          <ul>
+            <li>
+              <strong>Bad:</strong>
+              <img src="/site-imgs/Antenna-Bad.png" alt="Bad Antenna" />
+            </li>
+            <li>
+              <strong>Good:</strong>
+              <img src="/site-imgs/Antenna-Good.png" alt="Good Antenna" />
+            </li>
+            <li>
+              <strong>Great:</strong>
+              <img src="/site-imgs/Antenna-Great.png" alt="Great Antenna" />
+            </li>
+          </ul>
+        </p>
+
+        <p>
+          SeeedStudio resells antennas from RF Explorer, indicating their
+          approval. These are not petite, so shipping prices can be high. Here
+          are two options:
+          <ul>
+            <li>
+              <strong>5.8dBi gain</strong>
+              <a href="https://lora.rf-explorer.com/antennas/rfela3-5x9"
+                >RF Explorer RFELA-3/5X9 Antenna</a
+              > 902-928MHz – 5.8dBi Fiberglass Omnidirectional High Gain Outdoor Antenna
+              for LoRa, LoRaWAN / LongFi and ISM applications.
+            </li>
+            <li>
+              <strong>8dBi gain!</strong>
+              <a
+                href="https://lora.rf-explorer.com/antennas/rfela5-8x9"
+                target="_blank"
+                rel="noopener noreferrer">RF Explorer RFELA-5/8X9 Antenna</a
+              >, Fiberglass Omnidirectional High Gain Outdoor Antenna for LoRa,
+              LoRaWAN / LongFi and ISM applications
+            </li>
+          </ul>
+        </p>
+
+        <p>
+          Gemini 3 Pro AI agent has suggested these antennas based on user
+          reviews and performance for HD Radio reception:
+          <ul>
+            <li>
+              <strong>Best Overall:</strong>
+              <a
+                href="https://www.amazon.com/dp/B00I8BG4XQ"
+                target="_blank"
+                rel="noopener noreferrer">Antennas Direct HD Smart Antenna</a>
+            </li>
+            <li>
+              <strong>Best Budget:</strong>
+              <a
+                href="https://www.amazon.com/dp/B00I8BG4XQ"
+                target="_blank"
+                rel="noopener noreferrer">1byone HD Radio Antenna</a>
+            </li>
+            <li>
+              <strong>Best Indoor:</strong>
+              <a
+                href="https://www.amazon.com/dp/B00I8BG4XQ"
+                target="_blank"
+                rel="noopener noreferrer">Mohu Leaf Metro</a>
+            </li>
+            <li>
+              <strong>Best Outdoor:</strong>
+              <a
+                href="https://www.amazon.com/dp/B00I8BG4XQ"
+                target="_blank"
+                rel="noopener noreferrer">Antennas Direct ClearStream 2V</a>
+            </li>
+          </ul>
+        </p>
+
+        <p>
+          A couple recommendations from Facebook, <a
+            href="https://www.facebook.com/groups/2195603327524397/"
+            >https://www.facebook.com/groups/2195603327524397/</a
+          > are:
+          <ul>
+            <li>
+              <strong>High End:</strong>
+              <a href="https://www.dxengineering.com/parts/dmn-bc920"
+                >Diamond Antenna BC920 Base Station/Repeater Antennas BC920</a
+              > for ~$130 from a trusted manufacturer. At almost 6 feet long its for
+              fixed location use.
+            </li>
+            <li>
+              <strong>Also:</strong>
+              <a href="" target="_blank" rel="noopener noreferrer"
+                >1byone HD Radio Antenna</a>
+            </li>
+          </ul>
+        </p>
+
+        <p>
+          For more information on HD Radio antennas and installation tips, visit <a
+            href="https://www.hdradio.com"
+            target="_blank"
+            rel="noopener noreferrer">HDRadio.com</a
+          >.
+        </p>
+
+        <p>Happy listening!</p>
+      </p>
+    </article>
+  </main>
+</Layout>
