@@ -19,7 +19,7 @@ const config = {
     // Floating images - displayed at ~80px max
     floatingImages: {
         inputDirs: ['hero-imgs/birds', 'hero-imgs/devices', 'hero-imgs/solar'],
-        maxSize: 120, // 1.5x display size for retina
+        maxSize: 240, // 2x-3x display size for retina/high-DPI
         quality: 85,
         format: 'webp'
     },
@@ -111,7 +111,7 @@ async function main() {
     const results = [];
 
     // Optimize floating images
-    console.log('\n📦 Optimizing floating images (80px max)...\n');
+    console.log('\n📦 Optimizing floating images (240px max for retina displays)...\n');
     for (const dir of config.floatingImages.inputDirs) {
         const files = await getImageFiles(dir);
         for (const file of files) {
