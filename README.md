@@ -5,6 +5,17 @@
 [![Best Practices](https://img.shields.io/badge/Best%20Practices-96-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
 [![SEO](https://img.shields.io/badge/SEO-100-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
 
+[![Deploy Status](https://github.com/VashonMesh/VashonMesh.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/VashonMesh/VashonMesh.github.io/actions)
+[![Version](https://img.shields.io/badge/Version-0.1.0-blue?style=flat)](https://github.com/VashonMesh/VashonMesh.github.io/releases)
+[![Astro](https://img.shields.io/badge/Astro-6.0-BC52EE?style=flat&logo=astro&logoColor=white)](https://astro.build)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38BDF8?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat)](LICENSE)
+
+[![Discord](https://img.shields.io/badge/Discord-%23vashon-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/vashon)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-A-brightgreen?style=flat)](https://github.com/VashonMesh/VashonMesh.github.io)
+[![Browser Support](https://img.shields.io/badge/Browsers-Chrome%20%7C%20Firefox%20%7C%20Safari%20%7C%20Edge-4CAF50?style=flat&logo=googlechrome)](https://caniuse.com)
+
 [VashonMesh.org](https://VashonMesh.org) Website Technical Notes
 
 ## Welcome
