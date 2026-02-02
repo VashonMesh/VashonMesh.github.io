@@ -13,6 +13,9 @@ const recentPosts = allPosts
     return dateB - dateA;
   })
   .slice(0, 3);
+
+// Get first post image for preload
+const firstPostImage = recentPosts[0]?.data?.image?.url;
 ---
 
 <Layout
@@ -20,6 +23,17 @@ const recentPosts = allPosts
   floatingImages={true}
   maxWidth="1200px"
 >
+  {
+    firstPostImage && (
+      <link
+        slot="head"
+        rel="preload"
+        as="image"
+        href={firstPostImage}
+        fetchpriority="high"
+      />
+    )
+  }
   <main class="mx-auto px-4 max-w-[1200px] pointer-events-none">
     <section class="hero">
       <img
@@ -42,7 +56,7 @@ const recentPosts = allPosts
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {
-          recentPosts.map((post) => (
+          recentPosts.map((post, index) => (
             <a href={`/news/${post.id}`} class="news-card group">
               {post.data.image && (
                 <div
@@ -54,7 +68,8 @@ const recentPosts = allPosts
                     <img
                       src={post.data.image.url}
                       alt={post.data.image.alt}
-                      loading="lazy"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchpriority={index === 0 ? "high" : undefined}
                       width="400"
                       height="180"
                       class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"

@@ -63,20 +63,33 @@ if (floatingImages) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <noscript><link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet"></noscript>
     <script is:inline>
-      // Async load Google Fonts without blocking render
-      const fontLink = document.createElement('link');
-      fontLink.rel = 'stylesheet';
-      fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap';
-      document.head.appendChild(fontLink);
+      // Defer font loading to not impact LCP or create network dependency chain
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          const fontLink = document.createElement('link');
+          fontLink.rel = 'stylesheet';
+          fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+Maps&display=optional';
+          document.head.appendChild(fontLink);
+        }, { timeout: 2000 });
+      } else {
+        setTimeout(() => {
+          const fontLink = document.createElement('link');
+          fontLink.rel = 'stylesheet';
+          fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+Maps&display=optional';
+          document.head.appendChild(fontLink);
+        }, 100);
+      }
     </script>
     
-    <!-- Critical CSS for font fallback -->
+    <!-- Critical CSS for font fallback with size adjustments -->
     <style>
       .rubik-maps-regular {
-        font-family: "Rubik Maps", system-ui, -apple-system, sans-serif;
+        font-family: "Rubik Maps", "Comic Sans MS", "Marker Felt", fantasy, system-ui, sans-serif;
         font-optical-sizing: auto;
         font-weight: 400;
         font-style: normal;
+        /* Size adjustment for better fallback match */
+        font-size-adjust: 0.5;
       }
     </style>
     
@@ -303,8 +316,8 @@ if (floatingImages) {
 
 {floatingImages && (
   <script>
-    // Dynamic floating image animation system
-    document.addEventListener('DOMContentLoaded', () => {
+    // Dynamic floating image animation system - deferred to avoid blocking render
+    function initFloatingImages() {
       const floatingImages = document.querySelectorAll('.floating-image');
       let animationCounter = 0;
 
@@ -398,6 +411,14 @@ if (floatingImages) {
           container.style.opacity = '1';
         }
       }, 100);
-    });
+    }
+    
+    // Defer animation initialization to avoid blocking critical render path
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(initFloatingImages, { timeout: 2000 });
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(initFloatingImages, 100);
+    }
   </script>
 )}
