@@ -390,10 +390,13 @@ if (floatingImages) {
   <script>
     // Client-side animation continuity
     // This script ensures images keep floating after their initial SSG animation ends
-    window.addEventListener('load', () => {
+    function initFloatingAnimation() {
        const container = document.querySelector('.floating-container');
        if (container) {
-         container.classList.add('loaded'); // Trigger fade-in and start animation
+         // Small delay to ensure CSS transitions trigger nicely
+         requestAnimationFrame(() => {
+            container.classList.add('loaded'); 
+         });
        }
        
        const floatingImages = document.querySelectorAll('.floating-image');
@@ -451,6 +454,13 @@ if (floatingImages) {
            applyRandomAnimation(img as HTMLElement, index);
          });
        });
-    });
+    }
+
+    // Start when page is ready, handling both immediate and deferred loading states
+    if (document.readyState === 'complete') {
+        initFloatingAnimation();
+    } else {
+        window.addEventListener('load', initFloatingAnimation);
+    }
   </script>
 )}
