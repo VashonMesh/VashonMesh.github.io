@@ -53,16 +53,22 @@ if (floatingImages) {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- Preload critical assets -->\n    <link rel="preload" href="/logo/VashonMesh.svg" as="image" type="image/svg+xml">
+    
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="https://gc.zgo.at">
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     
-    <!-- Optimized font loading - defer to reduce blocking -->
+    <!-- Async font loading - completely non-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet"></noscript>
+    <script is:inline>
+      // Async load Google Fonts without blocking render
+      const fontLink = document.createElement('link');
+      fontLink.rel = 'stylesheet';
+      fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap';
+      document.head.appendChild(fontLink);
+    </script>
     
     <!-- Critical CSS for font fallback -->
     <style>
@@ -81,11 +87,11 @@ if (floatingImages) {
   </head>
   <body>
     {floatingImages && (
-      <div class="floating-container">
+      <div class="floating-container" style="opacity: 0; transition: opacity 0.3s ease;">
         {shuffledImages.map((img, index) => (
           <div class="floating-image" data-index={index}>
             <span class="img-wrapper">
-              <img src={`/${img}`} alt={img.replace(/\.(png|jpg|jpeg|gif|webp|svg)$/i, '').split('/').pop()} loading="lazy" width="80" height="80" style="max-width: 80px; width: 80px; height: auto;" />
+              <img src={`/${img}`} alt="" width="80" height="80" style="max-width: 80px; width: 80px; height: auto;" />
             </span>
           </div>
         ))}
@@ -253,7 +259,6 @@ if (floatingImages) {
       filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.3)) drop-shadow(0 0 25px rgba(102, 126, 234, 0.15));
       border-radius: 8px;
       transition: filter 0.3s ease;
-      loading: lazy;
     }
 
     html.dark .floating-image img {
@@ -385,6 +390,14 @@ if (floatingImages) {
 
       // Initial randomization
       randomizeAllAnimations();
+      
+      // Show floating images after a brief delay to not interfere with LCP
+      setTimeout(() => {
+        const container = document.querySelector('.floating-container') as HTMLElement;
+        if (container) {
+          container.style.opacity = '1';
+        }
+      }, 100);
     });
   </script>
 )}
