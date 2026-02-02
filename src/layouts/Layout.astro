@@ -138,37 +138,6 @@ if (floatingImages) {
     <slot name="head" />
   </head>
   <body>
-    <!-- Floating images container rendered server-side for immediate discovery -->
-    {floatingImages && (
-      <div class="floating-container">
-        <style>
-           {floatingImageItems.map(item => item.keyframes).join('\n')}
-        </style>
-        {floatingImageItems.map(item => (
-            <div class="floating-image" 
-                 id={`float-${item.index}`}
-                 style={`
-                    top: ${item.top}%; 
-                    left: ${item.left}%; 
-                    animation-name: ${item.animationName}; 
-                    animation-duration: ${item.duration}s; 
-                    animation-timing-function: linear; 
-                    animation-fill-mode: forwards;
-                 `}>
-              <span class="img-wrapper">
-                <img 
-                    src={`/${item.src}`} 
-                    alt="" 
-                    width="80" 
-                    height="80" 
-                    style="max-width: 80px; width: 80px; height: auto;" 
-                    loading="eager" 
-                />
-              </span>
-            </div>
-        ))}
-      </div>
-    )}
     <div class={floatingImages ? "site-wrapper" : ""}>
       <Header />
       {noWrapper ? (
@@ -193,6 +162,39 @@ if (floatingImages) {
       )}
       <Footer />
     </div>
+
+    <!-- Floating images container rendered after main content -->
+    {floatingImages && (
+      <div class="floating-container">
+        <style>
+           {floatingImageItems.map(item => item.keyframes).join('\n')}
+        </style>
+        {floatingImageItems.map(item => (
+            <div class="floating-image" 
+                 id={`float-${item.index}`}
+                 style={`
+                    top: ${item.top}%; 
+                    left: ${item.left}%; 
+                    animation-name: ${item.animationName}; 
+                    animation-duration: ${item.duration}s; 
+                    animation-timing-function: linear; 
+                    animation-fill-mode: forwards;
+                 `}>
+              <span class="img-wrapper">
+                <img 
+                    src={`/${item.src}`} 
+                    alt="" 
+                    width="80" 
+                    height="80" 
+                    style="max-width: 80px; width: 80px; height: auto;" 
+                    loading="lazy" 
+                    decoding="async"
+                />
+              </span>
+            </div>
+        ))}
+      </div>
+    )}
   </body>
   <!-- Web analytics -->
   <!-- Large script slows page loads...turn on after rest settles down.
