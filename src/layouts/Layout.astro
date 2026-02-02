@@ -95,14 +95,20 @@ if (floatingImages) {
     {floatingImages && (
       <script is:inline data-floating-images={JSON.stringify(shuffledImages)}>
         // Create floating container after DOM is ready to prevent LCP issues
-        document.addEventListener('DOMContentLoaded', () => {
-          const container = document.createElement('div');
-          container.className = 'floating-container';
-          container.style.cssText = 'opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s 0.3s;';
-          const imagesData = document.currentScript.getAttribute('data-floating-images');
-          container.setAttribute('data-images', imagesData);
-          document.body.insertBefore(container, document.body.firstChild);
-        });
+        (function() {
+          const scriptElement = document.currentScript;
+          document.addEventListener('DOMContentLoaded', () => {
+            if (!scriptElement) return;
+            const container = document.createElement('div');
+            container.className = 'floating-container';
+            container.style.cssText = 'opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s 0.3s;';
+            const imagesData = scriptElement.getAttribute('data-floating-images');
+            if (imagesData) {
+              container.setAttribute('data-images', imagesData);
+              document.body.insertBefore(container, document.body.firstChild);
+            }
+          });
+        })();
       </script>
     )}
     <div class={floatingImages ? "site-wrapper" : ""}>
