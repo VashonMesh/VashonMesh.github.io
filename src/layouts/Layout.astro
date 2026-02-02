@@ -166,9 +166,7 @@ if (floatingImages) {
     <!-- Floating images container rendered after main content -->
     {floatingImages && (
       <div class="floating-container">
-        <style>
-           {floatingImageItems.map(item => item.keyframes).join('\n')}
-        </style>
+        <style set:html={floatingImageItems.map(item => item.keyframes).join('\n')} />
         {floatingImageItems.map(item => (
             <div class="floating-image" 
                  id={`float-${item.index}`}
@@ -297,12 +295,6 @@ if (floatingImages) {
       pointer-events: none;
       transition: background 0.3s ease;
       max-width: 100%;
-      /* Delay visual appearance until loaded to solve LCP/distraction issues */
-      opacity: 0;
-      transition: opacity 1.5s ease;
-    }
-
-    .floating-container.loaded {
       opacity: 1;
     }
 
@@ -315,11 +307,6 @@ if (floatingImages) {
       pointer-events: auto;
       cursor: pointer;
       z-index: 1;
-      animation-play-state: paused; /* Pause animation until load */
-    }
-
-    .floating-container.loaded .floating-image {
-      animation-play-state: running;
     }
 
     .floating-image:hover {
@@ -389,15 +376,17 @@ if (floatingImages) {
 {floatingImages && (
   <script is:inline>
     (function() {
-        // Client-side animation continuity
-        function initFloatingAnimation() {
+        function setupContinuousAnimation() {
            const container = document.querySelector('.floating-container');
-           if (!container || container.classList.contains('loaded')) return;
-           
-           // Trigger fade-in and start animation
-           container.classList.add('loaded');
+           if (!container) return;
+
+           // Prevent double initialization
+           if (container.dataset.animStarted) return;
+           container.dataset.animStarted = "true";
            
            const floatingImages = document.querySelectorAll('.floating-image');
+           
+           // Setup continuous animation logic
            let animationCounter = 0;
            
            function randomRange(min, max) {
@@ -445,6 +434,7 @@ if (floatingImages) {
              element.style.animationDuration = `${duration}s`;
            }
 
+           // Listen for the end of the initial (and subsequent) animations
            floatingImages.forEach((img, index) => {
              img.addEventListener('animationend', () => {
                animationCounter++;
@@ -453,13 +443,11 @@ if (floatingImages) {
            });
         }
 
-        // Try to start when the window loads (images etc)
-        if (document.readyState === 'complete') {
-            initFloatingAnimation();
+        // Set up the continuous animation logic when DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setupContinuousAnimation);
         } else {
-            window.addEventListener('load', initFloatingAnimation);
-            // Fallback: If load event takes too long (e.g. stalled resource), force start
-            setTimeout(initFloatingAnimation, 3000); 
+          setupContinuousAnimation();
         }
     })();
   </script>
