@@ -399,11 +399,11 @@ if (floatingImages) {
        const floatingImages = document.querySelectorAll('.floating-image');
        let animationCounter = 0;
        
-       function randomRange(min, max) {
+       function randomRange(min: number, max: number) {
          return Math.random() * (max - min) + min;
        }
 
-       function generateKeyframes(index) {
+       function generateKeyframes(index: number) {
          const keyframeName = `dynamicFloat${animationCounter}_${index}`;
          const waypoints = Math.random() > 0.5 ? 4 : 2;
          const percentages = waypoints === 4 ? [0, 25, 50, 75, 100] : [0, 50, 100];
@@ -422,7 +422,7 @@ if (floatingImages) {
          return keyframeString;
        }
 
-       function applyRandomAnimation(element, index) {
+       function applyRandomAnimation(element: HTMLElement, index: number) {
          const keyframes = generateKeyframes(index);
          const keyframeName = `dynamicFloat${animationCounter}_${index}`;
          
@@ -448,7 +448,7 @@ if (floatingImages) {
          img.addEventListener('animationend', () => {
            // When initial animation ends, start a new one
            animationCounter++;
-           applyRandomAnimation(img, index);
+           applyRandomAnimation(img as HTMLElement, index);
          });
        });
     });
