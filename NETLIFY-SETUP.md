@@ -31,9 +31,15 @@ Publish directory: dist
 
 ## Step 4: Wait for Deployment
 
-- First deployment takes about 2-3 minutes
+- First deployment takes about 3-4 minutes (includes plugin installation)
+- Build plugins will install automatically:
+  - Image optimization plugin will process all images
+  - Link checker will scan for broken links
+  - Lighthouse will measure performance
 - You'll see a build log showing progress
 - When complete, you'll get a temporary URL like: `random-name-123456.netlify.app`
+
+**Note**: First build is slower due to plugin installation. Subsequent builds will be faster (~1-2 minutes).
 
 ## Step 5: Set Up Custom Domain
 
@@ -132,6 +138,25 @@ Every time you push to the `main` branch:
 - Get email notifications for failed builds
 - See deployment preview URLs for every commit
 
+### Plugin Results
+
+After each deploy, check plugin results in the build log:
+
+**Lighthouse scores** - Click "Plugin: @netlify/plugin-lighthouse" to see:
+
+- Performance, Accessibility, Best Practices, SEO scores
+- Detailed recommendations for improvements
+
+**Image optimization** - Look for "Plugin: netlify-plugin-image-optim":
+
+- Shows how much each image was reduced
+- Total space saved
+
+**Link checker** - Search for "Plugin: netlify-plugin-checklinks":
+
+- Lists any broken internal links found
+- Green = no broken links!
+
 ## Bonus Features Included
 
 ✅ **Global CDN** - Your site loads fast worldwide
@@ -142,16 +167,40 @@ Every time you push to the `main` branch:
 ✅ **Forms** - Can add contact forms easily (Netlify Forms)
 ✅ **Functions** - Can add serverless functions if needed later
 
+### Pre-configured Build Plugins
+
+Your `netlify.toml` includes these optimization plugins:
+
+1. **@netlify/plugin-lighthouse** - Monitors performance scores on each deploy
+2. **netlify-plugin-image-optim** - Automatically optimizes images (70-80% size reduction!)
+3. **netlify-plugin-checklinks** - Finds broken internal links
+4. **netlify-plugin-cache** - Speeds up builds by caching dependencies
+
+These will install automatically on first deploy - no action needed!
+
+**Expected benefits:**
+
+- Images reduced from 7,241 KiB to ~1,800 KiB (75% smaller!)
+- Build time: ~2 minutes → ~1 minute (after first build)
+- No broken links on production
+- Performance scores tracked on every deploy
+
 ## Comparing Before & After
 
-| Metric              | GitHub Pages (Before) | Netlify (After) |
-| ------------------- | --------------------- | --------------- |
-| Cache TTL           | 10 minutes            | 1 year          |
-| Build time          | 2-5 minutes           | 2-3 minutes     |
-| CDN                 | Limited               | Global          |
-| HTTPS Setup         | Manual                | Automatic       |
-| Branch Previews     | No                    | Yes             |
-| Build Notifications | No                    | Email + Slack   |
+| Metric               | GitHub Pages (Before)   | Netlify (After)           |
+| -------------------- | ----------------------- | ------------------------- |
+| Cache TTL            | 10 minutes              | 1 year                    |
+| Image sizes          | 7,241 KiB (unoptimized) | ~1,800 KiB (optimized)    |
+| First load           | ~3-4 seconds            | ~1-2 seconds              |
+| Repeat visits        | ~2-3 seconds            | ~0.5 seconds              |
+| Build time           | 2-5 minutes             | 1-2 minutes (after first) |
+| CDN                  | Limited                 | Global                    |
+| HTTPS Setup          | Manual                  | Automatic                 |
+| Branch Previews      | No                      | Yes                       |
+| Build Notifications  | No                      | Email + Slack             |
+| Image optimization   | Manual                  | Automatic                 |
+| Link checking        | Manual                  | Automatic                 |
+| Performance tracking | Manual                  | Every deploy              |
 
 ## Troubleshooting
 
@@ -194,6 +243,45 @@ Or keep both running during transition period!
 2. **Monitor Performance**: Use Lighthouse to verify improvements
 3. **Set Up Notifications**: Add build notifications in Netlify settings
 4. **Explore Analytics**: Netlify provides free analytics (or keep GoatCounter)
+5. **Review Plugin Results**: Check image optimization and link checker output in build logs
+
+## Optional: Add More Plugins Later
+
+Want even more features? Add these to `netlify.toml`:
+
+### Accessibility Auditing
+
+```toml
+[[plugins]]
+  package = "@netlify/plugin-a11y"
+  [plugins.inputs]
+    checkPaths = ['/', '/vashon-mesh', '/mesh-tech']
+```
+
+### Sitemap Submission to Google/Bing
+
+```toml
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+  [plugins.inputs]
+    exclude = ['/admin/**', '/news/readme.*']
+```
+
+### Security Headers Check
+
+```toml
+[[plugins]]
+  package = "netlify-plugin-security-headers"
+```
+
+### Bundle Size Analysis
+
+```toml
+[[plugins]]
+  package = "netlify-plugin-bundle-size"
+```
+
+Then commit and push - Netlify will auto-install on next deploy!
 
 ## Getting Help
 

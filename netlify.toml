@@ -16,7 +16,7 @@
   to = "/404.html"
   status = 404
 
-# Build plugin configuration
+# Build plugins for optimization and quality checks
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
   
@@ -26,3 +26,46 @@
     accessibility = 0.9
     best-practices = 0.9
     seo = 0.9
+
+# Image optimization - Critical for your large images!
+[[plugins]]
+  package = "netlify-plugin-image-optim"
+  
+  [plugins.inputs]
+    # Optimize all images in build output
+    all = true
+    
+    # Quality settings (85-90 is good balance)
+    jpegQuality = 85
+    pngQuality = 85
+    
+    # Convert to WebP for modern browsers (with fallback)
+    webp = true
+    
+    # Lossless optimization for SVGs
+    svgo = true
+
+# Check for broken links on each deploy
+[[plugins]]
+  package = "netlify-plugin-checklinks"
+  
+  [plugins.inputs]
+    # Only check internal links (external links can be slow/unreliable)
+    checkExternal = false
+    
+    # Pretty output in build logs
+    pretty = true
+    
+    # Don't fail build on broken links (just warn)
+    skipPatterns = ['readme']
+
+# Cache node_modules and Astro cache between builds
+[[plugins]]
+  package = "netlify-plugin-cache"
+  
+  [plugins.inputs]
+    paths = [
+      "node_modules",
+      ".astro",
+      "dist"
+    ]
