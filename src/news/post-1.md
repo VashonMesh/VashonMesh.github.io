@@ -4,7 +4,7 @@ pubDate: 2026-01-28
 description: "Michael Meyer calls local mesh enthusiasts to order"
 author: "John Cornelison"
 image:
-  url: "/news-imgs/post-1.1134-andersen-crowd-large-1218297396.jpg"
+  url: "/news-imgs/post-1.1134-andersen-crowd-large-1218297396.optimized.webp"
   alt: "The initial meeting did not have quite this many participants..."
   photographer: "Andersen"
 tags: ["VashonMesh", "W7VMI", "VMIRC"]

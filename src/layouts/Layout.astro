@@ -54,42 +54,19 @@ if (floatingImages) {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
-    <!-- Preload critical assets -->\n    <link rel="preload" href="/logo/VashonMesh.svg" as="image" type="image/svg+xml">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/logo/VashonMesh.svg" as="image" type="image/svg+xml">
     
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="https://gc.zgo.at">
     
-    <!-- Async font loading - completely non-blocking -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet"></noscript>
-    <script is:inline>
-      // Defer font loading to not impact LCP or create network dependency chain
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          const fontLink = document.createElement('link');
-          fontLink.rel = 'stylesheet';
-          fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+Maps&display=optional';
-          document.head.appendChild(fontLink);
-        }, { timeout: 2000 });
-      } else {
-        setTimeout(() => {
-          const fontLink = document.createElement('link');
-          fontLink.rel = 'stylesheet';
-          fontLink.href = 'https://fonts.googleapis.com/css2?family=Rubik+Maps&display=optional';
-          document.head.appendChild(fontLink);
-        }, 100);
-      }
-    </script>
-    
-    <!-- Critical CSS for font fallback with size adjustments -->
+    <!-- Critical CSS for font - using system fonts to eliminate network dependency -->
     <style>
       .rubik-maps-regular {
-        font-family: "Rubik Maps", "Comic Sans MS", "Marker Felt", fantasy, system-ui, sans-serif;
+        font-family: "Comic Sans MS", "Marker Felt", "Chalkboard SE", fantasy, system-ui, sans-serif;
         font-optical-sizing: auto;
         font-weight: 400;
         font-style: normal;
-        /* Size adjustment for better fallback match */
         font-size-adjust: 0.5;
       }
     </style>
@@ -101,10 +78,10 @@ if (floatingImages) {
   </head>
   <body>
     {floatingImages && (
-      <div class="floating-container" style="opacity: 0; transition: opacity 0.3s ease;" data-images={JSON.stringify(shuffledImages)}>
+      <div class="floating-container" style="opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s 0.3s;" data-images={JSON.stringify(shuffledImages)}>
         <!-- Images will be injected via JavaScript after page load -->
       </div>
-    )}
+    )}  
     <div class={floatingImages ? "site-wrapper" : ""}>
       <Header />
       {noWrapper ? (
@@ -131,8 +108,9 @@ if (floatingImages) {
     </div>
   </body>
   <!-- Web analytics -->
-  <script is:inline data-goatcounter="https://vashonmesh.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+  <!-- Large script slows page loads...turn on after rest settles down.
+  script is:inline data-goatcounter="https://vashonmesh.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script -->
 </html>
 
 <style is:global>
@@ -427,6 +405,8 @@ if (floatingImages) {
       setTimeout(() => {
         if (container) {
           container.style.opacity = '1';
+          container.style.visibility = 'visible';
+          container.style.transition = 'opacity 0.3s ease';
         }
       }, 100);
     }
