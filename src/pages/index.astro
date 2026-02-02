@@ -46,9 +46,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
     </section>
 
     <section class="recent-news">
-      <h2 class="text-3xl font-bold mb-6 text-[var(--text-primary)]">
-        Latest News
-      </h2>
+      <h2 class="text-3xl font-bold mb-6 text-(--text-primary)">Latest News</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {
           recentPosts.map((post, index) => (
@@ -73,11 +71,11 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
                 </div>
               )}
               <div class="news-content">
-                <h3 class="text-lg font-bold mb-2 text-[var(--text-primary)] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <h3 class="text-lg font-bold mb-2 text--(--text-primary) group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {post.data.title}
                 </h3>
                 {post.data.pubDate && (
-                  <time class="text-sm text-[var(--text-secondary)] block mb-2">
+                  <time class="text-sm text-(--text-secondary) block mb-2">
                     {new Date(post.data.pubDate).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -86,7 +84,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
                   </time>
                 )}
                 {post.data.description && (
-                  <p class="text-sm text-[var(--text-secondary)] line-clamp-3">
+                  <p class="text-sm text-(--text-secondary) line-clamp-3">
                     {post.data.description}
                   </p>
                 )}
@@ -110,11 +108,11 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
     >
       <div class="card">
         <h2 class="text-[#667eea] text-2xl mt-0">Welcome</h2>
-        <p class="text-[var(--text-secondary)] leading-relaxed">
+        <p class="text-(--text-secondary) leading-relaxed">
           VashonMesh is a small group of rebels informally helping islanders
           connect with MeshCore and related local area mesh networks.
         </p>
-        <p class="text-[var(--text-secondary)] leading-relaxed">
+        <p class="text-(--text-secondary) leading-relaxed">
           Our mission is to empower neighbors to build resilient, decentralized
           networks that foster communication and collaboration.
         </p>
@@ -130,14 +128,14 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
 
       <div class="card">
         <h2 class="text-[#667eea] text-2xl mt-0">What is Mesh Networking?</h2>
-        <p class="text-[var(--text-secondary)] leading-relaxed">
+        <p class="text-(--text-secondary) leading-relaxed">
           Mesh networks enable direct, peer-to-peer connections between devices,
           creating resilient communication systems that don't rely on
           traditional internet infrastructure: no cell towers, no subscriptions,
           inexpensive radios without license requirements, and better range than
           FRMS walkie-talkies.
         </p>
-        <p class="text-[var(--text-secondary)] leading-relaxed">
+        <p class="text-(--text-secondary) leading-relaxed">
           Read more about <a
             href="https://meshcore.net/"
             target="_blank"
@@ -148,7 +146,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
 
       <div class="card">
         <h2 class="text-[#667eea] text-2xl mt-0">Get Involved</h2>
-        <p class="text-[var(--text-secondary)] leading-relaxed">
+        <p class="text-(--text-secondary) leading-relaxed">
           Interested in joining or learning more about local mesh networks? We
           are all learning and experimenting. Join with us to learn more!
         </p>
@@ -164,7 +162,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
 
       <div class="card">
         <h2 class="text-[#667eea] text-2xl mt-0">Get a Radio</h2>
-        <p class="text-[var(--text-secondary)] leading-relaxed">
+        <p class="text-(--text-secondary) leading-relaxed">
           Interested in how to get started? We're here to help you get
           connected.
         </p>
@@ -174,7 +172,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
         <h2 class="text-[#667eea] text-2xl mt-0">
           Set up a Neighborhood Repeater
         </h2>
-        <p class="text-[var(--text-secondary)] leading-relaxed">
+        <p class="text-(--text-secondary) leading-relaxed">
           Ensure your neighborhood has great connectivity. We're here to help
           you get connected.
         </p>
@@ -182,7 +180,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
 
       <div class="card">
         <h2 class="text-[#667eea] text-2xl mt-0">Current Activities</h2>
-        <p class="text-[var(--text-secondary)] leading-relaxed">
+        <p class="text-(--text-secondary) leading-relaxed">
           See what we've been up to and how you can participate!
         </p>
       </div>

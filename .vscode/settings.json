@@ -10,6 +10,8 @@
         "Decap",
         "Dockton",
         "EMCOMM",
+        "FRMS",
+        "frontmatter",
         "goatcounter",
         "Heltec",
         "imgs",
@@ -23,9 +25,12 @@
         "reflashed",
         "Seeed",
         "Segoe",
+        "Sitepins",
         "Squoosh",
+        "Sveltia",
         "SVGOMG",
-        "vashonmesh"
+        "vashonmesh",
+        "walkie"
     ],
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
