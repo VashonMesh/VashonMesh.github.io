@@ -16,19 +16,19 @@ const publicDir = path.join(__dirname, '..', 'public');
 
 // Configuration
 const config = {
-    // Floating images - displayed at ~50-80px on screen
+    // Floating images - displayed at ~88px on screen
     floatingImages: {
         inputDirs: ['hero-imgs/birds', 'hero-imgs/devices', 'hero-imgs/solar'],
-        minWidth: 150, // Minimum width for retina displays (75px × 2)
-        maxHeight: 384, // Maximum height to keep files small
-        quality: 75, // Higher compression for smaller files
+        maxWidth: 176, // 2x display size for retina (88px × 2)
+        maxHeight: 200, // Keep small for fast loading
+        quality: 70, // Higher compression since these are background decorations
         format: 'webp'
     },
     // News images - displayed at ~280px max width
     newsImages: {
         inputDirs: ['news-imgs'],
         maxWidth: 560, // 2x display size for retina screens (280px × 2)
-        quality: 75, // Higher compression
+        quality: 70, // Higher compression for faster LCP
         format: 'webp'
     }
 };
@@ -59,12 +59,11 @@ async function optimizeImage(inputPath, options) {
         let pipeline = input;
 
         // Resize based on config
-        if (options.minWidth) {
-            // Ensure minimum width for floating images while constraining height
-            pipeline = pipeline.resize(options.minWidth, options.maxHeight, {
-                fit: 'outside', // Ensures width is at least minWidth
-                withoutEnlargement: false, // Allow upscaling to meet minimum
-                position: 'center'
+        if (options.maxWidth && options.maxHeight) {
+            // Constrain floating images to max dimensions
+            pipeline = pipeline.resize(options.maxWidth, options.maxHeight, {
+                fit: 'inside', // Keep within bounds while maintaining aspect ratio
+                withoutEnlargement: true
             });
         } else if (options.maxWidth) {
             // Width-based resize for news images
@@ -113,7 +112,7 @@ async function main() {
     const results = [];
 
     // Optimize floating images
-    console.log('\n📦 Optimizing floating images (150px min width, quality 75)...\n');
+    console.log('\n📦 Optimizing floating images (176x200px max, quality 70)...\n');
     for (const dir of config.floatingImages.inputDirs) {
         const files = await getImageFiles(dir);
         for (const file of files) {
@@ -123,7 +122,7 @@ async function main() {
     }
 
     // Optimize news images
-    console.log('\n📰 Optimizing news images (560px max width, quality 75)...\n');
+    console.log('\n📰 Optimizing news images (560px max width, quality 70)...\n');
     for (const dir of config.newsImages.inputDirs) {
         const files = await getImageFiles(dir);
         for (const file of files) {
