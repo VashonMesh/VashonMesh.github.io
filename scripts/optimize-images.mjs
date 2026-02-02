@@ -16,18 +16,18 @@ const publicDir = path.join(__dirname, '..', 'public');
 
 // Configuration
 const config = {
-    // Floating images - displayed at ~80px max
+    // Floating images - displayed at ~50px max on screen
     floatingImages: {
         inputDirs: ['hero-imgs/birds', 'hero-imgs/devices', 'hero-imgs/solar'],
-        maxSize: 240, // 2x-3x display size for retina/high-DPI
-        quality: 85,
+        maxSize: 100, // 2x display size for retina screens (50px × 2)
+        quality: 75, // Higher compression for smaller files
         format: 'webp'
     },
-    // News images - displayed at ~400px max
+    // News images - displayed at ~280px max width
     newsImages: {
         inputDirs: ['news-imgs'],
-        maxWidth: 800, // 2x display size for retina
-        quality: 85,
+        maxWidth: 560, // 2x display size for retina screens (280px × 2)
+        quality: 75, // Higher compression
         format: 'webp'
     }
 };
@@ -111,7 +111,7 @@ async function main() {
     const results = [];
 
     // Optimize floating images
-    console.log('\n📦 Optimizing floating images (240px max for retina displays)...\n');
+    console.log('\n📦 Optimizing floating images (100px max, quality 75)...\n');
     for (const dir of config.floatingImages.inputDirs) {
         const files = await getImageFiles(dir);
         for (const file of files) {
@@ -121,7 +121,7 @@ async function main() {
     }
 
     // Optimize news images
-    console.log('\n📰 Optimizing news images (800px max width)...\n');
+    console.log('\n📰 Optimizing news images (560px max width, quality 75)...\n');
     for (const dir of config.newsImages.inputDirs) {
         const files = await getImageFiles(dir);
         for (const file of files) {
