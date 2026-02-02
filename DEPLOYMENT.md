@@ -2,9 +2,9 @@
 
 ## Why aren't my changes showing up on the site?
 
-The VashonMesh.org website is hosted on GitHub Pages and uses GitHub Actions to
-automatically build and deploy the site. However, **deployments only happen when
-changes are pushed to the `main` branch**.
+The VashonMesh.org website is hosted on **Netlify** and automatically builds and
+deploys the site. However, **deployments only happen when changes are pushed to
+the `main` branch**.
 
 If you've made changes on a different branch (like a feature branch or pull
 request branch), those changes won't appear on the live site until they're
@@ -13,14 +13,13 @@ merged into `main`.
 ## How the Deployment Process Works
 
 1. **Automatic Deployment**:
-   - The site automatically rebuilds and deploys when changes are pushed to the
-     `main` branch
-   - The deployment workflow is defined in `.github/workflows/deploy.yml`
-   - It typically takes 2-5 minutes for changes to appear on the live site
+   - Netlify automatically watches your GitHub repository
+   - When changes are pushed to the `main` branch, Netlify starts building
+   - The build process runs `npm run build` as configured in `netlify.toml`
+   - It typically takes 1-3 minutes for changes to appear on the live site
 
 2. **Manual Deployment**:
-   - You can also trigger a deployment manually using GitHub's workflow_dispatch
-     feature
+   - You can trigger a deployment manually from the Netlify dashboard
    - See the "How to Force a Build" section below
 
 ## Getting Your Changes to the Live Site
@@ -74,43 +73,48 @@ use pull requests.
 If you need to trigger a deployment manually (for example, to rebuild the site
 without making code changes):
 
-### Using GitHub Web Interface:
+### Using Netlify Dashboard:
 
-1. Go to https://github.com/VashonMesh/VashonMesh.github.io/actions
-2. Click on "Deploy to GitHub Pages" in the workflows list
-3. Click the "Run workflow" button (on the right side)
-4. Select the `main` branch
-5. Click the green "Run workflow" button
+1. Go to your Netlify dashboard at https://app.netlify.com
+2. Select the VashonMesh.org site
+3. Click "Deploys" in the top navigation
+4. Click the "Trigger deploy" dropdown button
+5. Select "Deploy site"
 
-### Using GitHub CLI (gh):
+### Using Netlify CLI:
 
 ```bash
-gh workflow run deploy.yml --ref main
+# Install Netlify CLI if you haven't already
+npm install -g netlify-cli
+
+# Trigger a new deployment
+netlify deploy --prod
 ```
 
 ## Checking Deployment Status
 
 ### View Recent Deployments:
 
-1. Go to https://github.com/VashonMesh/VashonMesh.github.io/actions
-2. Look for "Deploy to GitHub Pages" workflow runs
-3. Green checkmark ✓ = successful deployment
-4. Red X ✗ = failed deployment (click to see error logs)
+1. Go to https://app.netlify.com
+2. Select your VashonMesh.org site
+3. Click "Deploys" to see deployment history
+4. Green "Published" = successful deployment
+5. Red "Failed" = failed deployment (click to see error logs)
 
 ### Common Deployment Times:
 
-- **Build time**: 1-3 minutes
-- **Deployment time**: 1-2 minutes
-- **DNS propagation**: Instant to a few minutes
-- **Total time**: Usually 2-5 minutes
+- **Build time**: 1-2 minutes
+- **Deployment time**: 30 seconds to 1 minute
+- **CDN propagation**: Usually instant
+- **Total time**: Usually 1-3 minutes
 
 ## Troubleshooting
 
 ### Changes still not showing up after merging to main?
 
-1. **Check the workflow status**:
-   - Go to https://github.com/VashonMesh/VashonMesh.github.io/actions
-   - Verify the latest workflow run completed successfully
+1. **Check the deployment status on Netlify**:
+   - Go to https://app.netlify.com and view your site's deploys
+   - Verify the latest deployment completed successfully
 
 2. **Clear your browser cache**:
    - Press `Ctrl+F5` (Windows/Linux) or `Cmd+Shift+R` (Mac)
@@ -140,14 +144,16 @@ gh workflow run deploy.yml --ref main
 
    - Fix any errors before pushing
 
-2. **Check the build logs**:
-   - Go to the failed workflow run on GitHub Actions
-   - Click on the "build" job to see detailed error messages
+2. **Check the build logs on Netlify**:
+   - Go to your failed deployment on Netlify
+   - Click on the deployment to see detailed error messages
+   - The logs will show exactly where the build failed
 
 3. **Common issues**:
    - TypeScript errors: Run `npm run astro check` locally
    - Missing dependencies: Run `npm install`
    - Syntax errors in `.astro`, `.md`, or config files
+   - Node version mismatch: Update `NODE_VERSION` in `netlify.toml` if needed
 
 ## Development Workflow
 
@@ -204,9 +210,9 @@ npm version major  # Breaking changes: 0.1.0 -> 1.0.0
 | Switch to main        | `git checkout main`                                              |
 | Update main branch    | `git pull origin main`                                           |
 | Merge feature to main | `git checkout main && git merge feature/branch-name && git push` |
-| Force rebuild         | Go to Actions → Deploy to GitHub Pages → Run workflow            |
-| View deployment logs  | https://github.com/VashonMesh/VashonMesh.github.io/actions       |
-| Live site             | https://vashonmesh.github.io/                                    |
+| Force rebuild         | Netlify Dashboard → Deploys → Trigger deploy → Deploy site       |
+| View deployment logs  | https://app.netlify.com (select site → Deploys)                  |
+| Live site             | https://vashonmesh.org/                                          |
 
 ## Need Help?
 
