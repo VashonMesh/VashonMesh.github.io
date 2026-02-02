@@ -387,80 +387,80 @@ if (floatingImages) {
 </script>
 
 {floatingImages && (
-  <script>
-    // Client-side animation continuity
-    // This script ensures images keep floating after their initial SSG animation ends
-    function initFloatingAnimation() {
-       const container = document.querySelector('.floating-container');
-       if (container) {
-         // Small delay to ensure CSS transitions trigger nicely
-         requestAnimationFrame(() => {
-            container.classList.add('loaded'); 
-         });
-       }
-       
-       const floatingImages = document.querySelectorAll('.floating-image');
-       let animationCounter = 0;
-       
-       function randomRange(min: number, max: number) {
-         return Math.random() * (max - min) + min;
-       }
+  <script is:inline>
+    (function() {
+        // Client-side animation continuity
+        function initFloatingAnimation() {
+           const container = document.querySelector('.floating-container');
+           if (!container || container.classList.contains('loaded')) return;
+           
+           // Trigger fade-in and start animation
+           container.classList.add('loaded');
+           
+           const floatingImages = document.querySelectorAll('.floating-image');
+           let animationCounter = 0;
+           
+           function randomRange(min, max) {
+             return Math.random() * (max - min) + min;
+           }
 
-       function generateKeyframes(index: number) {
-         const keyframeName = `dynamicFloat${animationCounter}_${index}`;
-         const waypoints = Math.random() > 0.5 ? 4 : 2;
-         const percentages = waypoints === 4 ? [0, 25, 50, 75, 100] : [0, 50, 100];
-         let keyframeString = `@keyframes ${keyframeName} {`;
-         
-         percentages.forEach(percent => {
-           const translateX = percent === 0 ? randomRange(-40, -15) : 
-                              percent === 100 ? randomRange(115, 145) : 
-                              randomRange(percent * 1.2 - 30, percent * 1.2 + 10);
-           const translateY = randomRange(-20, 20);
-           const scale = randomRange(0.7, 1.5);
-           const rotate = randomRange(-30, 30);
-           keyframeString += `${percent}% { transform: translate(${translateX}vw, ${translateY}vh) scale(${scale}) rotate(${rotate}deg); }`;
-         });
-         keyframeString += `}`;
-         return keyframeString;
-       }
+           function generateKeyframes(index) {
+             const keyframeName = `dynamicFloat${animationCounter}_${index}`;
+             const waypoints = Math.random() > 0.5 ? 4 : 2;
+             const percentages = waypoints === 4 ? [0, 25, 50, 75, 100] : [0, 50, 100];
+             let keyframeString = `@keyframes ${keyframeName} {`;
+             
+             percentages.forEach(percent => {
+               const translateX = percent === 0 ? randomRange(-40, -15) : 
+                                  percent === 100 ? randomRange(115, 145) : 
+                                  randomRange(percent * 1.2 - 30, percent * 1.2 + 10);
+               const translateY = randomRange(-20, 20);
+               const scale = randomRange(0.7, 1.5);
+               const rotate = randomRange(-30, 30);
+               keyframeString += `${percent}% { transform: translate(${translateX}vw, ${translateY}vh) scale(${scale}) rotate(${rotate}deg); }`;
+             });
+             keyframeString += `}`;
+             return keyframeString;
+           }
 
-       function applyRandomAnimation(element: HTMLElement, index: number) {
-         const keyframes = generateKeyframes(index);
-         const keyframeName = `dynamicFloat${animationCounter}_${index}`;
-         
-         let styleTag = document.getElementById(`anim-${index}`);
-         if (!styleTag) {
-             styleTag = document.createElement('style');
-             styleTag.id = `anim-${index}`;
-             document.head.appendChild(styleTag);
-         }
-         styleTag.textContent = keyframes;
-         
-         const top = randomRange(5, 85);
-         const left = randomRange(5, 90);
-         const duration = randomRange(33, 50);
-         
-         element.style.top = `${top}%`;
-         element.style.left = `${left}%`;
-         element.style.animationName = keyframeName;
-         element.style.animationDuration = `${duration}s`;
-       }
+           function applyRandomAnimation(element, index) {
+             const keyframes = generateKeyframes(index);
+             const keyframeName = `dynamicFloat${animationCounter}_${index}`;
+             
+             let styleTag = document.getElementById(`anim-${index}`);
+             if (!styleTag) {
+                 styleTag = document.createElement('style');
+                 styleTag.id = `anim-${index}`;
+                 document.head.appendChild(styleTag);
+             }
+             styleTag.textContent = keyframes;
+             
+             const top = randomRange(5, 85);
+             const left = randomRange(5, 90);
+             const duration = randomRange(33, 50);
+             
+             element.style.top = `${top}%`;
+             element.style.left = `${left}%`;
+             element.style.animationName = keyframeName;
+             element.style.animationDuration = `${duration}s`;
+           }
 
-       floatingImages.forEach((img, index) => {
-         img.addEventListener('animationend', () => {
-           // When initial animation ends, start a new one
-           animationCounter++;
-           applyRandomAnimation(img as HTMLElement, index);
-         });
-       });
-    }
+           floatingImages.forEach((img, index) => {
+             img.addEventListener('animationend', () => {
+               animationCounter++;
+               applyRandomAnimation(img, index);
+             });
+           });
+        }
 
-    // Start when page is ready, handling both immediate and deferred loading states
-    if (document.readyState === 'complete') {
-        initFloatingAnimation();
-    } else {
-        window.addEventListener('load', initFloatingAnimation);
-    }
+        // Try to start when the window loads (images etc)
+        if (document.readyState === 'complete') {
+            initFloatingAnimation();
+        } else {
+            window.addEventListener('load', initFloatingAnimation);
+            // Fallback: If load event takes too long (e.g. stalled resource), force start
+            setTimeout(initFloatingAnimation, 3000); 
+        }
+    })();
   </script>
 )}
