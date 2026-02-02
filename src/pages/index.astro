@@ -21,7 +21,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
 <Layout
   title="VashonMesh - Community Mesh Networks"
   floatingImages={true}
-  maxWidth="1200px"
+  maxWidth="1800px"
 >
   {
     firstPostImage && (
@@ -34,7 +34,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
       />
     )
   }
-  <main class="mx-auto px-4 max-w-[1200px] pointer-events-none">
+  <main class="mx-auto px-4 max-w-[1800px] pointer-events-none">
     <section class="hero">
       <img
         src="/logo/VashonMesh.webp"
@@ -396,8 +396,11 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
 
   /* Tagline styling */
   .tagline {
-    display: inline-block;
+    display: block;
     transform-origin: center center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* Thumbnail image hover and dark mode effects */

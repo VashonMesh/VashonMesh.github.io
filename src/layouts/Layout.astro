@@ -14,7 +14,7 @@ interface Props {
 
 const { 
   title, 
-  maxWidth = '1200px', 
+  maxWidth = '1800px', 
   twoColumn = false,
   floatingImages = false,
   imageCount = 10,
@@ -146,7 +146,7 @@ if (floatingImages) {
         <div class={`mx-auto px-4 py-8 w-full flex-1 ${floatingImages ? 'page-content' : ''}`} style={`max-width: ${maxWidth}`}>
           {twoColumn ? (
             <div class="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 items-start">
-              <main class="min-w-0">
+              <main class="min-w-0 prose">
                 <slot />
               </main>
               <aside class="md:sticky md:top-4">
@@ -154,7 +154,7 @@ if (floatingImages) {
               </aside>
             </div>
           ) : (
-            <main class="max-w-full">
+            <main class="max-w-full prose">
               <slot />
             </main>
           )}
