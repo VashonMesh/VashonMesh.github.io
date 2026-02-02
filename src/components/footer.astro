@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
   class="footer-transparent px-4 py-8 mt-16 border-t border-[var(--border-color)]"
 >
   <div
-    class="max-w-[1200px] mx-auto flex justify-between items-center flex-wrap gap-4"
+    class="max-w-[1800px] mx-auto flex justify-between items-center flex-wrap gap-4"
   >
     <p class="text-[var(--text-secondary)] m-0">
       <span class="copyright-tooltip" data-version={`v${pkg.version}`}>
@@ -17,7 +17,8 @@ const year = new Date().getFullYear();
     </p>
     <p class="m-0">
       <a href="https://vashonsoftware.com" class="com"
-        >Site by Vashon Software</a>
+        >Site by Vashon Software</a
+      >
     </p>
     <div class="flex items-center social-links">
       <a
@@ -29,7 +30,7 @@ const year = new Date().getFullYear();
         <img
           src="/logo/GitHub-Mark-32px.png"
           alt=""
-          class="w-8 h-8 align-middle mr-2.5"
+          class="align-middle mr-2.5"
         />Edit on GitHub
       </a>
       <a
@@ -41,7 +42,7 @@ const year = new Date().getFullYear();
         <img
           src="/logo/w7vmi_new_logo.svg"
           alt=""
-          class="w-8 h-8 align-middle mr-2.5 ml-10"
+          class="align-middle mr-2.5 ml-10"
         />Affiliated with W7VMI</a
       >
     </div>
@@ -75,6 +76,18 @@ const year = new Date().getFullYear();
     z-index: 1000;
   }
 
+  @media (min-width: 1280px) {
+    .copyright-tooltip::after {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .copyright-tooltip::after {
+      font-size: 1.125rem;
+    }
+  }
+
   .copyright-tooltip:hover::after {
     opacity: 1;
     transform: translateX(-50%) translateY(-4px);
@@ -90,10 +103,54 @@ const year = new Date().getFullYear();
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    padding: 2rem 1rem;
+  }
+
+  @media (min-width: 1280px) {
+    .footer-transparent {
+      padding: 2.5rem 1rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .footer-transparent {
+      padding: 3rem 1rem;
+    }
   }
 
   :global(.dark) .footer-transparent {
     background-color: rgba(17, 24, 39, 0.8);
+  }
+
+  /* Scale up footer text on larger screens */
+  footer p {
+    font-size: 1rem;
+  }
+
+  /* Center footer items on small screens */
+  @media (max-width: 768px) {
+    footer > div {
+      justify-content: center;
+      text-align: center;
+    }
+
+    footer p,
+    .social-links {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    footer p {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    footer p {
+      font-size: 1.25rem;
+    }
   }
 
   /* Vashon Software link with color swirl animation */
@@ -102,15 +159,27 @@ const year = new Date().getFullYear();
     transition: all 0.5s ease;
     color: #667eea;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.0625rem;
     font-weight: 400;
+  }
+
+  /* Scale up Vashon Software link on larger screens */
+  @media (min-width: 1280px) {
+    .com {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .com {
+      font-size: 1.375rem;
+    }
   }
 
   .com:hover {
     transform: scale(1.2) rotate(5deg);
     filter: hue-rotate(180deg) drop-shadow(0 0 8px rgba(102, 126, 234, 0.8));
     animation: colorSwirl 2s infinite;
-    font-size: 1.1rem;
     font-weight: 700;
   }
 
@@ -136,9 +205,36 @@ const year = new Date().getFullYear();
   .social-links a {
     color: var(--text-secondary);
     text-decoration: none;
+    font-size: 1rem;
     transition:
       color 0.2s,
       transform 0.3s ease;
+  }
+
+  .social-links img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  /* Scale up social links on larger screens */
+  @media (min-width: 1280px) {
+    .social-links a {
+      font-size: 1.125rem;
+    }
+    .social-links img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .social-links a {
+      font-size: 1.25rem;
+    }
+    .social-links img {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 
   .social-links a:hover {
