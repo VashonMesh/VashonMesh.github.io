@@ -105,7 +105,7 @@ if (floatingImages) {
             const imagesData = scriptElement.getAttribute('data-floating-images');
             if (imagesData) {
               container.setAttribute('data-images', imagesData);
-              document.body.insertBefore(container, document.body.firstChild);
+              document.body.appendChild(container);
             }
           });
         })();
