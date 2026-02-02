@@ -181,7 +181,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
         heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
         
         // Close mobile TOC after clicking
-        if (window.innerWidth < 1024) {
+        if (window.innerWidth < 769) {
           tocSidebar?.classList.remove('open');
         }
       });
@@ -261,7 +261,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
   
   // Close on outside click (mobile)
   document.addEventListener('click', (e) => {
-    if (window.innerWidth < 1024 && 
+    if (window.innerWidth < 769 && 
         tocSidebar?.classList.contains('open') &&
         !tocSidebar.contains(e.target as Node) &&
         !tocToggle?.contains(e.target as Node)) {
@@ -303,7 +303,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     gap: 2rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 769px) {
     .blog-post-container {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -345,7 +345,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     height: 1.25rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 769px) {
     .toc-toggle {
       display: none;
     }
@@ -356,7 +356,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     transform: translateY(-2px);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 769px) {
     .toc-sidebar {
       display: block;
       grid-column: 1;
@@ -371,7 +371,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
   }
 
   /* Mobile: Full Screen Overlay */
-  @media (max-width: 1023px) {
+  @media (max-width: 768px) {
     .toc-sidebar {
       position: fixed;
       top: 0;
@@ -400,7 +400,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     padding: 1rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 769px) {
     .toc-sticky {
       position: -webkit-sticky;
       position: sticky;
@@ -412,7 +412,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     }
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 768px) {
     .toc-sticky {
       position: -webkit-sticky;
       position: sticky;
@@ -444,7 +444,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     transition: all 0.2s;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 769px) {
     .toc-close {
       display: none;
     }
