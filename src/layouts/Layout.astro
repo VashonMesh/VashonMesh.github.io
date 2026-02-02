@@ -91,10 +91,10 @@ if (floatingImages) {
     <!-- Floating images container will be injected by JavaScript to avoid LCP calculation -->
     {floatingImages && (
       <script is:inline data-floating-images={JSON.stringify(shuffledImages)}>
-        // Create floating container after DOM is ready to prevent LCP issues
+        // Create floating container AFTER page fully loads to prevent LCP issues
         (function() {
           const scriptElement = document.currentScript;
-          document.addEventListener('DOMContentLoaded', () => {
+          window.addEventListener('load', () => {
             if (!scriptElement) return;
             const container = document.createElement('div');
             container.className = 'floating-container';
