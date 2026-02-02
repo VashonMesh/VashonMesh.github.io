@@ -5,8 +5,8 @@
 [![Best Practices](https://img.shields.io/badge/Best%20Practices-96-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
 [![SEO](https://img.shields.io/badge/SEO-100-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
 
-[![Deploy Status](https://github.com/VashonMesh/VashonMesh.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/VashonMesh/VashonMesh.github.io/actions)
-[![Version](https://img.shields.io/badge/Version-0.1.0-blue?style=flat)](https://github.com/VashonMesh/VashonMesh.github.io/releases)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7ca6b7a2-20c4-4c51-b4e6-519c5490bb96/deploy-status)](https://app.netlify.com/projects/vashonmesh/deploys)
+[![Version](https://img.shields.io/badge/Version-0.2.0-blue?style=flat)](https://github.com/VashonMesh/VashonMesh.github.io/releases)
 [![Astro](https://img.shields.io/badge/Astro-6.0-BC52EE?style=flat&logo=astro&logoColor=white)](https://astro.build)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38BDF8?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
