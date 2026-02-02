@@ -8,7 +8,6 @@ interface Props {
   maxWidth?: string;
   twoColumn?: boolean;
   floatingImages?: boolean;
-  imageDir?: string;
   imageCount?: number;
   noWrapper?: boolean;
 }
@@ -18,21 +17,29 @@ const {
   maxWidth = '1200px', 
   twoColumn = false,
   floatingImages = false,
-  imageDir = 'hero-imgs',
   imageCount = 10,
   noWrapper = false
 } = Astro.props;
 
-// Floating images setup
+// Floating images setup - use static list to avoid eager loading
 let shuffledImages: string[] = [];
 if (floatingImages) {
-  const imageGlob = import.meta.glob('/public/**/*.{png,jpg,jpeg,gif,webp,svg}', { eager: true });
-  const allImages = Object.keys(imageGlob)
-    .map(path => path.replace('/public/', ''))
-    .filter(path => path.startsWith(imageDir));
-  shuffledImages = [...allImages]
+  // Predefined list to avoid loading all images eagerly
+  const availableImages = [
+    'hero-imgs/birds/bald-eagle.png',
+    'hero-imgs/birds/golden-pheasant.png',
+    'hero-imgs/birds/parrot.png',
+    'hero-imgs/devices/T-DECK-PLUS_7.png',
+    'hero-imgs/devices/m5-lora.png',
+    'hero-imgs/devices/Panel-Antenna.png',
+    'hero-imgs/solar/planet5.png',
+    'hero-imgs/solar/saturn.png',
+    'hero-imgs/solar/star.png',
+    'hero-imgs/devices/Wisblock_WisMesh_Pocket_V2_RAK.png'
+  ];
+  shuffledImages = [...availableImages]
     .sort(() => Math.random() - 0.5)
-    .slice(0, imageCount);
+    .slice(0, Math.min(imageCount, availableImages.length));
 }
 ---
 
@@ -46,17 +53,16 @@ if (floatingImages) {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
-    <!-- Optimized font loading to reduce render blocking -->
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://gc.zgo.at">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    
+    <!-- Optimized font loading - defer to reduce blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap" rel="stylesheet"></noscript>
-    <script is:inline>
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://fonts.googleapis.com/css2?family=Rubik+Maps&display=swap';
-      document.head.appendChild(link);
-    </script>
     
     <!-- Critical CSS for font fallback -->
     <style>
@@ -79,7 +85,7 @@ if (floatingImages) {
         {shuffledImages.map((img, index) => (
           <div class="floating-image" data-index={index}>
             <span class="img-wrapper">
-              <img src={`/${img}`} alt={img.replace(/\.(png|jpg|jpeg|gif|webp|svg)$/i, '').split('/').pop()} style="max-width: 80px; width: 80px; height: auto;" />
+              <img src={`/${img}`} alt={img.replace(/\.(png|jpg|jpeg|gif|webp|svg)$/i, '').split('/').pop()} loading="lazy" width="80" height="80" style="max-width: 80px; width: 80px; height: auto;" />
             </span>
           </div>
         ))}
@@ -247,6 +253,7 @@ if (floatingImages) {
       filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.3)) drop-shadow(0 0 25px rgba(102, 126, 234, 0.15));
       border-radius: 8px;
       transition: filter 0.3s ease;
+      loading: lazy;
     }
 
     html.dark .floating-image img {

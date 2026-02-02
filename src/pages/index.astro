@@ -49,6 +49,9 @@ const recentPosts = allPosts
                     <img
                       src={post.data.image.url}
                       alt={post.data.image.alt}
+                      loading="lazy"
+                      width="400"
+                      height="180"
                       class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
