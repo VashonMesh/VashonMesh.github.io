@@ -1,6 +1,6 @@
 # VashonMesh.github.io, aka VashonMesh.org
 
-[![Performance](https://img.shields.io/badge/Performance-99-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
+[![Performance](https://img.shields.io/badge/Performance-100-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
 [![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
 [![Best Practices](https://img.shields.io/badge/Best%20Practices-100-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
 [![SEO](https://img.shields.io/badge/SEO-100-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
