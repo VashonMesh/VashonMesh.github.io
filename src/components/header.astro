@@ -1,5 +1,5 @@
 ---
-import pkg from '../../package.json';
+import pkg from "../../package.json";
 
 const currentPath = Astro.url.pathname;
 
@@ -10,120 +10,185 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { 
-    href: '/', 
-    label: 'VashonMesh.org',
+  {
+    href: "/",
+    label: "VashonMesh.org",
     children: [
-      { href: '/about', label: 'About Us' },
-      { href: '/contact-us', label: 'Contact Us' },
-      { href: '/get-involved', label: 'Get Involved' }
-    ]
+      { href: "/vashon-mesh", label: "About Us" },
+      { href: "/vashon-mesh/contact-us", label: "Contact Us" },
+      { href: "/vashon-mesh/get-involved", label: "Get Involved" },
+    ],
   },
-  { 
-    href: '/mesh-network', 
-    label: 'Mesh Tech',
+  {
+    href: "/mesh-tech",
+    label: "Mesh Tech",
     children: [
-      { href: '/radios', label: 'Radios' },
-      { href: '/repeaters', label: 'Repeaters' }
-    ]
+      { href: "/mesh-tech/radios", label: "Radios" },
+      { href: "/mesh-tech/repeaters", label: "Repeaters" },
+      { href: "/mesh-tech/room-repeaters", label: "Room Repeaters" },
+      { href: "/mesh-tech/antennas", label: "Antennas" },
+      { href: "/mesh-tech/mapping", label: "Mapping" },
+      { href: "/mesh-tech/software", label: "Software" },
+      { href: "/mesh-tech/glossary", label: "Glossary" },
+    ],
   },
-  { 
-    href: '/vashon-network', 
-    label: 'Vashon Network',
-    children: [
-      { href: '/emcomm', label: 'Emergency Comms' }
-    ]
+  {
+    href: "/mesh-on-vashon",
+    label: "Vashon Network",
+    children: [{ href: "/mesh-on-vashon/emcomm", label: "Emergency Comms" }],
   },
-  { href: '/news', label: 'News' }
+  { href: "/news", label: "News" },
 ];
 
 // Function to check if current path matches nav item or its children
-function isActive(itemPath: string, currentPath: string, children?: NavItem[]): boolean {
-  if (itemPath === '/') {
-    if (currentPath === '/') return true;
+function isActive(
+  itemPath: string,
+  currentPath: string,
+  children?: NavItem[],
+): boolean {
+  if (itemPath === "/") {
+    if (currentPath === "/") return true;
     // Check if any child is active
-    return children?.some(child => currentPath.startsWith(child.href)) ?? false;
+    return (
+      children?.some((child) => currentPath.startsWith(child.href)) ?? false
+    );
   }
   if (currentPath.startsWith(itemPath)) return true;
   // Check if any child is active
-  return children?.some(child => currentPath.startsWith(child.href)) ?? false;
+  return children?.some((child) => currentPath.startsWith(child.href)) ?? false;
 }
 ---
 
-<link rel="sitemap" href="/sitemap-index.xml">
+<link rel="sitemap" href="/sitemap-index.xml" />
 <title>Vashon Mesh Networking</title>
-<meta name="description" content="Vashon's mesh networking team">
-<meta name="version" content={pkg.version}>
+<meta name="description" content="Vashon's mesh networking team" />
+<meta name="version" content={pkg.version} />
 
 <!-- Open Graph tags -->
-<meta property="og:title" content="VashonMesh.org - Community Mesh Networking" />
+<meta
+  property="og:title"
+  content="VashonMesh.org - Community Mesh Networking"
+/>
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vashonmesh.org/" />
-<meta property="og:description" content="Connecting Vashon & Maury Islanders with resilient, decentralized local mesh networks. Community-powered communication without traditional infrastructure." />
-<meta property="og:image" content="https://www.vashonmesh.org/seo-banner.webp" />
-<meta property="og:image:alt" content="VashonMesh.org logo with tagline: Connecting Vashon & Maury Islanders with Local Mesh Networks" />
+<meta
+  property="og:description"
+  content="Connecting Vashon & Maury Islanders with resilient, decentralized local mesh networks. Community-powered communication without traditional infrastructure."
+/>
+<meta
+  property="og:image"
+  content="https://www.vashonmesh.org/seo-banner.webp"
+/>
+<meta
+  property="og:image:alt"
+  content="VashonMesh.org logo with tagline: Connecting Vashon & Maury Islanders with Local Mesh Networks"
+/>
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:site_name" content="VashonMesh.org" />
 
 <!-- Twitter Card tags -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="VashonMesh.org - Community Mesh Networking" />
-<meta name="twitter:description" content="Connecting Vashon & Maury Islanders with resilient, decentralized local mesh networks." />
-<meta name="twitter:image" content="https://www.vashonmesh.org/seo-banner.webp" />
-<meta name="twitter:image:alt" content="VashonMesh.org logo with tagline: Connecting Vashon & Maury Islanders with Local Mesh Networks" />
+<meta
+  name="twitter:title"
+  content="VashonMesh.org - Community Mesh Networking"
+/>
+<meta
+  name="twitter:description"
+  content="Connecting Vashon & Maury Islanders with resilient, decentralized local mesh networks."
+/>
+<meta
+  name="twitter:image"
+  content="https://www.vashonmesh.org/seo-banner.webp"
+/>
+<meta
+  name="twitter:image:alt"
+  content="VashonMesh.org logo with tagline: Connecting Vashon & Maury Islanders with Local Mesh Networks"
+/>
 
 <header class="header-transparent shadow-sm px-4 py-4 sticky top-0 z-[100]">
   <nav class="max-w-[1200px] mx-auto flex justify-between items-center">
     <div class="flex items-center logo">
       <a href="/" class="logo-link-container" data-tooltip="VashonMesh.org">
-        <img src="../../favicon.svg" alt="VashonMesh Logo" class="align-middle w-8 h-8" />
+        <img
+          src="../../favicon.svg"
+          alt="VashonMesh Logo"
+          class="align-middle w-8 h-8"
+        />
       </a>
     </div>
-    
+
     <!-- Hamburger button for mobile -->
-    <button id="hamburger-toggle" class="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+    <button
+      id="hamburger-toggle"
+      class="hamburger-btn"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
     </button>
 
     <div class="flex items-center gap-6 links" id="nav-menu">
-      {navItems.map(item => (
-        <div class={`nav-item ${item.children ? 'has-dropdown' : ''}`}>
-          <a 
-            href={item.href} 
-            class={`nav-link ${isActive(item.href, currentPath, item.children) ? 'active' : ''}`}
-          >
-            {item.label}
-            {item.children && <span class="dropdown-arrow">▾</span>}
-          </a>
-          {item.children && (
-            <div class="dropdown-menu">
-              <a 
-                href={item.href}
-                class={`dropdown-item parent-link ${currentPath === item.href || (item.href === '/' && currentPath === '/') ? 'active' : ''}`}
-              >
-                {item.href === '/' ? 'Home' : `${item.label} Overview`}
-              </a>
-              {item.children.map(child => (
-                <a 
-                  href={child.href}
-                  class={`dropdown-item ${isActive(child.href, currentPath) ? 'active' : ''}`}
+      {
+        navItems.map((item) => (
+          <div class={`nav-item ${item.children ? "has-dropdown" : ""}`}>
+            <a
+              href={item.href}
+              class={`nav-link ${isActive(item.href, currentPath, item.children) ? "active" : ""}`}
+            >
+              {item.label}
+              {item.children && <span class="dropdown-arrow">▾</span>}
+            </a>
+            {item.children && (
+              <div class="dropdown-menu">
+                <a
+                  href={item.href}
+                  class={`dropdown-item parent-link ${currentPath === item.href || (item.href === "/" && currentPath === "/") ? "active" : ""}`}
                 >
-                  {child.label}
+                  {item.href === "/" ? "Home" : `${item.label} Overview`}
                 </a>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-      <button id="theme-toggle" class="bg-transparent border-none cursor-pointer p-2 flex items-center justify-center rounded-md transition-all duration-200" aria-label="Toggle dark mode" title="Toggle dark mode">
-        <svg class="sun-icon hidden dark:block" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+                {item.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class={`dropdown-item ${isActive(child.href, currentPath) ? "active" : ""}`}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))
+      }
+      <button
+        id="theme-toggle"
+        class="bg-transparent border-none cursor-pointer p-2 flex items-center justify-center rounded-md transition-all duration-200"
+        aria-label="Toggle dark mode"
+        title="Toggle dark mode"
+      >
+        <svg
+          class="sun-icon hidden dark:block"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+          ></path>
         </svg>
-        <svg class="moon-icon block dark:hidden" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+        <svg
+          class="moon-icon block dark:hidden"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+          ></path>
         </svg>
       </button>
     </div>
@@ -144,7 +209,9 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 
   /* Logo image glow in dark mode */
   .logo img {
-    transition: filter 0.3s ease, transform 0.3s ease;
+    transition:
+      filter 0.3s ease,
+      transform 0.3s ease;
     margin: 0 1rem;
   }
 
@@ -153,7 +220,9 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
   }
 
   :global(.dark) .logo img {
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 3px rgba(255, 255, 255, 1));
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7))
+      drop-shadow(0 0 6px rgba(255, 255, 255, 0.9))
+      drop-shadow(0 0 3px rgba(255, 255, 255, 1));
   }
 
   /* Custom tooltip for logo */
@@ -176,14 +245,17 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0.2s;
     pointer-events: none;
     z-index: 1000;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .logo-link-container::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -0.5rem;
     left: 1rem;
@@ -191,7 +263,9 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     border-bottom-color: #667eea;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
+    transition:
+      opacity 0.2s,
+      visibility 0.2s;
     pointer-events: none;
     z-index: 1000;
   }
@@ -260,7 +334,10 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s, transform 0.3s ease, filter 0.3s ease;
+    transition:
+      color 0.2s,
+      transform 0.3s ease,
+      filter 0.3s ease;
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
@@ -278,7 +355,7 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
   }
 
   .nav-link.active::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 0;
@@ -291,7 +368,8 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
   .nav-link:hover {
     color: #667eea;
     transform: scale(1.1);
-    filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.8)) drop-shadow(0 0 4px rgba(102, 126, 234, 1));
+    filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.8))
+      drop-shadow(0 0 4px rgba(102, 126, 234, 1));
   }
 
   /* Dropdown menu styling */
@@ -308,7 +386,10 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0.2s;
     z-index: 200;
   }
 
@@ -324,7 +405,9 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
-    transition: background-color 0.2s, color 0.2s;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
   }
 
   .dropdown-item.parent-link {
@@ -439,7 +522,10 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
       max-height: 0;
       transform: translateY(0);
       overflow: hidden;
-      transition: opacity 0.3s ease, max-height 0.3s ease, visibility 0.3s ease;
+      transition:
+        opacity 0.3s ease,
+        max-height 0.3s ease,
+        visibility 0.3s ease;
     }
 
     .nav-item.mobile-active .dropdown-menu {
@@ -493,76 +579,80 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 
 <script>
   // Log version for developers
-  import pkg from '../../package.json';
+  import pkg from "../../package.json";
   console.log(`VashonMesh.org v${pkg.version}`);
 
   // Mobile navigation toggle functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const hamburgerBtn = document.getElementById('hamburger-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const navItems = document.querySelectorAll('.nav-item.has-dropdown');
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburgerBtn = document.getElementById("hamburger-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    const navItems = document.querySelectorAll(".nav-item.has-dropdown");
     const isMobile = () => window.innerWidth <= 768;
 
     // Hamburger menu toggle
     if (hamburgerBtn && navMenu) {
-      hamburgerBtn.addEventListener('click', () => {
-        const isOpen = navMenu.classList.toggle('mobile-menu-open');
-        hamburgerBtn.classList.toggle('active');
-        hamburgerBtn.setAttribute('aria-expanded', isOpen.toString());
-        
+      hamburgerBtn.addEventListener("click", () => {
+        const isOpen = navMenu.classList.toggle("mobile-menu-open");
+        hamburgerBtn.classList.toggle("active");
+        hamburgerBtn.setAttribute("aria-expanded", isOpen.toString());
+
         // Prevent body scroll when menu is open
         if (isOpen) {
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
         } else {
-          document.body.style.overflow = '';
+          document.body.style.overflow = "";
           // Close all dropdowns when closing menu
-          navItems.forEach(item => {
-            item.classList.remove('mobile-active');
+          navItems.forEach((item) => {
+            item.classList.remove("mobile-active");
           });
         }
       });
     }
 
     // Dropdown navigation for mobile
-    navItems.forEach(navItem => {
-      const navLink = navItem.querySelector('.nav-link');
-      
+    navItems.forEach((navItem) => {
+      const navLink = navItem.querySelector(".nav-link");
+
       if (navLink) {
-        navLink.addEventListener('click', (e) => {
+        navLink.addEventListener("click", (e) => {
           // Only handle click on mobile devices
           if (isMobile()) {
             e.preventDefault();
             e.stopPropagation();
 
             // Close all other open dropdowns
-            navItems.forEach(item => {
+            navItems.forEach((item) => {
               if (item !== navItem) {
-                item.classList.remove('mobile-active');
+                item.classList.remove("mobile-active");
               }
             });
 
             // Toggle current dropdown
-            navItem.classList.toggle('mobile-active');
+            navItem.classList.toggle("mobile-active");
           }
         });
       }
     });
 
     // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (isMobile() && navMenu && hamburgerBtn) {
         const isClickInsideNav = navMenu.contains(e.target as Node);
         const isClickOnHamburger = hamburgerBtn.contains(e.target as Node);
-        
-        if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('mobile-menu-open')) {
-          navMenu.classList.remove('mobile-menu-open');
-          hamburgerBtn.classList.remove('active');
-          hamburgerBtn.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
-          
+
+        if (
+          !isClickInsideNav &&
+          !isClickOnHamburger &&
+          navMenu.classList.contains("mobile-menu-open")
+        ) {
+          navMenu.classList.remove("mobile-menu-open");
+          hamburgerBtn.classList.remove("active");
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+
           // Close all dropdowns
-          navItems.forEach(item => {
-            item.classList.remove('mobile-active');
+          navItems.forEach((item) => {
+            item.classList.remove("mobile-active");
           });
         }
       }
@@ -570,22 +660,22 @@ function isActive(itemPath: string, currentPath: string, children?: NavItem[]): 
 
     // Handle window resize
     let resizeTimer: number;
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
         if (!isMobile()) {
           // Remove mobile-specific classes when switching to desktop
           if (navMenu) {
-            navMenu.classList.remove('mobile-menu-open');
+            navMenu.classList.remove("mobile-menu-open");
           }
           if (hamburgerBtn) {
-            hamburgerBtn.classList.remove('active');
-            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            hamburgerBtn.classList.remove("active");
+            hamburgerBtn.setAttribute("aria-expanded", "false");
           }
-          document.body.style.overflow = '';
-          
-          navItems.forEach(item => {
-            item.classList.remove('mobile-active');
+          document.body.style.overflow = "";
+
+          navItems.forEach((item) => {
+            item.classList.remove("mobile-active");
           });
         }
       }, 250);

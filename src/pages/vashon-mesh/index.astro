@@ -1,0 +1,156 @@
+---
+import Layout from "../layouts/Layout.astro";
+import pkg from "../../package.json";
+---
+
+<Layout title="VashonMesh - About Us">
+  <section class="flex flex-col gap-8">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
+      <h2 class="text-[#667eea] text-2xl mt-0">Welcome</h2>
+      <p class="text-[var(--text-secondary)] leading-relaxed">
+        VashonMesh is a small group of rebels informally helping islanders
+        connect with MeshCore and related local area mesh networks.
+      </p>
+      <p class="text-[var(--text-secondary)] leading-relaxed">
+        Our mission is to empower neighbors to build resilient, decentralized
+        networks that foster communication and collaboration.
+      </p>
+      <p class="text-[var(--text-secondary)] leading-relaxed mt-4">
+        Want to help spread the word? Check out our <a
+          href="/vashon-mesh/banners"
+          class="text-[#667eea] hover:underline font-medium"
+          >promotional banners and marketing materials</a
+        > that you can download and share.
+      </p>
+      <p class="text-sm text-[var(--text-secondary)] opacity-70 mt-4">
+        Website version: {pkg.version}
+      </p>
+    </div>
+
+    • Experimenting • Activities/Events • Informal group • Other (regional)
+    groups
+
+    <div class="flex flex-col gap-2">
+      <details
+        class="border border-[var(--border-color)] rounded-lg bg-[var(--bg-primary)] overflow-hidden faq-item"
+        open
+      >
+        <summary
+          class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 font-medium text-[var(--text-primary)] transition-colors list-none hover:bg-[var(--hover-bg)]"
+        >
+          <span>What are the basic features?</span>
+
+          <svg
+            width="20"
+            height="20"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-5 h-5 max-w-5 max-h-5 shrink-0 transition-transform duration-300 arrow"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
+          </svg>
+        </summary>
+
+        <div class="p-4">
+          <p class="text-[var(--text-secondary)] leading-relaxed">
+            Lorem, ipsum dolor sit
+          </p>
+        </div>
+      </details>
+
+      <details
+        class="border border-[var(--border-color)] rounded-lg bg-[var(--bg-primary)] overflow-hidden faq-item"
+        open
+      >
+        <summary
+          class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 font-medium text-[var(--text-primary)] transition-colors list-none hover:bg-[var(--hover-bg)]"
+        >
+          <span>How do I get started?</span>
+
+          <svg
+            width="20"
+            height="20"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-5 h-5 max-w-5 max-h-5 shrink-0 transition-transform duration-300 arrow"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
+          </svg>
+        </summary>
+
+        <div class="p-4">
+          <p class="text-[var(--text-secondary)] leading-relaxed">
+            Lorem, ipsum dolor sit ameestias iusto cupiditate ullam laborum
+            veniam quos officia. Quos, temporibus perspiciatis!
+          </p>
+        </div>
+      </details>
+
+      <details
+        class="border border-[var(--border-color)] rounded-lg bg-[var(--bg-primary)] overflow-hidden faq-item"
+      >
+        <summary
+          class="flex cursor-pointer items-center justify-between gap-4 px-4 py-3 font-medium text-[var(--text-primary)] transition-colors list-none hover:bg-[var(--hover-bg)]"
+        >
+          <span>What support options are available?</span>
+
+          <svg
+            width="20"
+            height="20"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-5 h-5 max-w-5 max-h-5 shrink-0 transition-transform duration-300 arrow"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 5v14m0 0l7-7m-7 7l-7-7"></path>
+          </svg>
+        </summary>
+
+        <div class="p-4">
+          <p class="text-[var(--text-secondary)] leading-relaxed">
+            Lorem, ipsum dolor sit amet conse
+          </p>
+        </div>
+      </details>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hide default disclosure markers */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::marker {
+    display: none;
+  }
+
+  summary::before {
+    display: none;
+  }
+
+  /* Rotate arrow when details is open */
+  details[open] summary .arrow {
+    transform: rotate(-180deg);
+  }
+</style>
