@@ -19,16 +19,16 @@ const config = {
     // Floating images - displayed at ~88px on screen
     floatingImages: {
         inputDirs: ['hero-imgs/birds', 'hero-imgs/devices', 'hero-imgs/solar'],
-        maxWidth: 88, // 1x display size - sufficient for decorative background elements
-        maxHeight: 120, // Keep very small for fast loading
-        quality: 40, // Aggressive compression for background decorations
+        maxWidth: 132, // 1.5x display size (88px x 1.5) - Reduced from 2x for LCP savings
+        maxHeight: 200, // Keep small for fast loading
+        quality: 50, // Higher compression since these are background decorations
         format: 'webp'
     },
     // News images - displayed at ~280px max width
     newsImages: {
         inputDirs: ['news-imgs'],
         maxWidth: 560, // 2x display size for retina screens (280px × 2)
-        quality: 50, // Higher compression for faster LCP
+        quality: 60, // Higher compression for faster LCP
         format: 'webp'
     }
 };
