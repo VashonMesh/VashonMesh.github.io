@@ -21,11 +21,21 @@ const {
   noWrapper = false
 } = Astro.props;
 
-// Floating images setup - use static list to avoid eager loading
-let shuffledImages: string[] = [];
+// Floating images setup
+interface FloatingImageConfig {
+  src: string;
+  top: number;
+  left: number;
+  duration: number;
+  keyframes: string;
+  animationName: string;
+  index: number;
+}
+
+let floatingImageItems: FloatingImageConfig[] = [];
+
 if (floatingImages) {
-  // Predefined list to avoid loading all images eagerly
-  // Using .optimized.webp versions for 87% smaller file sizes!
+  // Predefined list 
   const availableImages = [
     'hero-imgs/birds/bald-eagle.optimized.webp',
     'hero-imgs/birds/golden-pheasant.optimized.webp',
@@ -38,9 +48,49 @@ if (floatingImages) {
     'hero-imgs/solar/star.optimized.webp',
     'hero-imgs/devices/Wisblock_WisMesh_Pocket_V2_RAK.optimized.webp'
   ];
-  shuffledImages = [...availableImages]
+  
+  const shuffledImages = [...availableImages]
     .sort(() => Math.random() - 0.5)
     .slice(0, Math.min(imageCount, availableImages.length));
+
+  // Helper functions for random generation
+  const randomRange = (min: number, max: number) => Math.random() * (max - min) + min;
+
+  floatingImageItems = shuffledImages.map((src, index) => {
+    const animationName = `staticFloat_${index}`;
+    // Generate keyframes
+    const waypoints = Math.random() > 0.5 ? 4 : 2;
+    const percentages = waypoints === 4 ? [0, 25, 50, 75, 100] : [0, 50, 100];
+    
+    let keyframeContent = '';
+    
+    percentages.forEach(percent => {
+        const translateX = percent === 0 
+        ? randomRange(-40, -15)
+        : percent === 100
+            ? randomRange(115, 145)
+            : randomRange(percent * 1.2 - 30, percent * 1.2 + 10);
+        
+        const translateY = randomRange(-20, 20);
+        const scale = randomRange(0.7, 1.5);
+        const rotate = randomRange(-30, 30);
+        
+        keyframeContent += `
+        ${percent}% { transform: translate(${translateX}vw, ${translateY}vh) scale(${scale}) rotate(${rotate}deg); }`;
+    });
+
+    const keyframes = `@keyframes ${animationName} { ${keyframeContent} }`;
+    
+    return {
+        src,
+        top: randomRange(5, 85),
+        left: randomRange(5, 90),
+        duration: randomRange(33, 50),
+        keyframes,
+        animationName,
+        index
+    };
+  });
 }
 ---
 
@@ -88,25 +138,36 @@ if (floatingImages) {
     <slot name="head" />
   </head>
   <body>
-    <!-- Floating images container will be injected by JavaScript to avoid LCP calculation -->
+    <!-- Floating images container rendered server-side for immediate discovery -->
     {floatingImages && (
-      <script is:inline data-floating-images={JSON.stringify(shuffledImages)}>
-        // Create floating container AFTER page fully loads to prevent LCP issues
-        (function() {
-          const scriptElement = document.currentScript;
-          window.addEventListener('load', () => {
-            if (!scriptElement) return;
-            const container = document.createElement('div');
-            container.className = 'floating-container';
-            container.style.cssText = 'opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s 0.3s;';
-            const imagesData = scriptElement.getAttribute('data-floating-images');
-            if (imagesData) {
-              container.setAttribute('data-images', imagesData);
-              document.body.appendChild(container);
-            }
-          });
-        })();
-      </script>
+      <div class="floating-container">
+        <style>
+           {floatingImageItems.map(item => item.keyframes).join('\n')}
+        </style>
+        {floatingImageItems.map(item => (
+            <div class="floating-image" 
+                 id={`float-${item.index}`}
+                 style={`
+                    top: ${item.top}%; 
+                    left: ${item.left}%; 
+                    animation-name: ${item.animationName}; 
+                    animation-duration: ${item.duration}s; 
+                    animation-timing-function: linear; 
+                    animation-fill-mode: forwards;
+                 `}>
+              <span class="img-wrapper">
+                <img 
+                    src={`/${item.src}`} 
+                    alt="" 
+                    width="80" 
+                    height="80" 
+                    style="max-width: 80px; width: 80px; height: auto;" 
+                    loading="eager" 
+                />
+              </span>
+            </div>
+        ))}
+      </div>
     )}
     <div class={floatingImages ? "site-wrapper" : ""}>
       <Header />
@@ -234,6 +295,13 @@ if (floatingImages) {
       pointer-events: none;
       transition: background 0.3s ease;
       max-width: 100%;
+      /* Delay visual appearance until loaded to solve LCP/distraction issues */
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .floating-container.loaded {
+      opacity: 1;
     }
 
     html.dark .floating-container {
@@ -245,6 +313,11 @@ if (floatingImages) {
       pointer-events: auto;
       cursor: pointer;
       z-index: 1;
+      animation-play-state: paused; /* Pause animation until load */
+    }
+
+    .floating-container.loaded .floating-image {
+      animation-play-state: running;
     }
 
     .floating-image:hover {
@@ -315,136 +388,69 @@ if (floatingImages) {
 
 {floatingImages && (
   <script>
-    // Dynamic floating image animation system - deferred to avoid blocking render
-    // Load images AFTER page is fully loaded to save 8+ MB on initial load
-    function initFloatingImages() {
-      const container = document.querySelector('.floating-container') as HTMLElement;
-      if (!container) return;
-      
-      // Get image list from data attribute
-      const imagesData = container.getAttribute('data-images');
-      if (!imagesData) return;
-      
-      const images = JSON.parse(imagesData);
-      if (!images || images.length === 0) return;
-      
-      // Inject image elements into DOM
-      images.forEach((img: string, index: number) => {
-        const imageDiv = document.createElement('div');
-        imageDiv.className = 'floating-image';
-        imageDiv.setAttribute('data-index', index.toString());
-        imageDiv.innerHTML = `
-          <span class="img-wrapper">
-            <img src="/${img}" alt="" width="80" height="80" style="max-width: 80px; width: 80px; height: auto;" loading="lazy" />
-          </span>
-        `;
-        container.appendChild(imageDiv);
-      });
-      
-      const floatingImages = container.querySelectorAll('.floating-image');
-      let animationCounter = 0;
-
-      function randomRange(min: number, max: number): number {
-        return Math.random() * (max - min) + min;
-      }
-
-      function generateKeyframes(index: number): string {
-        const keyframeName = `dynamicFloat${animationCounter}_${index}`;
-        
-        // Random waypoints for more varied paths
-        const waypoints = Math.random() > 0.5 ? 4 : 2;
-        const percentages = waypoints === 4 ? [0, 25, 50, 75, 100] : [0, 50, 100];
-        
-        let keyframeString = `@keyframes ${keyframeName} {`;
-        
-        percentages.forEach(percent => {
-          const translateX = percent === 0 
-            ? randomRange(-40, -15)
-            : percent === 100
-              ? randomRange(115, 145)
-              : randomRange(percent * 1.2 - 30, percent * 1.2 + 10);
-          
-          const translateY = randomRange(-20, 20);
-          const scale = randomRange(0.7, 1.5);
-          const rotate = randomRange(-30, 30);
-          
-          keyframeString += `
-            ${percent}% { transform: translate(${translateX}vw, ${translateY}vh) scale(${scale}) rotate(${rotate}deg); }`;
-        });
-        
-        keyframeString += `\n}`;
-        return keyframeString;
-      }
-
-      function applyRandomAnimation(img: Element, index: number) {
-        const element = img as HTMLElement;
-        
-        // Generate unique keyframe
-        const keyframes = generateKeyframes(index);
-        const keyframeName = `dynamicFloat${animationCounter}_${index}`;
-        
-        // Remove old style tag if exists
-        const oldStyle = document.getElementById(`anim-${index}`);
-        if (oldStyle) oldStyle.remove();
-        
-        // Inject new keyframe
-        const styleTag = document.createElement('style');
-        styleTag.id = `anim-${index}`;
-        styleTag.textContent = keyframes;
-        document.head.appendChild(styleTag);
-        
-        // Random starting position
-        const top = randomRange(5, 85);
-        const left = randomRange(5, 90);
-        
-        // Random duration between 33-50 seconds
-        const duration = randomRange(33, 50);
-        
-        // Apply styles
-        element.style.top = `${top}%`;
-        element.style.left = `${left}%`;
-        element.style.animationName = keyframeName;
-        element.style.animationDuration = `${duration}s`;
-        element.style.animationTimingFunction = 'linear';
-        element.style.animationIterationCount = '1';
-        element.style.animationFillMode = 'forwards';
-      }
-
-      function randomizeAllAnimations() {
-        animationCounter++;
-        floatingImages.forEach((img, index) => {
-          applyRandomAnimation(img, index);
-        });
-      }
-
-      // Listen for animation end on each image
-      floatingImages.forEach((img) => {
-        img.addEventListener('animationend', () => {
-          randomizeAllAnimations();
-        });
-      });
-
-      // Initial randomization
-      randomizeAllAnimations();
-      
-      // Show floating images after animations start
-      setTimeout(() => {
-        if (container) {
-          container.style.opacity = '1';
-          container.style.visibility = 'visible';
-          container.style.transition = 'opacity 0.3s ease';
-        }
-      }, 100);
-    }
-    
-    // Defer animation initialization to load AFTER critical page content
-    // This saves 8+ MB on initial page load
+    // Client-side animation continuity
+    // This script ensures images keep floating after their initial SSG animation ends
     window.addEventListener('load', () => {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(initFloatingImages, { timeout: 3000 });
-      } else {
-        setTimeout(initFloatingImages, 1000);
-      }
+       const container = document.querySelector('.floating-container');
+       if (container) {
+         container.classList.add('loaded'); // Trigger fade-in and start animation
+       }
+       
+       const floatingImages = document.querySelectorAll('.floating-image');
+       let animationCounter = 0;
+       
+       function randomRange(min, max) {
+         return Math.random() * (max - min) + min;
+       }
+
+       function generateKeyframes(index) {
+         const keyframeName = `dynamicFloat${animationCounter}_${index}`;
+         const waypoints = Math.random() > 0.5 ? 4 : 2;
+         const percentages = waypoints === 4 ? [0, 25, 50, 75, 100] : [0, 50, 100];
+         let keyframeString = `@keyframes ${keyframeName} {`;
+         
+         percentages.forEach(percent => {
+           const translateX = percent === 0 ? randomRange(-40, -15) : 
+                              percent === 100 ? randomRange(115, 145) : 
+                              randomRange(percent * 1.2 - 30, percent * 1.2 + 10);
+           const translateY = randomRange(-20, 20);
+           const scale = randomRange(0.7, 1.5);
+           const rotate = randomRange(-30, 30);
+           keyframeString += `${percent}% { transform: translate(${translateX}vw, ${translateY}vh) scale(${scale}) rotate(${rotate}deg); }`;
+         });
+         keyframeString += `}`;
+         return keyframeString;
+       }
+
+       function applyRandomAnimation(element, index) {
+         const keyframes = generateKeyframes(index);
+         const keyframeName = `dynamicFloat${animationCounter}_${index}`;
+         
+         let styleTag = document.getElementById(`anim-${index}`);
+         if (!styleTag) {
+             styleTag = document.createElement('style');
+             styleTag.id = `anim-${index}`;
+             document.head.appendChild(styleTag);
+         }
+         styleTag.textContent = keyframes;
+         
+         const top = randomRange(5, 85);
+         const left = randomRange(5, 90);
+         const duration = randomRange(33, 50);
+         
+         element.style.top = `${top}%`;
+         element.style.left = `${left}%`;
+         element.style.animationName = keyframeName;
+         element.style.animationDuration = `${duration}s`;
+       }
+
+       floatingImages.forEach((img, index) => {
+         img.addEventListener('animationend', () => {
+           // When initial animation ends, start a new one
+           animationCounter++;
+           applyRandomAnimation(img, index);
+         });
+       });
     });
   </script>
 )}
