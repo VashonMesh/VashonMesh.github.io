@@ -1,5 +1,10 @@
 # VashonMesh.github.io, aka VashonMesh.org
 
+[![Performance](https://img.shields.io/badge/Performance-99-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
+[![Accessibility](https://img.shields.io/badge/Accessibility-95-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
+[![Best Practices](https://img.shields.io/badge/Best%20Practices-96-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
+[![SEO](https://img.shields.io/badge/SEO-100-brightgreen?style=flat&logo=googlechrome&logoColor=white)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org)
+
 [VashonMesh.org](https://VashonMesh.org) Website Technical Notes
 
 ## Welcome
@@ -26,7 +31,7 @@ VashonMesh.org, and some of the features available to editors & the curious.
 [Astro](https://astro.build) is the web framework used which
 
 - builds to a static website with minimal Javascript
-- makes it incredibly fast,
+- makes it incredibly fast ([PageSpeed scores](https://pagespeed.web.dev/report?url=https%3A%2F%2Fvashonmesh.org): 99 performance, 95 accessibility, 96 best practices, 100 SEO),
 - free (aside from the domain registration & SSL certs),
 - easily edited,
 - pretty self-explanatory, and
