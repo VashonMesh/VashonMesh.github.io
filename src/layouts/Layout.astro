@@ -60,45 +60,28 @@ if (floatingImages) {
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="https://gc.zgo.at">
     
-    <!-- Critical CSS for font - using system fonts to eliminate network dependency -->
+    <!-- Critical CSS - most important styles inlined for immediate render -->
     <style is:inline>
-      /* Critical inline CSS to prevent render blocking */
       :root {
-        --accent: 136, 58, 234;
         --bg-primary: #ffffff;
         --bg-secondary: #f9fafb;
         --text-primary: #111827;
-        --text-secondary: #6b7280;
-        --border-color: #e5e7eb;
       }
       .dark {
         --bg-primary: #0a0a0a;
         --bg-secondary: #1a1a2e;
         --text-primary: #f9fafb;
-        --text-secondary: #d1d5db;
-        --border-color: #374151;
       }
       * { box-sizing: border-box; }
-      html {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: var(--bg-secondary);
-        width: 100%;
-      }
       body {
         margin: 0;
         padding: 0;
         background: var(--bg-secondary);
         color: var(--text-primary);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+        font-family: system-ui, sans-serif;
       }
       .rubik-maps-regular {
-        font-family: "Comic Sans MS", "Marker Felt", "Chalkboard SE", fantasy, system-ui, sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 400;
-        font-style: normal;
-        font-size-adjust: 0.5;
+        font-family: "Comic Sans MS", "Marker Felt", fantasy, system-ui, sans-serif;
       }
     </style>
     

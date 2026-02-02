@@ -19,7 +19,7 @@ export default defineConfig({
   },
 
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always', // Inline all CSS to eliminate render blocking
   },
 
   integrations: [
