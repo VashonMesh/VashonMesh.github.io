@@ -211,39 +211,43 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     
     if (headings.length === 0 || tocLinks.length === 0) return;
     
-    let current = '';
     const scrollPosition = window.scrollY + 150;
     
+    // Batch all layout reads first to prevent forced reflow
+    const headingPositions = Array.from(headings).map(heading => ({
+      id: heading.id,
+      top: heading.getBoundingClientRect().top + window.scrollY
+    }));
+    
     // Find the current section based on scroll position
-    headings.forEach(heading => {
-      const top = heading.getBoundingClientRect().top + window.scrollY;
+    let current = '';
+    headingPositions.forEach(({ id, top }) => {
       if (scrollPosition >= top) {
-        current = heading.id;
+        current = id;
       }
     });
     
     // If no current section found, use the first heading
-    if (!current && headings.length > 0) {
-      current = headings[0].id;
+    if (!current && headingPositions.length > 0) {
+      current = headingPositions[0].id;
     }
     
-    // Update active states
+    // Batch all writes together (no reads after this point)
+    let activeLink = null;
     tocLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-        
-        // Scroll TOC to show active item
-        const tocNav = document.getElementById('toc-nav');
-        if (tocNav) {
-          const linkRect = link.getBoundingClientRect();
-          const navRect = tocNav.getBoundingClientRect();
-          if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
-            link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        }
+      const isActive = link.getAttribute('href') === `#${current}`;
+      link.classList.toggle('active', isActive);
+      if (isActive) {
+        activeLink = link;
       }
     });
+    
+    // Scroll active link into view in a separate frame to avoid reflow
+    if (activeLink) {
+      requestAnimationFrame(() => {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      });
+    }
   }
   
   // Mobile TOC toggle
@@ -415,6 +419,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
       overflow-y: auto;
       overflow-x: hidden;
       width: 100%;
+      scroll-behavior: smooth;
     }
   }
 
@@ -505,6 +510,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     line-height: 1.3;
     transition: all 0.2s;
     border-left: 3px solid transparent;
+    scroll-margin: 2rem;
   }
 
   .toc-nav :global(.toc-link:hover) {
@@ -518,6 +524,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     color: #2563eb;
     font-weight: 600;
     border-left-color: #2563eb;
+    scroll-snap-align: center;
   }
 
   :global(.dark) .toc-nav :global(.toc-link:hover) {
