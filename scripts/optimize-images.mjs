@@ -24,10 +24,10 @@ const config = {
         quality: 75, // Increased for better clarity
         format: 'webp'
     },
-    // News images - displayed at ~490px max width
+    // News images - displayed at ~350px max width in grid
     newsImages: {
         inputDirs: ['news-imgs'],
-        maxWidth: 980, // 2x display size for retina screens (490px × 2)
+        maxWidth: 700, // 2x display size for retina screens (350px × 2)
         quality: 85, // Increased for better clarity
         format: 'webp'
     }
@@ -122,7 +122,7 @@ async function main() {
     }
 
     // Optimize news images
-    console.log('\n📰 Optimizing news images (980px max width, quality 85)...\n');
+    console.log('\n📰 Optimizing news images (700px max width, quality 85)...\n');
     for (const dir of config.newsImages.inputDirs) {
         const files = await getImageFiles(dir);
         for (const file of files) {
