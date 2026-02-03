@@ -321,9 +321,8 @@ if (floatingImages) {
       cursor: pointer;
       z-index: 1;
       width: 80px;
-      height: 80px;
-      contain: layout style paint;
-      will-change: transform;
+      height: auto;
+      overflow: visible;
     }
 
     .floating-image:hover {
@@ -333,7 +332,7 @@ if (floatingImages) {
     .img-wrapper {
       display: inline-block;
       width: 80px;
-      height: 80px;
+      height: auto;
       opacity: 0.5;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       transform: scale(1);
@@ -360,12 +359,12 @@ if (floatingImages) {
     @media (max-width: 768px) {
       .floating-image {
         width: 50px;
-        height: 50px;
+        height: auto;
       }
       
       .img-wrapper {
         width: 50px;
-        height: 50px;
+        height: auto;
       }
       
       .floating-image img {
