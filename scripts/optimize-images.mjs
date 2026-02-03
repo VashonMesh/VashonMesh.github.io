@@ -21,14 +21,14 @@ const config = {
         inputDirs: ['hero-imgs/birds', 'hero-imgs/devices', 'hero-imgs/solar'],
         maxWidth: 132, // 1.5x display size (88px x 1.5) - Reduced from 2x for LCP savings
         maxHeight: 200, // Keep small for fast loading
-        quality: 50, // Higher compression since these are background decorations
+        quality: 75, // Increased for better clarity
         format: 'webp'
     },
     // News images - displayed at ~280px max width
     newsImages: {
         inputDirs: ['news-imgs'],
         maxWidth: 560, // 2x display size for retina screens (280px × 2)
-        quality: 60, // Higher compression for faster LCP
+        quality: 85, // Increased for better clarity
         format: 'webp'
     }
 };
@@ -112,7 +112,7 @@ async function main() {
     const results = [];
 
     // Optimize floating images
-    console.log('\n📦 Optimizing floating images (176x200px max, quality 70)...\n');
+    console.log('\n📦 Optimizing floating images (132x200px max, quality 75)...\n');
     for (const dir of config.floatingImages.inputDirs) {
         const files = await getImageFiles(dir);
         for (const file of files) {
@@ -122,7 +122,7 @@ async function main() {
     }
 
     // Optimize news images
-    console.log('\n📰 Optimizing news images (560px max width, quality 70)...\n');
+    console.log('\n📰 Optimizing news images (560px max width, quality 85)...\n');
     for (const dir of config.newsImages.inputDirs) {
         const files = await getImageFiles(dir);
         for (const file of files) {

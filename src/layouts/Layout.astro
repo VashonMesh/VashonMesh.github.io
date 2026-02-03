@@ -216,6 +216,13 @@ if (floatingImages) {
       grid-template-columns: 1fr;
     }
   }
+
+  /* Max width constraint for XL screens */
+  @media (min-width: 1280px) {
+    .mx-auto.px-4.py-8 {
+      max-width: min(75vw, var(--max-width, 1800px)) !important;
+    }
+  }
 </style>
 
 {floatingImages && (
