@@ -27,9 +27,11 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
     slot="head"
     rel="preload"
     as="image"
-    href="/logo/VashonMesh.webp"
+    href="/logo/VashonMesh-md.webp"
     fetchpriority="high"
     type="image/webp"
+    imagesrcset="/logo/VashonMesh-sm.webp 300w, /logo/VashonMesh-md.webp 600w, /logo/VashonMesh-lg.webp 1000w"
+    imagesizes="(max-width: 768px) 200px, (max-width: 1279px) 280px, (max-width: 1919px) 420px, 500px"
   />
   {
     firstPostImage && (
@@ -45,10 +47,12 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
   <main class="mx-auto px-4 max-w-450 pointer-events-none">
     <section class="hero">
       <img
-        src="/logo/VashonMesh.webp"
+        srcset="/logo/VashonMesh-sm.webp 300w, /logo/VashonMesh-md.webp 600w, /logo/VashonMesh-lg.webp 1000w"
+        sizes="(max-width: 768px) 200px, (max-width: 1279px) 280px, (max-width: 1919px) 420px, 500px"
+        src="/logo/VashonMesh-md.webp"
         alt="VashonMesh Logo"
-        width="800"
-        height="448"
+        width="600"
+        height="336"
         fetchpriority="high"
         class="thumbnail"
       />
@@ -208,7 +212,7 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
   .btn-primary {
     background-color: #4c1d95;
   }
-  
+
   .btn-primary:hover {
     background-color: #3b0764;
   }
