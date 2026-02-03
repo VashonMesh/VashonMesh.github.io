@@ -23,6 +23,14 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
   floatingImages={true}
   maxWidth="1800px"
 >
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href="/logo/VashonMesh.webp"
+    fetchpriority="high"
+    type="image/webp"
+  />
   {
     firstPostImage && (
       <link
