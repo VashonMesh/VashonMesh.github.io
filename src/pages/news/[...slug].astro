@@ -233,7 +233,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     }
     
     // Batch all writes together (no reads after this point)
-    let activeLink = null;
+    let activeLink: Element | null = null;
     tocLinks.forEach(link => {
       const isActive = link.getAttribute('href') === `#${current}`;
       link.classList.toggle('active', isActive);
@@ -245,7 +245,7 @@ const isoDate = post.data.pubDate ? new Date(post.data.pubDate).toISOString() : 
     // Scroll active link into view in a separate frame to avoid reflow
     if (activeLink) {
       requestAnimationFrame(() => {
-        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        activeLink?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
       });
     }
   }
