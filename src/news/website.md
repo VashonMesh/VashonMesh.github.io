@@ -1,62 +1,34 @@
 ---
-title: "Mesh Networking Overview"
-pubDate: 2026-01-15
-description:
-  "Introduction to mesh networking technologies and the VashonMesh community"
+title: "2nd Meeting: Let's Play with Our Devices!"
+pubDate: 2026-02-03
+description: "Experimenting with mesh networking devices with verbal backup"
 author: "VashonMesh Team"
-tags: ["Introduction", "LoRa", "Meshtastic", "MeshCore"]
+tags:
+  [
+    "VashonMesh",
+    "LoRa",
+    "Meshtastic",
+    "MeshCore",
+    "Hands-On",
+    "Penny-Farcy",
+    "Vashon Library",
+  ]
 ---
 
-**Mesh Networking**
+# Second Meeting
 
-(This is a very early cut. Others are **encouraged** to jump in and edit freely
-to correct mistakes, make things clearer, etc!)
+Michael Meyer and Jeff Few have reserved Penny Farcy (on the Vashon Fire campus) and Vashon Library's meeting room for our next gathering Tuesday, Feb. 12, 2026 at 4:30-5:30.
 
-**Intro**
+At the 1st meeting there was broad interest to actually experiment and try out various devices people had or were curious about. There were many knowledgeable folks and a few who had devices but hadn't done much with them.
 
-Vashon folks are interested to cooperatively learn about the relatively new Lora
-technology. Incentives range from education, playing with fun gadgets, long
-distance communication with sensors, and especially Emergency Communications:
-EMCOMM.
+Anyone is free to come to the meeting, with or without devices. If you just bring a smartphone we may be able to get you online!
 
-**Technology Options**
+## Agenda
 
-- **Lora** - The base technology allowing long range, low bandwidth
-  communications.
-- **PTP** - Point to point: two devices can talk to one another simply
-- **LoraWan** - Huge industry led solution for gathering sensor data into the
-  cloud.
-- **Mestastic** - Great for casual use among a few local users
-- **MeshCore** - Great for community networks with fixed 'repeaters' and more
-  traffic
-- **AREDN** - Amateur Radio Emergency Data Network. This does NOT use Lora.
-  "Instead The frequency ranges that are currently supported are the 900 MHz,
-  2.4 GHz, and 5.8 GHz bands. These microwave frequencies do require direct line
-  of sight for reliable communication. Depending on the type of radios and
-  antennas that are deployed, it’s possible to achieve network links anywhere
-  from a few miles to well over 30 miles between sites." Included here as an
-  alternative, or source of conventions/framework that maybe helpful. PugetMesh
-  acknowledges them prominently on their site.
+Nothing formal but maybe hit the following points
 
-**![](https://blog.seeedstudio.com/wp-content/uploads/2020/07/1-1030x294.png)**
-
-- Chart from
-  https://www.seeedstudio.com/blog/2020/08/03/lorapedia-an-introduction-of-lora-and-lorawan-technology/
-
-Vashon will start with MeshCore, but may adopt other technologies (in parallel)
-if there is desire.
-
-**Other Communities**
-
-- **PugetMesh:** [https://pugetmesh.org/](https://pugetmesh.org/) & Discord:
-  https://discord.gg/Y4PddSUd
-- **BostonMesh**: [https://bostonme.sh](https://bostonme.sh/)  
-- **AustinMesh:** [https://www.austinmesh.org](https://www.austinmesh.org/)
-- **ArizonaMesh** - https://www.arizonamesh.org 
-
-**Reading**
-
-- **Lora vs
-  LoraWan**: https://www.seeedstudio.com/blog/2020/08/03/lorapedia-an-introduction-of-lora-and-lorawan-technology/
-- MeshCore vs
-  Meshtastic: [MeshCore vs Meshtastic | Austin Mesh](https://www.austinmesh.org/learn/meshcore-vs-meshtastic/)
+- Introductions & interests
+- Anyone need to flash their device? (side group if so)
+- Everyone able to communicate on the public channel?
+- Try 10 messages "at once", or other stress tests?
+- Try Table topping a test situation: loose zebras in Jensen Point park, or?

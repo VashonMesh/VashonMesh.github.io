@@ -12,7 +12,6 @@ user experience across VashonMesh.org.
 ### Current Issues:
 
 - Multiple heading levels for "Mesh-Networking"
-- Inconsistent terminology (Mestastic vs Meshtastic)
 - Links not properly formatted
 - Missing internal navigation
 - Content organization could be clearer
@@ -25,8 +24,7 @@ user experience across VashonMesh.org.
 ---
 layout: ../layouts/NormalLayout.astro
 title: Mesh Networking Technology
-description:
-  Understanding LoRa, Meshtastic, MeshCore and other mesh networking
+description: Understanding LoRa, Meshtastic, MeshCore and other mesh networking
   technologies that power community networks
 ---
 
@@ -68,8 +66,6 @@ Ready to join the network? Check out:
 - [Vashon Network](/vashon-network) - See our local infrastructure
 - [Get Involved](/get-involved) - Join the community
 ```
-
-**Fix Meshtastic spelling** (appears as "Mestastic" in some places)
 
 ---
 
@@ -506,7 +502,7 @@ communication when traditional methods fail.
 ### Current Issues:
 
 - Broken HTML (unclosed `<ul>` tag)
-- Typos ("freinds", "V7VMI" should be "W7VMI")
+
 - Minimal content
 - Broken link (ContactUs without forward slash)
 
@@ -514,65 +510,146 @@ communication when traditional methods fail.
 
 ```astro
 ---
-import NormalLayout from '../layouts/NormalLayout.astro';
+import NormalLayout from "../layouts/NormalLayout.astro";
 ---
 
 <NormalLayout title="VashonMesh - Get Involved">
   <section class="flex flex-col gap-8">
-    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
       <h1 class="text-[#667eea] text-3xl mt-0 mb-4">Join the Community</h1>
       <p class="text-[var(--text-secondary)] leading-relaxed">
-        VashonMesh is an informal community of neighbors building resilient communication infrastructure.
-        Whether you're technically curious, emergency-focused, or just want to connect with your community,
-        there's a place for you here.
+        VashonMesh is an informal community of neighbors building resilient
+        communication infrastructure. Whether you're technically curious,
+        emergency-focused, or just want to connect with your community, there's
+        a place for you here.
       </p>
     </div>
 
-    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
       <h2 class="text-[#667eea] text-2xl mt-0 mb-4">Ways to Participate</h2>
 
       <h3 class="text-xl mb-3 mt-6">Connect Online</h3>
       <ul class="text-[var(--text-secondary)] leading-relaxed space-y-2 ml-6">
-        <li>Join <strong>#vashon channel</strong> on the island Discord server for planning and questions</li>
-        <li>Connect with the broader community on <a href="https://discord.gg/3sqhZg7E" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">PugetMesh Discord</a></li>
+        <li>
+          Join <strong>#vashon channel</strong> on the island Discord server for planning
+          and questions
+        </li>
+        <li>
+          Connect with the broader community on <a
+            href="https://discord.gg/3sqhZg7E"
+            target="_blank"
+            rel="noopener"
+            class="text-[#667eea] hover:underline">PugetMesh Discord</a
+          >
+        </li>
       </ul>
 
       <h3 class="text-xl mb-3 mt-6">Attend Local Meetings</h3>
       <ul class="text-[var(--text-secondary)] leading-relaxed space-y-2 ml-6">
-        <li>Join <a href="https://w7vmi.org" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">W7VMI Amateur Radio Club</a> meetings</li>
-        <li>Subscribe to updates via <a href="https://groups.io/g/W7VMI" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">W7VMI mailing list</a></li>
-        <li>Watch our <a href="/news" class="text-[#667eea] hover:underline">blog</a> for workshops and events</li>
+        <li>
+          Join <a
+            href="https://w7vmi.org"
+            target="_blank"
+            rel="noopener"
+            class="text-[#667eea] hover:underline">W7VMI Amateur Radio Club</a
+          > meetings
+        </li>
+        <li>
+          Subscribe to updates via <a
+            href="https://groups.io/g/W7VMI"
+            target="_blank"
+            rel="noopener"
+            class="text-[#667eea] hover:underline">W7VMI mailing list</a
+          >
+        </li>
+        <li>
+          Watch our <a href="/news" class="text-[#667eea] hover:underline"
+            >blog</a
+          > for workshops and events
+        </li>
       </ul>
 
       <h3 class="text-xl mb-3 mt-6">Hands-on Involvement</h3>
       <ul class="text-[var(--text-secondary)] leading-relaxed space-y-2 ml-6">
-        <li><strong>Get a device</strong> - Every personal node strengthens the network (<a href="/radios" class="text-[#667eea] hover:underline">Device Guide</a>)</li>
-        <li><strong>Host a repeater</strong> - Extend coverage from your property (<a href="/repeaters" class="text-[#667eea] hover:underline">Repeater Setup</a>)</li>
-        <li><strong>Map coverage</strong> - Help us identify gaps and opportunities</li>
-        <li><strong>Share knowledge</strong> - Teach neighbors or document your learnings</li>
-        <li><strong>Plan for emergencies</strong> - Join <a href="/emcomm" class="text-[#667eea] hover:underline">EmComm</a> preparedness efforts</li>
+        <li>
+          <strong>Get a device</strong> - Every personal node strengthens the network
+          (<a href="/radios" class="text-[#667eea] hover:underline"
+            >Device Guide</a
+          >)
+        </li>
+        <li>
+          <strong>Host a repeater</strong> - Extend coverage from your property (<a
+            href="/repeaters"
+            class="text-[#667eea] hover:underline">Repeater Setup</a
+          >)
+        </li>
+        <li>
+          <strong>Map coverage</strong> - Help us identify gaps and opportunities
+        </li>
+        <li>
+          <strong>Share knowledge</strong> - Teach neighbors or document your learnings
+        </li>
+        <li>
+          <strong>Plan for emergencies</strong> - Join <a
+            href="/emcomm"
+            class="text-[#667eea] hover:underline">EmComm</a
+          > preparedness efforts
+        </li>
       </ul>
     </div>
 
-    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
       <h2 class="text-[#667eea] text-2xl mt-0 mb-4">Learning Resources</h2>
       <p class="text-[var(--text-secondary)] leading-relaxed mb-4">
         New to mesh networking? Start here:
       </p>
       <ul class="text-[var(--text-secondary)] leading-relaxed space-y-2 ml-6">
-        <li><a href="/mesh-network" class="text-[#667eea] hover:underline">Mesh Technology Overview</a> - Understand how it works</li>
-        <li><a href="/vashon-network" class="text-[#667eea] hover:underline">Vashon Network Status</a> - See current coverage and nodes</li>
-        <li><a href="https://meshtastic.org/docs/" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">Meshtastic Documentation</a></li>
-        <li><a href="https://meshcore.net/" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">MeshCore Information</a></li>
+        <li>
+          <a href="/mesh-network" class="text-[#667eea] hover:underline"
+            >Mesh Technology Overview</a
+          > - Understand how it works
+        </li>
+        <li>
+          <a href="/vashon-network" class="text-[#667eea] hover:underline"
+            >Vashon Network Status</a
+          > - See current coverage and nodes
+        </li>
+        <li>
+          <a
+            href="https://meshtastic.org/docs/"
+            target="_blank"
+            rel="noopener"
+            class="text-[#667eea] hover:underline">Meshtastic Documentation</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://meshcore.net/"
+            target="_blank"
+            rel="noopener"
+            class="text-[#667eea] hover:underline">MeshCore Information</a
+          >
+        </li>
       </ul>
     </div>
 
-    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
       <h2 class="text-[#667eea] text-2xl mt-0 mb-4">Have Questions?</h2>
       <p class="text-[var(--text-secondary)] leading-relaxed">
-        We're here to help! <a href="/contact-us" class="text-[#667eea] hover:underline">Contact us</a>
-        or drop into any of the community channels listed above. There are no stupid questions -
-        we're all learning together.
+        We're here to help! <a
+          href="/contact-us"
+          class="text-[#667eea] hover:underline">Contact us</a
+        >
+        or drop into any of the community channels listed above. There are no stupid
+        questions - we're all learning together.
       </p>
     </div>
   </section>
@@ -593,20 +670,25 @@ import NormalLayout from '../layouts/NormalLayout.astro';
 
 ```astro
 ---
-import NormalLayout from '../layouts/NormalLayout.astro';
+import NormalLayout from "../layouts/NormalLayout.astro";
 ---
 
 <NormalLayout title="VashonMesh - Contact Us">
   <section class="flex flex-col gap-8">
-    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
       <h1 class="text-[#667eea] text-3xl mt-0 mb-4">Contact VashonMesh</h1>
       <p class="text-[var(--text-secondary)] leading-relaxed">
-        VashonMesh is an informal, volunteer-run community network. While we don't have a formal organization
-        or office, there are several ways to reach us.
+        VashonMesh is an informal, volunteer-run community network. While we
+        don't have a formal organization or office, there are several ways to
+        reach us.
       </p>
     </div>
 
-    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
       <h2 class="text-[#667eea] text-2xl mt-0 mb-4">Get in Touch</h2>
 
       <h3 class="text-xl mb-3 mt-6">For General Questions</h3>
@@ -614,14 +696,39 @@ import NormalLayout from '../layouts/NormalLayout.astro';
         The fastest way to reach community members is through online channels:
       </p>
       <ul class="text-[var(--text-secondary)] leading-relaxed space-y-2 ml-6">
-        <li><strong>Island Discord</strong> - Join the #vashon channel for quick responses</li>
-        <li><strong><a href="https://discord.gg/3sqhZg7E" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">PugetMesh Discord</a></strong> - Connect with the broader regional community</li>
-        <li><strong><a href="https://groups.io/g/W7VMI" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">W7VMI Mailing List</a></strong> - Email-based communication</li>
+        <li>
+          <strong>Island Discord</strong> - Join the #vashon channel for quick responses
+        </li>
+        <li>
+          <strong
+            ><a
+              href="https://discord.gg/3sqhZg7E"
+              target="_blank"
+              rel="noopener"
+              class="text-[#667eea] hover:underline">PugetMesh Discord</a
+            ></strong
+          > - Connect with the broader regional community
+        </li>
+        <li>
+          <strong
+            ><a
+              href="https://groups.io/g/W7VMI"
+              target="_blank"
+              rel="noopener"
+              class="text-[#667eea] hover:underline">W7VMI Mailing List</a
+            ></strong
+          > - Email-based communication
+        </li>
       </ul>
 
       <h3 class="text-xl mb-3 mt-6">For EmComm & Emergency Preparedness</h3>
       <p class="text-[var(--text-secondary)] leading-relaxed">
-        Connect with <a href="https://w7vmi.org/emergency-preparedness" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">W7VMI Amateur Radio Club</a>
+        Connect with <a
+          href="https://w7vmi.org/emergency-preparedness"
+          target="_blank"
+          rel="noopener"
+          class="text-[#667eea] hover:underline">W7VMI Amateur Radio Club</a
+        >
         for emergency communications planning and coordination.
       </p>
 
@@ -630,35 +737,75 @@ import NormalLayout from '../layouts/NormalLayout.astro';
         Device setup and troubleshooting help is available on:
       </p>
       <ul class="text-[var(--text-secondary)] leading-relaxed space-y-2 ml-6">
-        <li><a href="https://discord.gg/3sqhZg7E" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">PugetMesh Discord</a> - #hardware-mc and #support channels</li>
-        <li><a href="https://meshtastic.org/docs/" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">Meshtastic Documentation</a></li>
-        <li><a href="https://meshcore.net/" target="_blank" rel="noopener" class="text-[#667eea] hover:underline">MeshCore Resources</a></li>
+        <li>
+          <a
+            href="https://discord.gg/3sqhZg7E"
+            target="_blank"
+            rel="noopener"
+            class="text-[#667eea] hover:underline">PugetMesh Discord</a
+          > - #hardware-mc and #support channels
+        </li>
+        <li>
+          <a
+            href="https://meshtastic.org/docs/"
+            target="_blank"
+            rel="noopener"
+            class="text-[#667eea] hover:underline">Meshtastic Documentation</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://meshcore.net/"
+            target="_blank"
+            rel="noopener"
+            class="text-[#667eea] hover:underline">MeshCore Resources</a
+          >
+        </li>
       </ul>
 
       <h3 class="text-xl mb-3 mt-6">Host a Repeater</h3>
       <p class="text-[var(--text-secondary)] leading-relaxed">
-        Interested in hosting a repeater on your property? Reach out via Discord (#vashon channel)
-        to discuss optimal placement, equipment, and community coordination.
+        Interested in hosting a repeater on your property? Reach out via Discord
+        (#vashon channel) to discuss optimal placement, equipment, and community
+        coordination.
       </p>
     </div>
 
-    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
       <h2 class="text-[#667eea] text-2xl mt-0 mb-4">About Response Times</h2>
       <p class="text-[var(--text-secondary)] leading-relaxed">
-        Since VashonMesh is run entirely by volunteers, response times vary. For the fastest help:
+        Since VashonMesh is run entirely by volunteers, response times vary. For
+        the fastest help:
       </p>
-      <ul class="text-[var(--text-secondary)] leading-relaxed space-y-2 ml-6 mt-3">
-        <li><strong>Discord</strong> - Usually responds within hours during daytime</li>
-        <li><strong>Email/Mailing List</strong> - Expect 1-3 days for responses</li>
-        <li><strong>In-Person Meetings</strong> - Attend W7VMI meetings for face-to-face discussions</li>
+      <ul
+        class="text-[var(--text-secondary)] leading-relaxed space-y-2 ml-6 mt-3"
+      >
+        <li>
+          <strong>Discord</strong> - Usually responds within hours during daytime
+        </li>
+        <li>
+          <strong>Email/Mailing List</strong> - Expect 1-3 days for responses
+        </li>
+        <li>
+          <strong>In-Person Meetings</strong> - Attend W7VMI meetings for face-to-face
+          discussions
+        </li>
       </ul>
     </div>
 
-    <div class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm">
+    <div
+      class="bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-8 shadow-sm"
+    >
       <h2 class="text-[#667eea] text-2xl mt-0 mb-4">Join the Effort</h2>
       <p class="text-[var(--text-secondary)] leading-relaxed">
-        Rather than just asking questions, consider <a href="/get-involved" class="text-[#667eea] hover:underline">joining the community</a>
-        directly. We're always looking for people to help with network planning, documentation, outreach, and technical projects.
+        Rather than just asking questions, consider <a
+          href="/get-involved"
+          class="text-[#667eea] hover:underline">joining the community</a
+        >
+        directly. We're always looking for people to help with network planning, documentation,
+        outreach, and technical projects.
       </p>
     </div>
   </section>
@@ -681,7 +828,6 @@ import NormalLayout from '../layouts/NormalLayout.astro';
 5. **Professional tone** - Removed informal email-style content
 6. **Consistent structure** - All pages follow similar layouts
 7. **No placeholders** - Removed Lorem ipsum and TODO items
-8. **Fixed typos** - Corrected "Mestastic", "freinds", "V7VMI", etc.
 
 ### User Experience
 

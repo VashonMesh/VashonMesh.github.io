@@ -8,7 +8,7 @@ description: Learn about LoRa, Meshtastic, MeshCore and other mesh networking te
 
 ## About mesh-networks
 
-I’m just learning, but LoRa (from www.st.com) is the underlying technology.
+I’m just learning, but LoRa (from <www.st.com>) is the underlying technology.
 https://en.wikipedia.org/wiki/LoRa
 
 There are a wide variety of networking schemes that take advantage of LoRa:
@@ -22,7 +22,41 @@ There are a wide variety of networking schemes that take advantage of LoRa:
 - Devices can readily be flashed to use MeshCore or Meshtastic, but can also
   easily just be used point to point, like the tracker above.
 
-For more info: www.PugetMesh.org, or probably better is to join their Discord
+**Technology Options**
+
+- **Lora** - The base technology allowing long range, low bandwidth
+  communications.
+- **PTP** - Point to point: two devices can talk to one another simply
+- **LoraWan** - Huge industry led solution for gathering sensor data into the
+  cloud.
+- **Meshtastic** - Great for casual use among a few local users
+- **MeshCore** - Great for community networks with fixed 'repeaters' and more
+  traffic
+- **AREDN** - Amateur Radio Emergency Data Network. This does NOT use Lora.
+  "Instead The frequency ranges that are currently supported are the 900 MHz,
+  2.4 GHz, and 5.8 GHz bands. These microwave frequencies do require direct line
+  of sight for reliable communication. Depending on the type of radios and
+  antennas that are deployed, it’s possible to achieve network links anywhere
+  from a few miles to well over 30 miles between sites." Included here as an
+  alternative, or source of conventions/framework that maybe helpful. PugetMesh
+  acknowledges them prominently on their site.
+
+**![](https://blog.seeedstudio.com/wp-content/uploads/2020/07/1-1030x294.png)**
+
+- Chart from
+  https://www.seeedstudio.com/blog/2020/08/03/lorapedia-an-introduction-of-lora-and-lorawan-technology/
+
+Vashon will start with MeshCore, but may adopt other technologies (in parallel)
+if there is desire.
+
+**Reading**
+
+- **Lora vs
+  LoraWan**: https://www.seeedstudio.com/blog/2020/08/03/lorapedia-an-introduction-of-lora-and-lorawan-technology/
+- MeshCore vs
+  Meshtastic: [MeshCore vs Meshtastic | Austin Mesh](https://www.austinmesh.org/learn/meshcore-vs-meshtastic/)
+
+For more info: <www.PugetMesh.org>, or probably better is to join their Discord
 server: https://discord.gg/3sqhZg7E
 
 I’m smitten by products from
@@ -34,7 +68,7 @@ LilyGo and lots of others make compatible devices…
 - Technologies (pros & cons)
   - LoRa
   - LoRaWAN
-  - Mestastic
+  - Meshtastic
   - MeshCore
   - Beartooth
   - PTP
@@ -45,6 +79,11 @@ LilyGo and lots of others make compatible devices…
 - Family & friends
 - https://www.seeedstudio.com/Loko-GPS-Tracker-p-6261.html is an example of a
   device you could put on a wandering dog with an associated receiver.
+
+### secure
+
+- The MeshCore C++ library automatically encrypts everything, so client apps don't have to worry about that, but everything that goes over the air is encrypted. For DM chats with another user, the packets are encrypted using ECDH (Elliptic Curve, Diffie Hellman) in the popular x25519 'curve', and then using AES128. Group chats are AES128 encrypted, with pre-shared symmetric keys.
+- https://buymeacoffee.com/ripplebiz/some-big-news
 
 ### Typical Installation Sequence
 
@@ -76,7 +115,7 @@ LilyGo and lots of others make compatible devices…
 - Consider hanging two repeaters at each location – one for PugetMesh, one
   Vashon-mostly for EMCOMM – on two different frequencies
 
-Mestastic vs Meshcore: https://www.youtube.com/watch?v=BezGb65kb_c
+Meshtastic vs Meshcore: https://www.youtube.com/watch?v=BezGb65kb_c
 
 ## Flash
 

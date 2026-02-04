@@ -28,7 +28,7 @@ if the internet is up...
 - Technologies
   - LoRa
   - LoRaWAN
-  - Mestastic
+  - Meshtastic
   - MeshCore
   - PTP
 - Use Cases

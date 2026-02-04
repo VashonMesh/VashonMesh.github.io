@@ -1,0 +1,68 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Get an Antenna" floatingImages={true} imageCount={15}>
+  <main class="max-w-4xl mx-auto px-4 py-8 pointer-events-auto">
+    <article
+      class="prose prose-lg dark:prose-invert max-w-none
+                  prose-headings:text-[var(--text-primary)]
+                  prose-p:text-[var(--text-secondary)]
+                  prose-a:text-blue-600 dark:prose-a:text-blue-400
+                  prose-strong:text-[var(--text-primary)]
+                  prose-code:text-[var(--text-primary)]
+                  prose-code:bg-gray-100 dark:prose-code:bg-gray-800
+                  prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
+                  prose-blockquote:border-l-blue-500
+                  prose-ul:text-[var(--text-secondary)]
+                  prose-ol:text-[var(--text-secondary)]
+                  prose-li:text-[var(--text-secondary)]
+                  bg-[var(--bg-primary)] rounded-lg p-8 shadow-lg"
+    >
+      <h1>Room-Servers</h1>
+      <p>
+        When flashing your device with Meshcore, you get a choice between 4
+        options:
+        <ul>
+          <label
+            ><li>
+              <strong>Companion:</strong> This is the first option. It is great if
+              you want to send and receive messages at home, work, and while traveling.
+            </li></label
+          >
+          <label
+            ><li>
+              <strong>Companion:</strong> This is the first option. It is great if
+              you want to send and receive messages at home, work, and while traveling.
+            </li></label
+          >
+          <label
+            ><li>
+              <strong>Room-Server:</strong> This is the default option. It is designed
+              to be used in a fixed location, such as a home or office. It will create
+              a Wi-Fi access point that other devices can connect to. It will also
+              connect to other room-servers and mesh nodes to create a mesh network.
+            </li></label
+          >
+        </ul>
+      </p>
+      <p>
+        Some basic factoids about room-servers:
+        <ul>
+          <li>
+            <strong>Can also run as a repeater:</strong> From the admin menu/command
+            line just issue "set repeater true". Simple, eh? But wait, there is some
+            controversy about doing this. It reduces some repeater functionality.
+          </li>
+          <li>
+            <strong>16 message per queue</strong> If you are absent for longer than
+            16 messages, the oldest messages will be dropped. Some folks use MQTT
+            and storing messages on a web site to get around this limitation - I think.
+          </li>
+        </ul>
+      </p>
+
+      <p>More on this topic</p>
+    </article>
+  </main>
+</Layout>
