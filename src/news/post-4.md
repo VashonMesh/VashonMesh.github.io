@@ -25,7 +25,7 @@ Anyone is free to come to the meeting, with or without devices. If you just brin
 
 ## Agenda items sought
 
-Nothing formal but maybe hit the following points
+We don't need anything formal, but a default structure to start with may help guide the meeting.
 
 - Introductions & interests
 - Anyone need to flash their device? (side group if so)

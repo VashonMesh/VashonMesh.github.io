@@ -1,45 +1,53 @@
 ---
 layout: ../../layouts/Layout.astro
-title: Mesh Networking
-description: Learn about LoRa, Meshtastic, MeshCore and other mesh networking technologies
+title: Quick Start
+description: Get up & running quickly with this slightly opinionated guide.
 ---
 
-# Mesh-Networking
+## Step 1: Decide your use case
 
-## About mesh-networks
+- First think about how you will be using your device.
+  - Use for (public or private) chats around the lowlands of Puget Sound? You want **Meshcore**! (Great for community networks with fixed 'repeaters' and more traffic.)
+  - Use for (public or private) chats in the mountains or rural countryside (without much of an existing network) with friends or a Search & Rescue team? You want **Meshtastic**! This is very useful around Puget Sound too, but there will be more traffic jams and scattered conversations. (Great for casual use among a few local users.)
+  - Are you monitoring coyotes, sheep, and weather balloons, or a fleet of vehicles and do data studies? You want **LoRaWAN**!
+  - You just want a private local, neighborhood dog tracker? Find a commercial solution, or consider something like CapSense? You'll have to do more exploration here.
 
-I’m just learning, but LoRa (from <www.st.com>) is the underlying technology.
-https://en.wikipedia.org/wiki/LoRa
+## Step 2: Get a device
 
-There are a wide variety of networking schemes that take advantage of LoRa:
+- Meshcore and Meshtastic both run on a wide variety of devices. If it works for Meshtastic, it likely works for Meshcore, just by loading ("flashing") new software on it!
+  - To be sure find your device at either:
+    - (https://flash.meshcore.uk) or
+    - (https://flash.meshtastic.com)
+  - Ensure your device supports the USA frequency band (902=928 MHz)
 
-- LoRaWAN (The big industry consortium, great for sending lots of sensor data
-  from the field to the cloud)
-- Meshtastic (great for casual 255 character text conversations between limited
-  numbers of folks out and about)
-- MeshCore (great for 255 character text conversations in a larger community of
-  more people with fixed repeaters)
-- Devices can readily be flashed to use MeshCore or Meshtastic, but can also
-  easily just be used point to point, like the tracker above.
+- With some hardware limitations, most devices can serve as "companion radios", "repeaters", or even "room servers". Start out with a companion radio & probably buy a repeater-focused device as your 2nd or 3rrd purchase in the future.
 
-**Technology Options**
+Look at our devices page for more information, but popular, proven devices are
 
-- **Lora** - The base technology allowing long range, low bandwidth
-  communications.
-- **PTP** - Point to point: two devices can talk to one another simply
-- **LoraWan** - Huge industry led solution for gathering sensor data into the
-  cloud.
-- **Meshtastic** - Great for casual use among a few local users
-- **MeshCore** - Great for community networks with fixed 'repeaters' and more
-  traffic
-- **AREDN** - Amateur Radio Emergency Data Network. This does NOT use Lora.
-  "Instead The frequency ranges that are currently supported are the 900 MHz,
-  2.4 GHz, and 5.8 GHz bands. These microwave frequencies do require direct line
-  of sight for reliable communication. Depending on the type of radios and
-  antennas that are deployed, it’s possible to achieve network links anywhere
-  from a few miles to well over 30 miles between sites." Included here as an
-  alternative, or source of conventions/framework that maybe helpful. PugetMesh
-  acknowledges them prominently on their site.
+- (Heltec v4)[https://heltec.org/project/wifi-lora-32-v4/], probably with a basic case, or (their fancy one)[https://heltec.org/project/wifi-lora-32-v4-expansion-housing/].
+- various LilyGo products
+- SeeedStudio.com products, including their [Tracker P1](https://www.seeedstudio.com/Wio-Tracker-L1-Pro-p-6454.html) or SenseCap Tracker T1000-E (check delivery dates!)
+- RAK
+
+### Non-chat options (LoraWAN and dog trackers) are out of scope for our discussion, but
+
+- LoraWAN: a plethora of info and device options exist. Bosch Group, Cisco, Orange SA, and Semtech are popular manufacturers, or see SeeedStudio.com for a nice selection too
+- For dog trackers, automated chicken coops & other use cases, check out https://tryFi.com, https://tracki.com, https://chickenclucks.com, https://hackaday.com
+
+## Step 3: Typical Installation Sequence
+
+- Buy a device for writing and reading texts
+- Many folks buy a repeater too, but less important as the network grows
+- Flash the device with your desired software
+- Install your companion device web or phone app
+- Connect from the wb or app to your device
+  - Bluetooth
+  - WiFi
+  - USB Cable
+  - Remote LoRa
+- Settings
+- Advertise
+- See if you were seen/repeated!
 
 **![](https://blog.seeedstudio.com/wp-content/uploads/2020/07/1-1030x294.png)**
 
