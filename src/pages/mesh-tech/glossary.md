@@ -11,3 +11,5 @@ wireless Mobile Ad-hoc Network (MANET) Amateur Radio Emergency Digital Network
 (AREDN) - https://www.arednmesh.org/
 
 Commercial Off The Shelf (COTS) components
+
+<https://www.thethingsnetwork.org/docs/lorawan/glossary/>

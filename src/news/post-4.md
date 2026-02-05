@@ -17,7 +17,7 @@ tags:
 
 [Copy of post to <https://groups.io/g/W7VMI>]
 
-Michael Meyer and Jeff Few have reserved Penny Farcy (on the Vashon Fire campus) and Vashon Library's meeting room for our next gathering **Tuesday, Feb. 12, 2026 at 4:30-5:30pm**.
+Michael Meyer and Jeff Few have reserved Penny Farcy (on the Vashon Fire campus) and Vashon Library's meeting room for our next gathering **Thursday, Feb. 12, 2026 at 4:30-5:30pm**.
 
 At the 1st meeting there was broad interest to actually experiment and try out various devices people had or were curious about. There were many knowledgeable folks and a few who had devices but hadn't done much with them.
 
@@ -31,6 +31,7 @@ We don't need anything formal, but a default structure to start with may help gu
 - Anyone need to flash their device? (side group if so)
 - Everyone able to communicate on the public channel?
 - Add the **#vashon** channel to our devices & test that
+- What's our repeater plan? Where should we put them?
 - Try 10 messages "at once", or other stress tests?
 - Discuss Emergency Communication more? Use cases, public & private channel names, monitoring
 - Try Table topping (Talk thru what we'd do, without taking time to actually do it) a test situation: "loose zebras in Jensen Point park", or "island internet down for a few days"?
