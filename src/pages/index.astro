@@ -124,16 +124,20 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
       class="cards-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
     >
       <div class="card">
-        <h2 class="text-[#667eea] text-2xl mt-0">LoRa & Mesh Networks</h2>
+        <h2 class="text-[#667eea] text-2xl mt-0">
+          LoRa = <span class="underline">Lo</span>ng <span class="underline"
+            >Ra</span
+          >nge Radio
+        </h2>
+
         <p class="text-(--text-secondary) leading-relaxed">
-          LoRa (Long Range) is a low-power, long-range foundational wireless
-          communication technology.
+          LoRa is a low-power, long-range foundational wireless communication
+          technology.
           <ul>
             <li>
-              Serving as a low-bandwidth Bluetooth or WiFi alternative, but
-              reaching 2-10 kilometers to other LoRa devices - especially with
-              good antennas and few obstructions. LoRa reaches further than
-              FRS/GMRS walkie-talkies.
+              A low-bandwidth alternative to Bluetooth, WiFi, GMRS and cellular
+              technologies, LoRa reaches 2-10 kilometers to other LoRa devices -
+              especially with good antennas and few obstructions.
             </li>
             <li>
               Repeaters easily extend this range, enabling community mesh
@@ -169,11 +173,11 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
 
       <div class="card">
         <h2 class="text-[#667eea] text-2xl mt-0">
-          Software Leveraging LoRa Hardware
+          Software Using LoRa Hardware
         </h2>
         <p class="text-(--text-secondary) leading-relaxed">
-          Depending on how you plan to use cheap LoRa chips, decide your
-          software solution. Popular options include:
+          Many software packages leverage cheap LoRa chips. A few popular
+          options:
           <ul>
             <li>
               <strong
@@ -215,16 +219,6 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
               flooded.
             </li>
             <li>
-              <strong
-                ><a
-                  href="https://https://meshcore.co.uk/"
-                  target="_blank"
-                  rel="noopener">Meshcore:</a
-                ></strong
-              > An alternative to Meshtastic that uses the identical devices but a
-              different network topology, one better for more traffic. It assumes
-              the use of fixed repeaters(in hilltop locations with good antennas)
-              to create a more efficient, scalable mesh network.
               <blockquote class="meshcore-focus">
                 <img
                   src="/site-imgs/fingered.200x100.png"
@@ -234,6 +228,19 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
                 <strong>MeshCore</strong> is what we are focusing on for Vashon &
                 Maury Islands' network!
               </blockquote>
+
+              <strong
+                ><a
+                  href="https://https://meshcore.co.uk/"
+                  target="_blank"
+                  rel="noopener">Meshcore:</a
+                ></strong
+              > An alternative to Meshtastic that uses the identical devices but a
+              different network topology, one better for more traffic. It assumes
+              the use of fixed repeaters(in hilltop locations with good antennas)
+              to create a more efficient, scalable mesh network. Core firmware and
+              protocol specifications are open source, but not many apps sitting on
+              top.
             </li>
           </ul>
 
@@ -248,10 +255,9 @@ const firstPostImage = recentPosts[0]?.data?.image?.url;
       </div>
 
       <div class="card">
-        <h2 class="text-[#667eea] text-2xl mt-0">Get a Radio</h2>
+        <h2 class="text-[#667eea] text-2xl mt-0">Get on the Air</h2>
         <p class="text-(--text-secondary) leading-relaxed">
-          Interested in how to get started? We're here to help you get
-          connected!
+          Get started with a device and start chatting with your neighbors!
 
           <ol>
             <li>

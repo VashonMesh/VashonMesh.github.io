@@ -55,6 +55,7 @@ if there is desire.
   LoraWan**: https://www.seeedstudio.com/blog/2020/08/03/lorapedia-an-introduction-of-lora-and-lorawan-technology/
 - MeshCore vs
   Meshtastic: [MeshCore vs Meshtastic | Austin Mesh](https://www.austinmesh.org/learn/meshcore-vs-meshtastic/)
+  also <https://nodakmesh.org/blog/meshcore-vs-meshtastic-comparison/.
 
 For more info: <www.PugetMesh.org>, or probably better is to join their Discord
 server: https://discord.gg/3sqhZg7E
