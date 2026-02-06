@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Long Range Radio" twoColumn={true}>
+  <div class="card">
+    <h2 class="text-[#667eea] text-2xl mt-0">
+      LoRa = <span class="underline">Lo</span>ng <span class="underline"
+        >Ra</span
+      >nge Radio
+    </h2>
+
+    <p class="text-(--text-secondary) leading-relaxed">
+      LoRa is a low-power, long-range foundational wireless communication
+      technology.
+      <ul>
+        <li>
+          A low-bandwidth alternative to Bluetooth, WiFi, GMRS and cellular
+          technologies, LoRa reaches 2-10 kilometers to other LoRa devices -
+          especially with good antennas and few obstructions.
+        </li>
+        <li>
+          Repeaters easily extend this range, enabling community mesh networks - <strong
+            >completely independent of cell towers or the internet!</strong
+          >
+        </li>
+        <li>
+          Introduced in 2015, LoRa is free to use, uses very low-power (under 1
+          amp), unlicensed frequency bands, and the basic chips cost ~$5. With a
+          display, microprocessor & cases, consumer LoRa devices cost ~$30-100,
+          easing adoption.
+        </li>
+      </ul>
+    </p>
+    <p>
+      <span class="hover-popup-wrapper">
+        <img
+          class="hover-popup"
+          src="/site-imgs/LoRa-BWvsRange.png"
+          alt="LoRa Bandwidth vs Range Comparison, courtesy of https://wifivitae.com/lora-vs-wifi-vs-bluetooth/"
+        />
+        <span class="image-credit">
+          Image courtesy of <a
+            href="https://wifivitae.com/lora-vs-wifi-vs-bluetooth/"
+            target="_blank"
+            rel="noopener">Troy Martin</a
+          >
+        </span>
+      </span>
+      <strong class="block text-center"
+        >LoRa as compared with Wi-Fi, Cellular & Bluetooth</strong
+      >
+      <a
+        href="https://en.wikipedia.org/wiki/LoRa"
+        class="btn-primary inline-flex items-center justify-center px-6 pt-1 pb-1.5 text-white rounded-full transition-colors leading-none"
+        >More about LoRa</a
+      >
+    </p>
+  </div>
+
+  <aside slot="sidebar">
+    <h3>Sidebar</h3>
+    <p>Sidebar content</p>
+  </aside>
+</Layout>

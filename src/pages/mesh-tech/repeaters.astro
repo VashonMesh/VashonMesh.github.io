@@ -22,13 +22,76 @@ import Layout from "../../layouts/Layout.astro";
       <h1>Repeaters</h1>
 
       <p>
-        Most radios can be reflashed to become a repeater. The distinction is
-        more the use case, and what we refer to here as a fixed repeater:
-        something with batteries or solar panels for multi-day power,
-        weather-proofed, and often fewer UI elements.
+        Repeaters extend the range of a radio network by receiving and then
+        retransmitting signals - often with good locations, quality antennas,
+        and a strong amplifier.
       </p>
 
-      <h2>Some Devices</h2>
+      <h2>Is it a repeater or a radio?</h2>
+      <p>
+        Many radios can be reflashed to become a repeater, check <a
+          href="https://flash.meshcore.uk">flash.meshcore.uk</a
+        > to be sure. If using the repeater software, it's a repeater!
+      </p>
+
+      <p>
+        Radios are put into the role of being a repeater if they are meant to
+        extend the range of a network. So a radio on Vashon may get repeated by
+        a radio on the mainland, and then repeated again by a radio in Seattle,
+        and then repeated again by a radio in Bellevue, and so on. The radios
+        that are doing the repeating are repeaters. The radios that are just
+        talking to each other are radios. Repeaters are radios, but not all
+        radios are repeaters.
+      </p>
+      <p>
+        Putting a repeater next to another repeater can cause interference at
+        best but also is pointless. A better strategy is to figure out an
+        island-wide plan for locating the repeaters. This is a group activity
+        and being undertaken early in 2026, though revisions will be ongoing.
+      </p>
+      <p>
+        With a focus on antennas mounted high with few obstructions, physically
+        accessing repeaters may be inconvenient. Like cell towers, they often
+        are situated on mountain tops or atop poles. This may lead to special
+        requirements:
+        <ul>
+          <li>
+            robust power, commonly with solar and batteries. Power usage is less
+            than cellular networks, so generators and connections to the
+            electrical grid are less common.
+          </li>
+          <li>
+            Antennas are generally fixed and the main barrier to large,
+            commercial quality antennas is cost.
+          </li>
+          <li>
+            Maintenance is more difficult, so reliable, quality components are
+            more important.
+          </li>
+          <li>
+            Remote management is more important, so repeaters typically are
+            remotely managed and monitored, a standard feature with Meshcore.
+            Thus they rarely have screens or keyboards.
+          </li>
+        </ul>
+      </p>
+
+      <h2>Device Suggestions</h2>
+
+      SeeedStudio Solar Repeater
+      https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-Pro-for-Meshtastic-LoRa-p-6412.html
+      KEEPTEEN D5L Mesh Solar LoRa Repeater: All in one. Sounds like it's well
+      supported and well regarded. This is going to be my "plug and play"
+      repeater for travel and events. WisBlock Meshtastic Starter Kit & RAK
+      Wireless Solar Unify Enclosure Case: This is going to be my experimental
+      repeater for trying out code changes. Heltec v4 with a nice antenna in a
+      weather proof enclosure is another inexpensive, great option. The V4 chip
+      has built in connections for a battery & solar power, and GPS if desired.
+      The V4 is also the basis for the WisBlock, so it's a good option for
+      testing code changes before putting them on the WisBlock.
+      https://www.etsy.com/listing/1795573484/peakmesh-magnet-climber-solar-meshtastic
+      Regardless of the device, plan to use a high gain antenna to maximize the
+      range of the repeater. Check out our seperate page onm antennas.
 
       <ul>
         <li>
@@ -59,6 +122,12 @@ import Layout from "../../layouts/Layout.astro";
             > & RAK Wireless Solar Unify Enclosure Case:</strong
           > This is going to be my experimental repeater for trying out code changes.
         </li>
+
+        A somewhat unique case is trying to send to a specific location, like a
+        boat or a remote cabin. In that case, you may want to put a repeater at
+        the location and then use a directional antenna to talk to it from your
+        home. This is a bit more work but can be worth it if you need to reach a
+        specific location. https://www.amazon.com/gp/product/B008Z5QB96
       </ul>
     </article>
   </main>
